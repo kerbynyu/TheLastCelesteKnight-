@@ -15,9 +15,15 @@ public class SimplePhysicsController : MonoBehaviour {
     public Vector3 movementVector;
     Vector3 thisVelocty = Vector3.zero*20;
     public float smoothTime = 0.3f;
+    public GroundCheck2 feet;
+
+    //jump variables
+    private bool releasedJump = true;
+    private int jumpHeight = 320;
     int jumpcounter = 1;
     public bool doubleJump = false;
     public bool isJumping;
+    private bool jumped;
 
 
 
@@ -44,7 +50,8 @@ public class SimplePhysicsController : MonoBehaviour {
         }
         //move left with 'a'
         if (Input.GetKey(KeyCode.A)) {
-            this.thisRigidbody2D.AddForce(-Vector2.right * force * Time.deltaTime, ForceMode2D.Impulse);
+            //this.thisRigidbody2D.AddForce(-Vector2.right * force * Time.deltaTime, ForceMode2D.Impulse);
+            transform.Translate(-20*Time.deltaTime, 0, 0);
 
             if (thisSprite.flipX == false) {
                 thisSprite.flipX = true;
@@ -59,8 +66,8 @@ public class SimplePhysicsController : MonoBehaviour {
 
         //move right with 'd' 
         if (Input.GetKey(KeyCode.D)) {
-            this.thisRigidbody2D.AddForce(Vector2.right * force * Time.deltaTime, ForceMode2D.Impulse);
-
+            //this.thisRigidbody2D.AddForce(Vector2.right * force * Time.deltaTime, ForceMode2D.Impulse);
+            transform.Translate(20*Time.deltaTime, 0, 0);
             if (thisSprite.flipX == true) {
                 thisSprite.flipX = false;
             }
@@ -82,41 +89,84 @@ public class SimplePhysicsController : MonoBehaviour {
 
 
     private void Update() {
-
-        thisRigidbody2D.gravityScale = gravityScale;
-
         //jump up with 'space' 
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            isJumping = true;
-            //Debug.Log(jumpcounter);
 
-            if (jumpcounter >= 2) {
+        if(Input.GetKeyUp(KeyCode.Space) && jumped)
+        {
+            releasedJump = true;
+        }
+
+        if(feet.isGrounded && !releasedJump)
+        {
+            if (!Input.GetKey(KeyCode.Space))
+            {
+                releasedJump = true;
+            }
+        }
+
+        if (Input.GetKey(KeyCode.Space) && feet.isGrounded == true && releasedJump == true)
+        {
+            releasedJump = false;
+            isJumping = true;
+            jumped = true;
+        }
+
+        if (isJumping && releasedJump == false)
+        {
+            thisRigidbody2D.gravityScale = gravityInAir;
+            jumpcounter += 1;
+            if (jumpcounter < jumpHeight)
+            {
+                thisRigidbody2D.AddForce(Vector2.up * 2500 * Time.deltaTime, ForceMode2D.Impulse);
+            }else if (jumpcounter < jumpHeight+30)
+            {
+                thisRigidbody2D.AddForce(Vector2.down * 1000 * Time.deltaTime, ForceMode2D.Impulse);
+            }
+            if (thisRigidbody2D.velocity.y > 45)
+            {
+                thisRigidbody2D.velocity = new Vector2(0, 45);
+            }
+            if (Input.GetKeyUp(KeyCode.Space) || jumpcounter > jumpHeight+50)
+            {
+                isJumping = false;
+                thisRigidbody2D.velocity = new Vector2(0, 0);
                 jumpcounter = 0;
             }
+        }
+        else
+        {
+            transform.Translate(0, 0, 0);
+            jumpcounter = 0;
+            thisRigidbody2D.gravityScale = gravityScale;
+        }
 
-            if (GameObject.Find("Feet").GetComponent<GroundCheck2>().isGrounded == true) {
-                //thisRigidbody2D.gravityScale = 1;
+        //double jump
 
-                //SoundManagerScript.playSound("jump");
-                thisRigidbody2D.gravityScale = 0;
-                this.thisRigidbody2D.AddForce(Vector2.up * jumpforce, ForceMode2D.Impulse);
+        if (feet.isGrounded == true)
+        {
+            //thisRigidbody2D.gravityScale = 1;
 
-                doubleJump = true;
+            //SoundManagerScript.playSound("jump");
+            thisRigidbody2D.gravityScale = 0;
+            //this.thisRigidbody2D.AddForce(Vector2.up * jumpforce, ForceMode2D.Impulse);
+
+            doubleJump = true;
+            jumped = false;
 
 
-
-            }
-            else if (Input.GetKeyDown(KeyCode.Space) && doubleJump == true) {
-                thisRigidbody2D.gravityScale = 0;
-                this.thisRigidbody2D.AddForce(Vector2.up * jumpforce, ForceMode2D.Impulse);
-                //SoundManagerScript.playSound("jump");
-                doubleJump = false;
-
-            }
-        }else {
-            thisRigidbody2D.gravityScale = gravityInAir;
 
         }
+        else if (Input.GetKeyDown(KeyCode.Space) && doubleJump == true && jumped)
+        {
+            thisRigidbody2D.gravityScale = 0;
+            Debug.Log("double jump");
+            this.thisRigidbody2D.AddForce(Vector2.up * jumpforce, ForceMode2D.Impulse);
+            //SoundManagerScript.playSound("jump");
+            doubleJump = false;
+
+        }
+
+
     }
 
     public void Hurt() {
