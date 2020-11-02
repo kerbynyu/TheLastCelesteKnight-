@@ -34,7 +34,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 if (Input.GetKey(KeyCode.D)) { cHitbox = hitbox1; }
                 else if (Input.GetKey(KeyCode.A)) { cHitbox = hitbox3; }
-                else if (Input.GetKey(KeyCode.S)) { cHitbox = hitbox2; }
+                if (Input.GetKey(KeyCode.S)) { cHitbox = hitbox2; }
                 else if (Input.GetKey(KeyCode.W)) { cHitbox = hitbox4; }
                 //print("attack!");
                 isAttacking = true;
