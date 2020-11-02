@@ -10,20 +10,28 @@ public class SimplePhysicsController : MonoBehaviour {
     public float force = 10f;
     public float jumpforce = 10;
     public bool onplatform;
-    public float jumpingGravity;
-    public float fallingGravity;
     public Vector3 movementVector;
     Vector3 thisVelocty = Vector3.zero*20;
     public float smoothTime = 0.3f;
     public GroundCheck2 feet;
 
+    //move variables
+
+    private bool movingRight = false;
+
     //jump variables
+    public float jumpingGravity;
+    public float fallingGravity;
     private bool releasedJump = true;
     public float jumpHeight = 1.5f;
     public int jumpcounter = 0;
     public bool doubleJump = false;
     public bool isJumping;
     private bool jumped;
+
+    //dash variables
+    public int dashCounter = 0;
+    public bool isDashing = false;
 
 
 
@@ -49,42 +57,26 @@ public class SimplePhysicsController : MonoBehaviour {
             transform.rotation = Quaternion.identity;
         }
         //move left with 'a'
-        if (Input.GetKey(KeyCode.A)) {
-            //this.thisRigidbody2D.AddForce(-Vector2.right * force * Time.deltaTime, ForceMode2D.Impulse);
+        if (Input.GetKey(KeyCode.A) && !isDashing) { 
             transform.Translate(-20*Time.deltaTime, 0, 0);
 
             if (thisSprite.flipX == false) {
                 thisSprite.flipX = true;
             }
+            movingRight = false;
 
-            /*
-            if (anim.gameObject.activeSelf) {
-                anim.SetTrigger("Walking");
-            }
-            */
         }
 
         //move right with 'd' 
-        if (Input.GetKey(KeyCode.D)) {
-            //this.thisRigidbody2D.AddForce(Vector2.right * force * Time.deltaTime, ForceMode2D.Impulse);
+        if (Input.GetKey(KeyCode.D) && !isDashing) {
             transform.Translate(20*Time.deltaTime, 0, 0);
             if (thisSprite.flipX == true) {
                 thisSprite.flipX = false;
             }
-
-
-            /*
-            if (anim.gameObject.activeSelf) {
-                anim.SetTrigger("Walking");
-            }
-            */
+            movingRight = true;
         }
 
-        /*
-        if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D)) {
-            anim.SetTrigger("Idle");
-        }
-        */
+        //jump control in fixed update
 
         if (!isJumping && !feet.isGrounded)
         {
@@ -97,15 +89,15 @@ public class SimplePhysicsController : MonoBehaviour {
             jumpcounter += 1;
             if (jumpcounter  < jumpHeight)
             {
-                thisRigidbody2D.AddForce(Vector2.up * 3800 * Time.deltaTime, ForceMode2D.Impulse);
+                thisRigidbody2D.AddForce(Vector2.up * 4000 * Time.deltaTime, ForceMode2D.Impulse);
             }else if (jumpcounter < jumpHeight + 3)
             {
                 thisRigidbody2D.AddForce(Vector2.down * 600 * Time.deltaTime, ForceMode2D.Impulse);
                 
             }
-            if (thisRigidbody2D.velocity.y > 36)
+            if (thisRigidbody2D.velocity.y > 40)
             {
-                thisRigidbody2D.velocity = new Vector2(0, 36);
+                thisRigidbody2D.velocity = new Vector2(0, 40);
             }
             if (Input.GetKeyUp(KeyCode.Space) || jumpcounter > jumpHeight + 3)
             {
@@ -122,13 +114,58 @@ public class SimplePhysicsController : MonoBehaviour {
             thisRigidbody2D.gravityScale = fallingGravity;
         }
 
+        //dash control in update
+        if (isDashing)
+        {
+
+            thisRigidbody2D.velocity = new Vector2(thisRigidbody2D.velocity.x, 0);
+
+            if (movingRight)
+            {
+                thisRigidbody2D.AddForce(Vector2.right * 1500 * Time.deltaTime, ForceMode2D.Impulse);
+            }else
+            {
+                thisRigidbody2D.AddForce(Vector2.right * -1500 * Time.deltaTime, ForceMode2D.Impulse);
+            }
+            dashCounter += 1;
+            isJumping = false;
+            if (dashCounter > 4)
+            {
+                if (movingRight)
+                {
+                    thisRigidbody2D.AddForce(Vector2.right * -500 * Time.deltaTime, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    thisRigidbody2D.AddForce(Vector2.right * 500 * Time.deltaTime, ForceMode2D.Impulse);
+                }
+            }
+
+            if (dashCounter > 6)
+            {
+                isDashing = false;
+                dashCounter = 0;
+            }
+        }
+        else
+        {
+            thisRigidbody2D.velocity = new Vector2(0, thisRigidbody2D.velocity.y);
+        }
+
     }
 
 
     private void Update() {
-        //jump up with 'space' 
+        //dash control in update
 
-        if(Input.GetKeyUp(KeyCode.Space) && jumped)
+        if (Input.GetKeyDown(KeyCode.L) && !isDashing)
+        {
+            isDashing = true;
+        }
+
+        //jump control in update
+
+        if(Input.GetKeyUp(KeyCode.K) && jumped)
         {
             releasedJump = true;
             thisRigidbody2D.gravityScale = fallingGravity;
@@ -136,13 +173,13 @@ public class SimplePhysicsController : MonoBehaviour {
 
         if(feet.isGrounded && !releasedJump)
         {
-            if (!Input.GetKey(KeyCode.Space))
+            if (!Input.GetKey(KeyCode.K))
             {
                 releasedJump = true;
             }
         }
 
-        if (Input.GetKey(KeyCode.Space) && feet.isGrounded == true && releasedJump == true)
+        if (Input.GetKey(KeyCode.K) && feet.isGrounded == true && releasedJump == true)
         {
             releasedJump = false;
             isJumping = true;
@@ -151,7 +188,7 @@ public class SimplePhysicsController : MonoBehaviour {
 
         if (isJumping && !releasedJump)
         {
-            if (Input.GetKeyUp(KeyCode.Space) || jumpcounter > jumpHeight + 3)
+            if (Input.GetKeyUp(KeyCode.K) || jumpcounter > jumpHeight + 3)
             {
                 thisRigidbody2D.velocity = new Vector2(0, 0);
                 jumpcounter = 0;
@@ -176,7 +213,7 @@ public class SimplePhysicsController : MonoBehaviour {
 
 
         }
-        else if (Input.GetKeyDown(KeyCode.Space) && doubleJump == true && jumped)
+        else if (Input.GetKeyDown(KeyCode.K) && doubleJump == true && jumped)
         {
             thisRigidbody2D.gravityScale = 0;
             Debug.Log("double jump");
