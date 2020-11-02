@@ -826,13 +826,15 @@ MonoBehaviour:
   force: 25
   jumpforce: 17
   onplatform: 0
-  gravityInAir: 10
-  gravityScale: 12
+  jumpingGravity: 1
+  fallingGravity: 10
   movementVector: {x: 0, y: 0, z: 0}
   smoothTime: 0.3
+  feet: {fileID: 487726399}
+  jumpHeight: 20
+  jumpcounter: 0
   doubleJump: 0
   isJumping: 0
-  feet: {fileID: 487726399}
 --- !u!1 &1161958132
 GameObject:
   m_ObjectHideFlags: 0
