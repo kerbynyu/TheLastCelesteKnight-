@@ -19,7 +19,7 @@ public class SimplePhysicsController : MonoBehaviour {
 
     //jump variables
     private bool releasedJump = true;
-    public int jumpHeight = 10;
+    public float jumpHeight = 1.5f;
     public int jumpcounter = 0;
     public bool doubleJump = false;
     public bool isJumping;
@@ -85,6 +85,43 @@ public class SimplePhysicsController : MonoBehaviour {
             anim.SetTrigger("Idle");
         }
         */
+
+        if (!isJumping && !feet.isGrounded)
+        {
+            thisRigidbody2D.gravityScale = fallingGravity;
+        }
+
+        if (isJumping && releasedJump == false)
+        {
+            thisRigidbody2D.gravityScale = jumpingGravity;
+            jumpcounter += 1;
+            if (jumpcounter  < jumpHeight)
+            {
+                thisRigidbody2D.AddForce(Vector2.up * 3800 * Time.deltaTime, ForceMode2D.Impulse);
+            }else if (jumpcounter < jumpHeight + 3)
+            {
+                thisRigidbody2D.AddForce(Vector2.down * 600 * Time.deltaTime, ForceMode2D.Impulse);
+                
+            }
+            if (thisRigidbody2D.velocity.y > 36)
+            {
+                thisRigidbody2D.velocity = new Vector2(0, 36);
+            }
+            if (Input.GetKeyUp(KeyCode.Space) || jumpcounter > jumpHeight + 3)
+            {
+                thisRigidbody2D.velocity = new Vector2(0, 0);
+                jumpcounter = 0;
+                thisRigidbody2D.gravityScale = fallingGravity;
+                isJumping = false;
+            }
+        }
+        else
+        {
+            transform.Translate(0, 0, 0);
+            jumpcounter = 0;
+            thisRigidbody2D.gravityScale = fallingGravity;
+        }
+
     }
 
 
@@ -112,36 +149,15 @@ public class SimplePhysicsController : MonoBehaviour {
             jumped = true;
         }
 
-        if (!isJumping && !feet.isGrounded)
+        if (isJumping && !releasedJump)
         {
-            thisRigidbody2D.gravityScale = fallingGravity;
-        }
-
-        if (isJumping && releasedJump == false)
-        {
-            thisRigidbody2D.gravityScale = jumpingGravity;
-            jumpcounter += 1;
-            if (jumpcounter < jumpHeight)
-            {
-                thisRigidbody2D.AddForce(Vector2.up * 2500 * Time.deltaTime, ForceMode2D.Impulse);
-            }
-            if (thisRigidbody2D.velocity.y > 36)
-            {
-                thisRigidbody2D.velocity = new Vector2(0, 36);
-            }
-            if (Input.GetKeyUp(KeyCode.Space) || jumpcounter > jumpHeight)
+            if (Input.GetKeyUp(KeyCode.Space) || jumpcounter > jumpHeight + 3)
             {
                 thisRigidbody2D.velocity = new Vector2(0, 0);
                 jumpcounter = 0;
                 thisRigidbody2D.gravityScale = fallingGravity;
                 isJumping = false;
             }
-        }
-        else
-        {
-            transform.Translate(0, 0, 0);
-            jumpcounter = 0;
-            thisRigidbody2D.gravityScale = fallingGravity;
         }
 
         //double jump

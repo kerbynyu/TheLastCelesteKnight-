@@ -831,8 +831,8 @@ MonoBehaviour:
   movementVector: {x: 0, y: 0, z: 0}
   smoothTime: 0.3
   feet: {fileID: 487726399}
-  jumpHeight: 13
-  jumpcounter: 1
+  jumpHeight: 20
+  jumpcounter: 0
   doubleJump: 0
   isJumping: 0
 --- !u!1 &1161958132
