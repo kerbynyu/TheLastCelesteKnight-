@@ -281,17 +281,10 @@ public class SimplePhysicsController : MonoBehaviour {
                 isDoubleJumping = false;
             }
         }
-
-
-
-        
-        
-
     }
 
     public void Hurt() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        //sc.playerDead = true; 
 
 
     }
