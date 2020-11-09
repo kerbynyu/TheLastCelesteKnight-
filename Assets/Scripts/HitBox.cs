@@ -31,7 +31,7 @@ public class HitBox : MonoBehaviour
         if (collision.gameObject.CompareTag("hurtBox")&& collision.gameObject.GetComponent<HurtBox>())
         {
             HurtBox hurtbox = collision.gameObject.GetComponent<HurtBox>();
-            if (!whiteList.Contains(collision.gameObject)) {
+            if (hurtbox.side!=side&&!whiteList.Contains(collision.gameObject)) {
                 print("hitted");
                 whiteList.Add(collision.gameObject);
                 //if hitted solid hurtBox instead of grass
