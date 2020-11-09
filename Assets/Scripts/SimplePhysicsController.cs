@@ -40,8 +40,11 @@ public class SimplePhysicsController : MonoBehaviour {
     public bool isDoubleJumping;
     public float doubleJumpHeight = 0.5f;
     public int doubleJumpCounter = 0;
-    
 
+    //wall jump variables
+    public wallJump WJ1;
+    public wallJump WJ2;
+    public bool isOnWall = false;
 
     //Animator anim;
     private GameMaster gm;
@@ -188,13 +191,31 @@ public class SimplePhysicsController : MonoBehaviour {
             thisRigidbody2D.velocity = new Vector2(0, thisRigidbody2D.velocity.y);
         }
 
-
+        //wall jump control in fixed update
+        if (isOnWall)
+        {
+            
+            transform.Translate(0, -8 * Time.deltaTime, 0);
+            thisRigidbody2D.velocity = new Vector2(0, 0);
+        }
 
 
     }
 
 
     private void Update() {
+        //wall jump control in update
+        if (WJ1.onWall == true || WJ2.onWall == true)
+        {
+            isOnWall = true;
+        }
+        else
+        {
+            isOnWall = false;
+        }
+
+        
+
         //dash control in update
 
         if (Input.GetKeyDown(KeyCode.L) && !isDashing && !dashed && dashAgainCounter < 0)
