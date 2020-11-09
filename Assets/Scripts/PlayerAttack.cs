@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
+    public string playerState = "neutral";
     public bool isAttacking= false;
     public float counter1 = 0;
     public SpriteRenderer pSprite;
@@ -26,7 +27,7 @@ public class PlayerAttack : MonoBehaviour
     void Update()
     {
         //When it is not during one attack
-        if (!isAttacking)
+        if (playerState=="neutral")
         {
             //the defualt attack direction will be the current facing
             if (pSprite.flipX) { cHitbox = hitbox3; }
@@ -36,7 +37,7 @@ public class PlayerAttack : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.J))
             {
                 //print("attack!");
-                isAttacking = true;
+                playerState = "attack";
                 //attack direction will be overwrite by directional inputs
                 if (Input.GetKey(KeyCode.D)) { cHitbox = hitbox1; }
                 else if (Input.GetKey(KeyCode.A)) { cHitbox = hitbox3; }
@@ -53,7 +54,7 @@ public class PlayerAttack : MonoBehaviour
             //count down the time
             if (counter1 > 0) { counter1 -= Time.deltaTime; }
             //when it's end, deactivate the hitbox
-            else { cHitbox.gameObject.SetActive(false); isAttacking = false;cHitbox.whiteList.Clear(); }
+            else { cHitbox.gameObject.SetActive(false); playerState="neutral";cHitbox.whiteList.Clear(); }
 
         }
     }
