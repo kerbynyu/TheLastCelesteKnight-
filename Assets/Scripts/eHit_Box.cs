@@ -30,7 +30,9 @@ public class eHit_Box : MonoBehaviour
             HurtBox hurtbox = collision.gameObject.GetComponent<HurtBox>();
             if (hurtbox.side != side )
             {
-                print("hitted");
+                hurtbox.owner.GetComponent<Attack>().hitted = true;
+                hurtbox.owner.GetComponent<Health>().Hp -= damage;
+                //print("hitted");
                 hurtbox.owner.transform.Translate(new Vector3(xMovement*Mathf.Sign(hurtbox.owner.transform.position.x- owner.transform.position.x), yMovement, 0)); 
                 
 
