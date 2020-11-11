@@ -32,7 +32,9 @@ public class HitBox : MonoBehaviour
         {
             HurtBox hurtbox = collision.gameObject.GetComponent<HurtBox>();
             if (hurtbox.side!=side&&!whiteList.Contains(collision.gameObject)) {
-                print("hitted");
+                hurtbox.owner.GetComponent<Attack>().hitted=true;
+                hurtbox.owner.GetComponent<Health>().Hp -= damage;
+
                 whiteList.Add(collision.gameObject);
                 //if hitted solid hurtBox instead of grass
                 if (hurtbox.solid) {
