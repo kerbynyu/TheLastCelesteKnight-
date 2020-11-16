@@ -56,13 +56,13 @@ public class SimplePhysicsController : MonoBehaviour {
     public bool dashRight = false;
     public bool dashLeft = false;
 
-    //Animator anim;
+    private Animator anim;
     private GameMaster gm;
 
     void Start() {
         GetComponent<Rigidbody2D>();
 
-        //anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
         gm = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameMaster>();
 
         //transform.position = gm.lastCheckPointPos;
@@ -74,6 +74,11 @@ public class SimplePhysicsController : MonoBehaviour {
 
     void FixedUpdate() {
 
+        if(feet.isGrounded){
+            anim.SetBool("grounded",true);
+            anim.SetBool("dJump",false);
+        }
+
         if (transform.rotation.eulerAngles.z != 0) {
             transform.rotation = Quaternion.identity;
         }
@@ -81,6 +86,8 @@ public class SimplePhysicsController : MonoBehaviour {
         if (Input.GetKey(KeyCode.A) && !isDashing) {
             if (!leaveTheWall)
             {
+                anim.SetBool("walking",true);
+                anim.SetBool("idle",false);
                 //walking animation
                 transform.Translate(-20 * Time.deltaTime, 0, 0);
                 isMoving = true;
@@ -105,6 +112,8 @@ public class SimplePhysicsController : MonoBehaviour {
             if (!leaveTheWall)
             {
                 //walking animation
+                anim.SetBool("walking",true);
+                anim.SetBool("idle",false);
                 transform.Translate(20 * Time.deltaTime, 0, 0);
                 isMoving = true;
             }
@@ -126,12 +135,20 @@ public class SimplePhysicsController : MonoBehaviour {
             if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
             {
                 isMoving = false;
+                anim.SetBool("idle",true);
+                anim.SetBool("walking",false);
                 if (feet.isGrounded)
                 {
-                    //idle animation
+                    //idle animation  
+                    anim.SetBool("grounded",true);
                 }
             }
+        }else{
+            anim.SetBool("idle",true);
+            anim.SetBool("walking",false);
         }
+
+        
 
         //jump control in fixed update
 
@@ -143,6 +160,8 @@ public class SimplePhysicsController : MonoBehaviour {
         if (isJumping && releasedJump == false)
         {
             //jumping animation
+            anim.SetBool("grounded",false);
+            anim.SetBool("falling",false);
             thisRigidbody2D.gravityScale = jumpingGravity;
             jumpcounter += 1;
             if (jumpcounter < jumpHeight)
@@ -170,6 +189,7 @@ public class SimplePhysicsController : MonoBehaviour {
         else
         {
             //falling animation
+            anim.SetBool("falling",true);
             transform.Translate(0, 0, 0);
             jumpcounter = 0;
             thisRigidbody2D.gravityScale = fallingGravity;
@@ -180,6 +200,9 @@ public class SimplePhysicsController : MonoBehaviour {
         if (isDoubleJumping)
         {
             //double jump animation
+            anim.SetBool("dJump",true);
+            anim.SetBool("falling",false);
+            anim.SetBool("grounded",false);
             jumped = false;
             doubleJumpCounter += 1;
             if (doubleJumpCounter < doubleJumpHeight)
@@ -198,6 +221,8 @@ public class SimplePhysicsController : MonoBehaviour {
             if (Input.GetKeyUp(KeyCode.K) || doubleJumpCounter > doubleJumpHeight + 6)
             {
                 //falling animation
+                anim.SetBool("dJump",true);
+                anim.SetBool("falling",true);
                 thisRigidbody2D.velocity = new Vector2(0, 0);
                 doubleJumpCounter = 0;
                 thisRigidbody2D.gravityScale = fallingGravity;
@@ -215,6 +240,8 @@ public class SimplePhysicsController : MonoBehaviour {
         {
             //dash animation
             dashed = true;
+            anim.SetBool("dash",true);
+            anim.SetBool("idle",false);
             thisRigidbody2D.velocity = new Vector2(thisRigidbody2D.velocity.x, 0);
             if (!wallDash)
             {
@@ -278,6 +305,8 @@ public class SimplePhysicsController : MonoBehaviour {
         if (isOnWall)
         {
             //climbing on the wall animation
+            anim.SetBool("onWall",true);
+            anim.SetBool("grounded",false);
             transform.Translate(0, -8 * Time.deltaTime, 0);
             thisRigidbody2D.velocity = new Vector2(0, 0);
             //reset jump
@@ -302,6 +331,7 @@ public class SimplePhysicsController : MonoBehaviour {
         //jump from wall
         if (leaveTheWall)
         {
+            
             wjCount = false;
             isOnWall = false;
             wjCounter += 1;
@@ -356,6 +386,16 @@ public class SimplePhysicsController : MonoBehaviour {
 
 
     private void Update() {
+        if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D)){
+            anim.SetBool("idle",true);
+            anim.SetBool("walking",false);
+        }
+        if(!isDashing){
+            anim.SetBool("dash",false);
+        }
+        if(!isOnWall){
+            anim.SetBool("onWall",false);
+        }
         //wall jump control in update
         if (WJ1.onWall == true && Input.GetKey(KeyCode.D))
         {
