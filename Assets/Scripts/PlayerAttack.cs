@@ -22,10 +22,11 @@ public class PlayerAttack : Attack
     public HitBox hitbox4;
     public HitBox cHitbox;//record the current hitbox
     public HurtBox hutbox;
-
+    private Animator anim;
     // Start is called before the first frame update
     void Start()
     {
+        anim = GetComponent<Animator>();
         hitbox1.gameObject.SetActive(false);
         hitbox2.gameObject.SetActive(false);
         hitbox3.gameObject.SetActive(false);
@@ -35,6 +36,7 @@ public class PlayerAttack : Attack
     // Update is called once per frame
     public override void Update()
     {
+        anim.SetBool("slash", isAttacking);
         base.Update();
         if (hitted)
         {
@@ -51,19 +53,20 @@ public class PlayerAttack : Attack
             if (!isAttacking)
             {
                 //the defualt attack direction will be the current facing
-                if (pSprite.flipX) { cHitbox = hitbox3; }
-                else { cHitbox = hitbox1; }
+                if (pSprite.flipX) { cHitbox = hitbox3; anim.SetInteger("direction", 0); }
+                else { cHitbox = hitbox1; anim.SetInteger("direction", 0); }
 
                 //if pressed attack button
                 if (Input.GetKeyDown(KeyCode.J))
                 {
+                    
                     //print("attack!");
                     isAttacking = true;
                     //attack direction will be overwrite by directional inputs
-                    if (Input.GetKey(KeyCode.D)) { cHitbox = hitbox1; }
-                    else if (Input.GetKey(KeyCode.A)) { cHitbox = hitbox3; }
-                    if (Input.GetKey(KeyCode.S)) { cHitbox = hitbox2; }
-                    else if (Input.GetKey(KeyCode.W)) { cHitbox = hitbox4; }
+                    if (Input.GetKey(KeyCode.D)) { cHitbox = hitbox1; anim.SetInteger("direction", 0); }
+                    else if (Input.GetKey(KeyCode.A)) { cHitbox = hitbox3;  anim.SetInteger("direction", 0); }
+                    if (Input.GetKey(KeyCode.S)) { cHitbox = hitbox2;  anim.SetInteger("direction", -1); }
+                    else if (Input.GetKey(KeyCode.W)) { cHitbox = hitbox4;  anim.SetInteger("direction", 1); }
 
                     //Initialize the choosen hitbox
                     cHitbox.gameObject.SetActive(true);
