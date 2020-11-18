@@ -56,6 +56,8 @@ public class SimplePhysicsController : MonoBehaviour {
     public bool dashRight = false;
     public bool dashLeft = false;
 
+    public GameObject wings;
+
     private Animator anim;
     private GameMaster gm;
 
@@ -200,6 +202,10 @@ public class SimplePhysicsController : MonoBehaviour {
         if (isDoubleJumping)
         {
             //double jump animation
+            if(doubleJumpCounter==0){
+                wings.SetActive(false);
+                wings.SetActive(true);
+            }
             anim.SetBool("dJump",true);
             anim.SetBool("falling",false);
             anim.SetBool("grounded",false);
