@@ -32,7 +32,7 @@ public class eHit_Box : MonoBehaviour
             {
                 hurtbox.owner.GetComponent<Attack>().hitted = true;
                 hurtbox.owner.GetComponent<Health>().Hp -= damage;
-                //print("hitted");
+                print("hitted");
                 hurtbox.owner.transform.Translate(new Vector3(xMovement*Mathf.Sign(hurtbox.owner.transform.position.x- owner.transform.position.x), yMovement, 0)); 
                 
 

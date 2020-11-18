@@ -17,9 +17,9 @@ public class GroundCheck2 : MonoBehaviour {
 
         }
 
-        if (other.gameObject.CompareTag("Enemy")) {
+       /* if (other.gameObject.CompareTag("Enemy")) {
             isGrounded = true;
-        }
+        }*/
     }
 
     public void OnTriggerStay2D(Collider2D other) {
@@ -32,16 +32,16 @@ public class GroundCheck2 : MonoBehaviour {
 
         }
 
-        if (other.gameObject.CompareTag("Enemy")) {
+        /*if (other.gameObject.CompareTag("Enemy")) {
             isGrounded = true;
-        }
+        }*/
     }
     public void OnTriggerExit2D(Collider2D other) {
         isGrounded = false;
 
-        if (other.gameObject.CompareTag("Enemy")) {
+        /*if (other.gameObject.CompareTag("Enemy")) {
             isGrounded = true;
-        }
+        }*/
 
     }
 }
