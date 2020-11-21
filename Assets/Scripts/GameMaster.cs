@@ -12,7 +12,8 @@ public class GameMaster : MonoBehaviour
     public int score = 0;
 
     private void Start() {
-        //sc = GameObject.FindGameObjectWithTag("Player").GetComponent<SimplePhysicsController>();
+        sc = GameObject.FindGameObjectWithTag("Player").GetComponent<SimplePhysicsController>();
+   
     }
 
     private void Update() {
