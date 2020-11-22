@@ -26,6 +26,18 @@ public class wallJump : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!isGrounded && collision.tag == "wall")
+        {
+            onWall = true;
+        }
+        else if (isGrounded)
+        {
+            onWall = false;
+        }
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (!isGrounded && collision.tag == "wall")
