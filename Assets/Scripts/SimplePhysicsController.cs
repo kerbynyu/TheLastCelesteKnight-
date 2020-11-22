@@ -17,7 +17,7 @@ public class SimplePhysicsController : MonoBehaviour {
 
     //move variables
 
-    private bool movingRight = false;
+    public bool movingRight = false;
     private bool isMoving = false;
 
     //jump variables
@@ -55,6 +55,7 @@ public class SimplePhysicsController : MonoBehaviour {
     public bool wallDash = false;
     public bool dashRight = false;
     public bool dashLeft = false;
+    public bool dirChanged = false;
 
     public GameObject wings; 
 
@@ -102,10 +103,10 @@ public class SimplePhysicsController : MonoBehaviour {
                 }
             }
 
-            if (thisSprite.flipX == false) {
-                thisSprite.flipX = true;
+            if (!isOnWall)
+            {
+                movingRight = false;
             }
-            movingRight = false;
 
         }
 
@@ -126,10 +127,27 @@ public class SimplePhysicsController : MonoBehaviour {
                     transform.Translate(20 * Time.deltaTime, 0, 0);
                 }
             }
-            if (thisSprite.flipX == true) {
-                thisSprite.flipX = false;
+            if (!isOnWall)
+            {
+                movingRight = true;
             }
-            movingRight = true;
+        }
+        if (!isOnWall)
+        {
+            if (movingRight)
+            {
+                if (thisSprite.flipX == true)
+                {
+                    thisSprite.flipX = false;
+                }
+            }
+            else
+            {
+                if (thisSprite.flipX == false)
+                {
+                    thisSprite.flipX = true;
+                }
+            }
         }
 
         if (isMoving)
@@ -159,7 +177,7 @@ public class SimplePhysicsController : MonoBehaviour {
             thisRigidbody2D.gravityScale = fallingGravity;
         }
 
-        if (isJumping && releasedJump == false)
+        if (isJumping && releasedJump == false && !isOnWall)
         {
             //jumping animation
             anim.SetBool("grounded",false);
@@ -199,7 +217,7 @@ public class SimplePhysicsController : MonoBehaviour {
             
         //double jump control in fixed update
 
-        if (isDoubleJumping)
+        if (isDoubleJumping && !isOnWall)
         {
 
             if (doubleJumpCounter == 0) {
@@ -239,6 +257,14 @@ public class SimplePhysicsController : MonoBehaviour {
             }
         }
 
+        if (anim.GetBool("falling")==true && anim.GetBool("grounded")==true && anim.GetBool("walking")==false)
+        {
+            if (!isMoving || !isDashing)
+            {
+                anim.SetBool("falling", false);
+                anim.SetBool("idle", true);
+            }
+        }
 
         //dash control in fixed update
         if (dashAgainCounter > -5)
@@ -247,6 +273,7 @@ public class SimplePhysicsController : MonoBehaviour {
         }
         if (isDashing)
         {
+            wings.SetActive(false);
             //dash animation
             dashed = true;
             anim.SetBool("dash",true);
@@ -256,14 +283,14 @@ public class SimplePhysicsController : MonoBehaviour {
             {
                 if (movingRight)
                 {
-                    thisRigidbody2D.AddForce(Vector2.right * 1500 * Time.deltaTime, ForceMode2D.Impulse);
+                    thisRigidbody2D.AddForce(Vector2.right * 800 * Time.deltaTime, ForceMode2D.Impulse);
                 }else
                 {
-                    thisRigidbody2D.AddForce(Vector2.right * -1500 * Time.deltaTime, ForceMode2D.Impulse);
+                    thisRigidbody2D.AddForce(Vector2.right * -800 * Time.deltaTime, ForceMode2D.Impulse);
                 }
                 dashCounter += 1;
                 isJumping = false;
-                if (dashCounter > 4)
+                if (dashCounter > 6)
                 {
                     if (movingRight)
                     {
@@ -279,14 +306,14 @@ public class SimplePhysicsController : MonoBehaviour {
             {
                 if (dashRight)
                 {
-                    thisRigidbody2D.AddForce(Vector2.right * 1500 * Time.deltaTime, ForceMode2D.Impulse);
+                    thisRigidbody2D.AddForce(Vector2.right * 800 * Time.deltaTime, ForceMode2D.Impulse);
                 }else if (dashLeft)
                 {
-                    thisRigidbody2D.AddForce(Vector2.right * -1500 * Time.deltaTime, ForceMode2D.Impulse);
+                    thisRigidbody2D.AddForce(Vector2.right * -800 * Time.deltaTime, ForceMode2D.Impulse);
                 }
                 dashCounter += 1;
                 isJumping = false;
-                if (dashCounter > 4)
+                if (dashCounter > 6)
                 {
                     if (dashRight)
                     {
@@ -298,7 +325,7 @@ public class SimplePhysicsController : MonoBehaviour {
                     }
                 }
             }
-            if (dashCounter > 6)
+            if (dashCounter > 8)
             {
                 wallDash = false;
                 isDashing = false;
@@ -313,9 +340,28 @@ public class SimplePhysicsController : MonoBehaviour {
         //wall jump control in fixed update
         if (isOnWall)
         {
+            if (dirChanged == false)
+            {
+                if (movingRight)
+                {
+                    movingRight = false;
+                    dirChanged = true;
+                }
+                else
+                {
+                    movingRight = true;
+                    dirChanged = true;
+                }
+            }
             //climbing on the wall animation
+            anim.SetBool("walking", false);
+            anim.SetBool("jump2wall", true);
+            anim.SetBool("falling", false);
             anim.SetBool("onWall",true);
             anim.SetBool("grounded",false);
+            anim.SetBool("dJump", false);
+            wings.SetActive(false);
+            dashed = false;
             transform.Translate(0, -8 * Time.deltaTime, 0);
             thisRigidbody2D.velocity = new Vector2(0, 0);
             //reset jump
@@ -340,7 +386,8 @@ public class SimplePhysicsController : MonoBehaviour {
         //jump from wall
         if (leaveTheWall)
         {
-            
+            anim.SetBool("jump2wall", false);
+            dirChanged = false;
             wjCount = false;
             isOnWall = false;
             wjCounter += 1;
@@ -355,14 +402,16 @@ public class SimplePhysicsController : MonoBehaviour {
                 toLeft = false;
                 toRight = true;
             }
-            if (wjCounter < 15)
+            int jumpIdx = 17;
+            
+            if (wjCounter < jumpIdx )
             {
                if (toLeft)
                 {
-                    thisRigidbody2D.AddForce(Vector2.left * 1000 * Time.deltaTime, ForceMode2D.Impulse);
+                    thisRigidbody2D.AddForce(Vector2.left * 600 * Time.deltaTime, ForceMode2D.Impulse);
                 }else if (toRight)
                 {
-                    thisRigidbody2D.AddForce(Vector2.right * 1000 * Time.deltaTime, ForceMode2D.Impulse);
+                    thisRigidbody2D.AddForce(Vector2.right * 600 * Time.deltaTime, ForceMode2D.Impulse);
                 }
             }
             else
@@ -372,8 +421,15 @@ public class SimplePhysicsController : MonoBehaviour {
             }
 
         }
+
+        if (feet.isGrounded)
+        {
+            dirChanged = false;
+            wings.SetActive(false);
+            dashed = false;
+        }
         //reset dash
-        dashed = false;
+        
         if (WJ1.onWall)
         {
             dashLeft = true;
@@ -389,6 +445,8 @@ public class SimplePhysicsController : MonoBehaviour {
             isDashing = true;
             dashAgainCounter = dashAgainCounterMax;
             isOnWall = false;
+            
+            
         }
 
     }
