@@ -5476,7 +5476,6 @@ MonoBehaviour:
   wallDash: 0
   dashRight: 0
   dashLeft: 0
-  dirChanged: 0
   wings: {fileID: 1503941099}
 --- !u!114 &1063632699
 MonoBehaviour:
