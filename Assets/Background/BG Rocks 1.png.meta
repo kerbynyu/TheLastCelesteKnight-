@@ -1,0 +1,388 @@
+fileFormatVersion: 2
+guid: b326f5197df7a40aa88c39fb471bb1f6
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 9030073244688661362
+    second: BG Rocks 1_0
+  - first:
+      213: 625414586930652295
+    second: BG Rocks 1_1
+  - first:
+      213: -8930851734389518885
+    second: BG Rocks 1_2
+  - first:
+      213: 954530354041146098
+    second: BG Rocks 1_3
+  - first:
+      213: 1920703226624550731
+    second: BG Rocks 1_4
+  - first:
+      213: 5996513427576774848
+    second: BG Rocks 1_5
+  - first:
+      213: 6054801028367533956
+    second: BG Rocks 1_6
+  - first:
+      213: 1687505543847062340
+    second: BG Rocks 1_7
+  - first:
+      213: 2874064407332841108
+    second: BG Rocks 1_8
+  - first:
+      213: -4063300469372748141
+    second: BG Rocks 1_9
+  - first:
+      213: -9065929495801646834
+    second: BG Rocks 1_0
+  - first:
+      213: 859983479737791310
+    second: BG Rocks 1_1
+  - first:
+      213: 4814141751985676704
+    second: BG Rocks 1_2
+  - first:
+      213: 7388231081923906888
+    second: BG Rocks 1_3
+  - first:
+      213: 8842238556737294430
+    second: BG Rocks 1_4
+  - first:
+      213: 3740241687882291777
+    second: BG Rocks 1_5
+  - first:
+      213: 8968551803206981288
+    second: BG Rocks 1_6
+  - first:
+      213: -2540025731681067052
+    second: BG Rocks 1_7
+  - first:
+      213: -2330315837816465628
+    second: BG Rocks 1_8
+  - first:
+      213: -1506251638570281289
+    second: BG Rocks 1_9
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 50
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BG Rocks 1_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1525
+        width: 22
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e01b10c28295f2280800000000000000
+      internalID: -9065929495801646834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BG Rocks 1_1
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 1293
+        width: 769
+        height: 655
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e43b97e1b664feb00800000000000000
+      internalID: 859983479737791310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BG Rocks 1_2
+      rect:
+        serializedVersion: 2
+        x: 831
+        y: 1282
+        width: 815
+        height: 684
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a1ab71ca644fc240800000000000000
+      internalID: 4814141751985676704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BG Rocks 1_3
+      rect:
+        serializedVersion: 2
+        x: 1734
+        y: 1263
+        width: 1322
+        height: 722
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84d03944605488660800000000000000
+      internalID: 7388231081923906888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BG Rocks 1_4
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 1388
+        width: 14
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e50d6918e11f5ba70800000000000000
+      internalID: 8842238556737294430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BG Rocks 1_5
+      rect:
+        serializedVersion: 2
+        x: 794
+        y: 1352
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14ad45c9ff108e330800000000000000
+      internalID: 3740241687882291777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BG Rocks 1_6
+      rect:
+        serializedVersion: 2
+        x: 1640
+        y: 1354
+        width: 33
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a657dbf852b67c70800000000000000
+      internalID: 8968551803206981288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BG Rocks 1_7
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 724
+        width: 832
+        height: 527
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4df5ccefd0400ccd0800000000000000
+      internalID: -2540025731681067052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BG Rocks 1_8
+      rect:
+        serializedVersion: 2
+        x: 977
+        y: 710
+        width: 846
+        height: 547
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4279b70971e09afd0800000000000000
+      internalID: -2330315837816465628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BG Rocks 1_9
+      rect:
+        serializedVersion: 2
+        x: 2229
+        y: 113
+        width: 615
+        height: 650
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b61bac7d18b81be0800000000000000
+      internalID: -1506251638570281289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
