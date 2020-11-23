@@ -15,6 +15,8 @@ public class PlayerAttack : Attack
     public float launchTime = 1f;
     public Vector3 lPosition;
     public Vector3 shift;
+
+    public Animator thisAnimator;
     public SpriteRenderer pSprite;
     public HitBox hitbox1;
     public HitBox hitbox2;
@@ -50,6 +52,7 @@ public class PlayerAttack : Attack
             //When it is not during one attack
             if (!isAttacking)
             {
+                thisAnimator.SetBool("slash", false);
                 //the defualt attack direction will be the current facing
                 if (pSprite.flipX) { cHitbox = hitbox3; }
                 else { cHitbox = hitbox1; }
@@ -57,13 +60,14 @@ public class PlayerAttack : Attack
                 //if pressed attack button
                 if (Input.GetKeyDown(KeyCode.J))
                 {
+                    thisAnimator.SetBool("slash", true);
                     //print("attack!");
                     isAttacking = true;
                     //attack direction will be overwrite by directional inputs
-                    if (Input.GetKey(KeyCode.D)) { cHitbox = hitbox1; }
-                    else if (Input.GetKey(KeyCode.A)) { cHitbox = hitbox3; }
-                    if (Input.GetKey(KeyCode.S)) { cHitbox = hitbox2; }
-                    else if (Input.GetKey(KeyCode.W)) { cHitbox = hitbox4; }
+                    if (Input.GetKey(KeyCode.D)) { cHitbox = hitbox1;thisAnimator.SetInteger("direction", 0); }
+                    else if (Input.GetKey(KeyCode.A)) { cHitbox = hitbox3; thisAnimator.SetInteger("direction", 0); }
+                    if (Input.GetKey(KeyCode.S)) { cHitbox = hitbox2; thisAnimator.SetInteger("direction", -1); }
+                    else if (Input.GetKey(KeyCode.W)) { cHitbox = hitbox4; thisAnimator.SetInteger("direction", 1); }
 
                     //Initialize the choosen hitbox
                     cHitbox.gameObject.SetActive(true);
