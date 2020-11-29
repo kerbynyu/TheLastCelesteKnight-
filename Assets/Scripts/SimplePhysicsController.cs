@@ -7,6 +7,7 @@ public class SimplePhysicsController : MonoBehaviour {
 
     public SpriteRenderer thisSprite;
     public Rigidbody2D thisRigidbody2D;
+    public PlayerAttack playerAattack;
     public float force = 10f;
     public float jumpforce = 10;
     public bool onplatform;
@@ -76,377 +77,397 @@ public class SimplePhysicsController : MonoBehaviour {
 
 
     void FixedUpdate() {
+        //if not using charging
+        if (playerAattack.eUsed <= 0)
+        {
 
-        if(feet.isGrounded){
-            anim.SetBool("grounded",true);
-            anim.SetBool("dJump",false);
-        }
-
-        if (transform.rotation.eulerAngles.z != 0) {
-            transform.rotation = Quaternion.identity;
-        }
-        //move left with 'a'
-        if (Input.GetKey(KeyCode.A) && !isDashing) {
-            if (!leaveTheWall)
+            if (feet.isGrounded)
             {
-                anim.SetBool("walking",true);
-                anim.SetBool("idle",false);
-                //walking animation
-                transform.Translate(-20 * Time.deltaTime, 0, 0);
-                isMoving = true;
+                anim.SetBool("grounded", true);
+                anim.SetBool("dJump", false);
             }
-            else
+
+            if (transform.rotation.eulerAngles.z != 0)
             {
-                if (wjCounter > 5)
+                transform.rotation = Quaternion.identity;
+            }
+            //if not during a push back onground
+            if (playerAattack.counter5 <= 0 || playerAattack.pushed_movable)
+            {
+                //move left with 'a'
+                if (Input.GetKey(KeyCode.A) && !isDashing)
                 {
-                    transform.Translate(-20 * Time.deltaTime, 0, 0);
+                    if (!leaveTheWall)
+                    {
+                        anim.SetBool("walking", true);
+                        anim.SetBool("idle", false);
+                        //walking animation
+                        transform.Translate(-20 * Time.deltaTime, 0, 0);
+                        isMoving = true;
+                    }
+                    else
+                    {
+                        if (wjCounter > 5)
+                        {
+                            transform.Translate(-20 * Time.deltaTime, 0, 0);
+                        }
+                    }
+
+                    if (!isOnWall)
+                    {
+                        movingRight = false;
+                    }
+
+                }
+
+                //move right with 'd' 
+                if (Input.GetKey(KeyCode.D) && !isDashing)
+                {
+                    if (!leaveTheWall)
+                    {
+                        //walking animation
+                        anim.SetBool("walking", true);
+                        anim.SetBool("idle", false);
+                        transform.Translate(20 * Time.deltaTime, 0, 0);
+                        isMoving = true;
+                    }
+                    else
+                    {
+                        if (wjCounter > 5)
+                        {
+                            transform.Translate(20 * Time.deltaTime, 0, 0);
+                        }
+                    }
+                    if (!isOnWall)
+                    {
+                        movingRight = true;
+                    }
                 }
             }
-
             if (!isOnWall)
             {
-                movingRight = false;
-            }
-
-        }
-
-        //move right with 'd' 
-        if (Input.GetKey(KeyCode.D) && !isDashing) {
-            if (!leaveTheWall)
-            {
-                //walking animation
-                anim.SetBool("walking",true);
-                anim.SetBool("idle",false);
-                transform.Translate(20 * Time.deltaTime, 0, 0);
-                isMoving = true;
-            }
-            else
-            {
-                if (wjCounter > 5)
+                if (movingRight)
                 {
-                    transform.Translate(20 * Time.deltaTime, 0, 0);
-                }
-            }
-            if (!isOnWall)
-            {
-                movingRight = true;
-            }
-        }
-        if (!isOnWall)
-        {
-            if (movingRight)
-            {
-                if (thisSprite.flipX == true)
-                {
-                    thisSprite.flipX = false;
-                }
-            }
-            else
-            {
-                if (thisSprite.flipX == false)
-                {
-                    thisSprite.flipX = true;
-                }
-            }
-        }
-
-        if (isMoving)
-        {
-            if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
-            {
-                isMoving = false;
-                anim.SetBool("idle",true);
-                anim.SetBool("walking",false);
-                if (feet.isGrounded)
-                {
-                    //idle animation  
-                    anim.SetBool("grounded",true);
-                }
-            }
-        }else{
-            anim.SetBool("idle",true);
-            anim.SetBool("walking",false);
-        }
-
-        
-
-        //jump control in fixed update
-
-        if (!isJumping && !feet.isGrounded)
-        {
-            thisRigidbody2D.gravityScale = fallingGravity;
-        }
-
-        if (isJumping && releasedJump == false && !isOnWall)
-        {
-            //jumping animation
-            anim.SetBool("grounded",false);
-            anim.SetBool("falling",false);
-            thisRigidbody2D.gravityScale = jumpingGravity;
-            jumpcounter += 1;
-            if (jumpcounter < jumpHeight)
-            {
-                if (!leaveTheWall)
-                {
-                    thisRigidbody2D.AddForce(Vector2.up * 4500 * Time.deltaTime, ForceMode2D.Impulse);
+                    if (thisSprite.flipX == true)
+                    {
+                        thisSprite.flipX = false;
+                    }
                 }
                 else
                 {
-                    thisRigidbody2D.AddForce(Vector2.up * 500 * Time.deltaTime, ForceMode2D.Impulse);
+                    if (thisSprite.flipX == false)
+                    {
+                        thisSprite.flipX = true;
+                    }
                 }
-            } else if (jumpcounter < jumpHeight + 3)
+            }
+
+            if (isMoving)
             {
-                thisRigidbody2D.AddForce(Vector2.down * 600 * Time.deltaTime, ForceMode2D.Impulse);
-
+                if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
+                {
+                    isMoving = false;
+                    anim.SetBool("idle", true);
+                    anim.SetBool("walking", false);
+                    if (feet.isGrounded)
+                    {
+                        //idle animation  
+                        anim.SetBool("grounded", true);
+                    }
+                }
             }
-            if (thisRigidbody2D.velocity.y > 40)
+            else
             {
-                thisRigidbody2D.velocity = new Vector2(0, 40);
+                anim.SetBool("idle", true);
+                anim.SetBool("walking", false);
             }
 
 
-        }
-        else
-        {
-            //falling animation
-            anim.SetBool("falling",true);
-            transform.Translate(0, 0, 0);
-            jumpcounter = 0;
-            thisRigidbody2D.gravityScale = fallingGravity;
-        }
-            
-        //double jump control in fixed update
 
-        if (isDoubleJumping && !isOnWall)
-        {
+            //jump control in fixed update
 
-            if (doubleJumpCounter == 0) {
-                wings.SetActive(false);
-                wings.SetActive(true);
-            }
-
-            //double jump animation
-            anim.SetBool("dJump",true);
-            anim.SetBool("falling",false);
-            anim.SetBool("grounded",false);
-
-            jumped = false;
-            doubleJumpCounter += 1;
-            if (doubleJumpCounter < doubleJumpHeight)
+            if (!isJumping && !feet.isGrounded)
             {
-                thisRigidbody2D.AddForce(Vector2.up * 4500 * Time.deltaTime, ForceMode2D.Impulse);
+                thisRigidbody2D.gravityScale = fallingGravity;
             }
-            else if (doubleJumpCounter < doubleJumpHeight + 1)
+
+            if (isJumping && releasedJump == false && !isOnWall)
             {
-                thisRigidbody2D.AddForce(Vector2.down * 600 * Time.deltaTime, ForceMode2D.Impulse);
+                //jumping animation
+                anim.SetBool("grounded", false);
+                anim.SetBool("falling", false);
+                thisRigidbody2D.gravityScale = jumpingGravity;
+                jumpcounter += 1;
+                if (jumpcounter < jumpHeight)
+                {
+                    if (!leaveTheWall)
+                    {
+                        thisRigidbody2D.AddForce(Vector2.up * 4500 * Time.deltaTime, ForceMode2D.Impulse);
+                    }
+                    else
+                    {
+                        thisRigidbody2D.AddForce(Vector2.up * 500 * Time.deltaTime, ForceMode2D.Impulse);
+                    }
+                }
+                else if (jumpcounter < jumpHeight + 3)
+                {
+                    thisRigidbody2D.AddForce(Vector2.down * 600 * Time.deltaTime, ForceMode2D.Impulse);
+
+                }
+                if (thisRigidbody2D.velocity.y > 40)
+                {
+                    thisRigidbody2D.velocity = new Vector2(0, 40);
+                }
+
 
             }
-            if (thisRigidbody2D.velocity.y > 30)
-            {
-                thisRigidbody2D.velocity = new Vector2(0, 30);
-            }
-            if (Input.GetKeyUp(KeyCode.K) || doubleJumpCounter > doubleJumpHeight + 6)
+            else
             {
                 //falling animation
-                anim.SetBool("dJump",true);
-                anim.SetBool("falling",true);
+                anim.SetBool("falling", true);
+                transform.Translate(0, 0, 0);
+                jumpcounter = 0;
+                thisRigidbody2D.gravityScale = fallingGravity;
+            }
+
+            //double jump control in fixed update
+
+            if (isDoubleJumping && !isOnWall)
+            {
+
+                if (doubleJumpCounter == 0)
+                {
+                    wings.SetActive(false);
+                    wings.SetActive(true);
+                }
+
+                //double jump animation
+                anim.SetBool("dJump", true);
+                anim.SetBool("falling", false);
+                anim.SetBool("grounded", false);
+
+                jumped = false;
+                doubleJumpCounter += 1;
+                if (doubleJumpCounter < doubleJumpHeight)
+                {
+                    thisRigidbody2D.AddForce(Vector2.up * 4500 * Time.deltaTime, ForceMode2D.Impulse);
+                }
+                else if (doubleJumpCounter < doubleJumpHeight + 1)
+                {
+                    thisRigidbody2D.AddForce(Vector2.down * 600 * Time.deltaTime, ForceMode2D.Impulse);
+
+                }
+                if (thisRigidbody2D.velocity.y > 30)
+                {
+                    thisRigidbody2D.velocity = new Vector2(0, 30);
+                }
+                if (Input.GetKeyUp(KeyCode.K) || doubleJumpCounter > doubleJumpHeight + 6)
+                {
+                    //falling animation
+                    anim.SetBool("dJump", true);
+                    anim.SetBool("falling", true);
+                    thisRigidbody2D.velocity = new Vector2(0, 0);
+                    doubleJumpCounter = 0;
+                    thisRigidbody2D.gravityScale = fallingGravity;
+                    isDoubleJumping = false;
+                }
+            }
+
+            if (anim.GetBool("falling") == true && anim.GetBool("grounded") == true && anim.GetBool("walking") == false)
+            {
+                if (!isMoving || !isDashing)
+                {
+                    anim.SetBool("falling", false);
+                    anim.SetBool("idle", true);
+                }
+            }
+
+            //dash control in fixed update
+            if (dashAgainCounter > -5)
+            {
+                dashAgainCounter -= 1;
+            }
+            if (isDashing)
+            {
+                wings.SetActive(false);
+                //dash animation
+                dashed = true;
+                anim.SetBool("dash", true);
+                anim.SetBool("idle", false);
+                thisRigidbody2D.velocity = new Vector2(thisRigidbody2D.velocity.x, 0);
+                if (!wallDash)
+                {
+                    if (movingRight)
+                    {
+                        thisRigidbody2D.AddForce(Vector2.right * 800 * Time.deltaTime, ForceMode2D.Impulse);
+                    }
+                    else
+                    {
+                        thisRigidbody2D.AddForce(Vector2.right * -800 * Time.deltaTime, ForceMode2D.Impulse);
+                    }
+                    dashCounter += 1;
+                    isJumping = false;
+                    if (dashCounter > 6)
+                    {
+                        if (movingRight)
+                        {
+                            thisRigidbody2D.AddForce(Vector2.right * -500 * Time.deltaTime, ForceMode2D.Impulse);
+                        }
+                        else
+                        {
+                            thisRigidbody2D.AddForce(Vector2.right * 500 * Time.deltaTime, ForceMode2D.Impulse);
+                        }
+                    }
+                }
+                else
+                {
+                    if (dashRight)
+                    {
+                        thisRigidbody2D.AddForce(Vector2.right * 800 * Time.deltaTime, ForceMode2D.Impulse);
+                    }
+                    else if (dashLeft)
+                    {
+                        thisRigidbody2D.AddForce(Vector2.right * -800 * Time.deltaTime, ForceMode2D.Impulse);
+                    }
+                    dashCounter += 1;
+                    isJumping = false;
+                    if (dashCounter > 6)
+                    {
+                        if (dashRight)
+                        {
+                            thisRigidbody2D.AddForce(Vector2.right * -500 * Time.deltaTime, ForceMode2D.Impulse);
+                        }
+                        else if (dashLeft)
+                        {
+                            thisRigidbody2D.AddForce(Vector2.right * 500 * Time.deltaTime, ForceMode2D.Impulse);
+                        }
+                    }
+                }
+                if (dashCounter > 8)
+                {
+                    wallDash = false;
+                    isDashing = false;
+                    dashCounter = 0;
+                }
+            }
+            else
+            {
+                thisRigidbody2D.velocity = new Vector2(0, thisRigidbody2D.velocity.y);
+            }
+
+            //wall jump control in fixed update
+            if (isOnWall)
+            {
+                if (dirChanged == false)
+                {
+                    if (movingRight)
+                    {
+                        movingRight = false;
+                        dirChanged = true;
+                    }
+                    else
+                    {
+                        movingRight = true;
+                        dirChanged = true;
+                    }
+                }
+                //climbing on the wall animation
+                anim.SetBool("walking", false);
+                anim.SetBool("jump2wall", true);
+                anim.SetBool("falling", false);
+                anim.SetBool("onWall", true);
+                anim.SetBool("grounded", false);
+                anim.SetBool("dJump", false);
+                wings.SetActive(false);
+                dashed = false;
+                transform.Translate(0, -8 * Time.deltaTime, 0);
+                thisRigidbody2D.velocity = new Vector2(0, 0);
+                //reset jump
                 thisRigidbody2D.velocity = new Vector2(0, 0);
                 doubleJumpCounter = 0;
                 thisRigidbody2D.gravityScale = fallingGravity;
                 isDoubleJumping = false;
-            }
-        }
-
-        if (anim.GetBool("falling")==true && anim.GetBool("grounded")==true && anim.GetBool("walking")==false)
-        {
-            if (!isMoving || !isDashing)
-            {
-                anim.SetBool("falling", false);
-                anim.SetBool("idle", true);
-            }
-        }
-
-        //dash control in fixed update
-        if (dashAgainCounter > -5)
-        {
-            dashAgainCounter -= 1;
-        }
-        if (isDashing)
-        {
-            wings.SetActive(false);
-            //dash animation
-            dashed = true;
-            anim.SetBool("dash",true);
-            anim.SetBool("idle",false);
-            thisRigidbody2D.velocity = new Vector2(thisRigidbody2D.velocity.x, 0);
-            if (!wallDash)
-            {
-                if (movingRight)
-                {
-                    thisRigidbody2D.AddForce(Vector2.right * 800 * Time.deltaTime, ForceMode2D.Impulse);
-                }else
-                {
-                    thisRigidbody2D.AddForce(Vector2.right * -800 * Time.deltaTime, ForceMode2D.Impulse);
-                }
-                dashCounter += 1;
+                jumpcounter = 0;
+                thisRigidbody2D.gravityScale = fallingGravity;
                 isJumping = false;
-                if (dashCounter > 6)
+                releasedJump = true;
+                if (wjCount)
                 {
-                    if (movingRight)
-                    {
-                        thisRigidbody2D.AddForce(Vector2.right * -500 * Time.deltaTime, ForceMode2D.Impulse);
-                    }
-                    else
-                    {
-                        thisRigidbody2D.AddForce(Vector2.right * 500 * Time.deltaTime, ForceMode2D.Impulse);
-                    }
+                    leaveTheWall = true;
+                    doubleJumpEnabled = true;
+                    releasedJump = false;
+                    isJumping = true;
+                    jumped = true;
                 }
-            }
-            else
-            {
-                if (dashRight)
-                {
-                    thisRigidbody2D.AddForce(Vector2.right * 800 * Time.deltaTime, ForceMode2D.Impulse);
-                }else if (dashLeft)
-                {
-                    thisRigidbody2D.AddForce(Vector2.right * -800 * Time.deltaTime, ForceMode2D.Impulse);
-                }
-                dashCounter += 1;
-                isJumping = false;
-                if (dashCounter > 6)
-                {
-                    if (dashRight)
-                    {
-                        thisRigidbody2D.AddForce(Vector2.right * -500 * Time.deltaTime, ForceMode2D.Impulse);
-                    }
-                    else if (dashLeft)
-                    {
-                        thisRigidbody2D.AddForce(Vector2.right * 500 * Time.deltaTime, ForceMode2D.Impulse);
-                    }
-                }
-            }
-            if (dashCounter > 8)
-            {
-                wallDash = false;
-                isDashing = false;
-                dashCounter = 0;
-            }
-        }
-        else
-        {
-            thisRigidbody2D.velocity = new Vector2(0, thisRigidbody2D.velocity.y);
-        }
 
-        //wall jump control in fixed update
-        if (isOnWall)
-        {
-            if (dirChanged == false)
+            }
+            //jump from wall
+            if (leaveTheWall)
             {
-                if (movingRight)
+                anim.SetBool("jump2wall", false);
+                dirChanged = false;
+                wjCount = false;
+                isOnWall = false;
+                wjCounter += 1;
+
+                if (WJ1.onWall)
                 {
-                    movingRight = false;
-                    dirChanged = true;
+                    toRight = false;
+                    toLeft = true;
+                }
+                else if (WJ2.onWall)
+                {
+                    toLeft = false;
+                    toRight = true;
+                }
+                int jumpIdx = 17;
+
+                if (wjCounter < jumpIdx)
+                {
+                    if (toLeft)
+                    {
+                        thisRigidbody2D.AddForce(Vector2.left * 600 * Time.deltaTime, ForceMode2D.Impulse);
+                    }
+                    else if (toRight)
+                    {
+                        thisRigidbody2D.AddForce(Vector2.right * 600 * Time.deltaTime, ForceMode2D.Impulse);
+                    }
                 }
                 else
                 {
-                    movingRight = true;
-                    dirChanged = true;
+                    wjCounter = 0;
+                    leaveTheWall = false;
                 }
+
             }
-            //climbing on the wall animation
-            anim.SetBool("walking", false);
-            anim.SetBool("jump2wall", true);
-            anim.SetBool("falling", false);
-            anim.SetBool("onWall",true);
-            anim.SetBool("grounded",false);
-            anim.SetBool("dJump", false);
-            wings.SetActive(false);
-            dashed = false;
-            transform.Translate(0, -8 * Time.deltaTime, 0);
-            thisRigidbody2D.velocity = new Vector2(0, 0);
-            //reset jump
-            thisRigidbody2D.velocity = new Vector2(0, 0);
-            doubleJumpCounter = 0;
-            thisRigidbody2D.gravityScale = fallingGravity;
-            isDoubleJumping = false;
-            jumpcounter = 0;
-            thisRigidbody2D.gravityScale = fallingGravity;
-            isJumping = false;
-            releasedJump = true;
-            if (wjCount)
+
+            if (feet.isGrounded)
             {
-                leaveTheWall = true;
-                doubleJumpEnabled = true;
-                releasedJump = false;
-                isJumping = true;
-                jumped = true;
+                dirChanged = false;
+                wings.SetActive(false);
+                dashed = false;
             }
-            
-        }
-        //jump from wall
-        if (leaveTheWall)
-        {
-            anim.SetBool("jump2wall", false);
-            dirChanged = false;
-            wjCount = false;
-            isOnWall = false;
-            wjCounter += 1;
-            
+            //reset dash
+
             if (WJ1.onWall)
             {
-                toRight = false;
-                toLeft = true;
+                dashLeft = true;
+                dashRight = false;
             }
             else if (WJ2.onWall)
             {
-                toLeft = false;
-                toRight = true;
+                dashRight = true;
+                dashLeft = false;
             }
-            int jumpIdx = 17;
-            
-            if (wjCounter < jumpIdx )
+            //dash from wall
+            if (wallDash)
             {
-               if (toLeft)
-                {
-                    thisRigidbody2D.AddForce(Vector2.left * 600 * Time.deltaTime, ForceMode2D.Impulse);
-                }else if (toRight)
-                {
-                    thisRigidbody2D.AddForce(Vector2.right * 600 * Time.deltaTime, ForceMode2D.Impulse);
-                }
-            }
-            else
-            {
-                wjCounter = 0;
-                leaveTheWall = false;
-            }
+                isDashing = true;
+                dashAgainCounter = dashAgainCounterMax;
+                isOnWall = false;
 
-        }
 
-        if (feet.isGrounded)
-        {
-            dirChanged = false;
-            wings.SetActive(false);
-            dashed = false;
-        }
-        //reset dash
-        
-        if (WJ1.onWall)
-        {
-            dashLeft = true;
-            dashRight = false;
-        }else if (WJ2.onWall)
-        {
-            dashRight = true;
-            dashLeft = false;
-        }
-        //dash from wall
-        if (wallDash)
-        {
-            isDashing = true;
-            dashAgainCounter = dashAgainCounterMax;
-            isOnWall = false;
-            
-            
+            }
         }
 
     }
@@ -620,6 +641,7 @@ public class SimplePhysicsController : MonoBehaviour {
                 isDoubleJumping = false;
             }
         }
+
     }
 
     public void Hurt() {

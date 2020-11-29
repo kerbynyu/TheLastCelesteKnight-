@@ -7,11 +7,11 @@ public class HitBox : MonoBehaviour
     public int side = 0;//0 for neutral, 1 for player, -1 for enemy
     public GameObject owner;
     public float damage = 0;
-    public float life = 1;
-    public float force = 5f;
+    public float life = 1;//the duration of this box
+    public float force = 5f;//the force to the taker
+    public float force2 = 40f;//the force to the owner
+    public bool moveAble = false;//if movable once land a hit
     public Vector2 dir = Vector2.left;
-    public float xMovement=5f;
-    public float yMovement=5f;
     public List<GameObject> whiteList;
     // Start is called before the first frame update
     void Start()
@@ -22,7 +22,7 @@ public class HitBox : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+       
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -38,9 +38,18 @@ public class HitBox : MonoBehaviour
                 whiteList.Add(collision.gameObject);
                 //if hitted solid hurtBox instead of grass
                 if (hurtbox.solid) {
+                    if (owner.GetComponent<PlayerAttack>())
+                    {
+                        PlayerAttack pl = owner.GetComponent<PlayerAttack>();
+                        pl.counter5 = pl.pushed_back_time;
+                        pl.pushed_direction = dir;
+                        pl.pushed_back_speed = force2;
+                        pl.pushed_movable = moveAble;
+                        pl.energy += 1;
+                    }
                     owner.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                     //owner.GetComponent<Rigidbody2D>().AddForce(force*dir, ForceMode2D.Impulse);
-                    owner.transform.Translate(xMovement, yMovement, 0);
+                    //owner.transform.Translate(xMovement, yMovement, 0);
                 }
                 //if the hitted box is not steel
                 if (!hurtbox.steel)
