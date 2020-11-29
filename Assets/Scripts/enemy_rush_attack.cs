@@ -18,8 +18,10 @@ public class enemy_rush_attack : Attack
 
     public float chargeTime=0.5f;
     public float runTime=2f;
+    public float stunTime = 1f;
     public float counter1=0;//charge counter
     public float counter2=0;//run counter
+    public float counter3 = 0;//stun counter
 
     public SpriteRenderer thisSpriteRenderer;
     public GroundCheck2 feet;
@@ -32,65 +34,76 @@ public class enemy_rush_attack : Attack
     // Update is called once per frame
     public override void Update()
     {
-        if (thisSpriteRenderer.flipX) { direction = -1; } else { direction = 1; }
-        //if no player spotted
-        if (!isAttacking)
+        if (counter3<=0&&!hitted)
         {
-            if (feet.isGrounded)
+            if (thisSpriteRenderer.flipX) { direction = -1; } else { direction = 1; }
+            //if no player spotted
+            if (!isAttacking)
             {
-                counter1 = 0;
-                counter2 = 0;
-                transform.Translate(walk_speed * direction * Time.deltaTime, 0, 0);//walking
-                                                                                   //reverse detection section
-                Ray2D reverseRay = new Ray2D(new Vector2(transform.position.x + ray_offX, transform.position.y + ray_offY), new Vector2(direction, 0) * reverse_length);
-                Ray2D fallRay = new Ray2D(new Vector2(transform.position.x + ray_offX, transform.position.y + ray_offY), new Vector2(direction, -1) * fall_length);
-                Debug.DrawRay(reverseRay.origin, new Vector2(direction, 0) * reverse_length);
-                Debug.DrawRay(reverseRay.origin, fallRay.direction * fall_length);
-                RaycastHit2D reverseHit = Physics2D.Raycast(reverseRay.origin, reverseRay.direction, reverse_length, thisMask);
-                RaycastHit2D fallHit = Physics2D.Raycast(fallRay.origin, fallRay.direction, fall_length, thisMask);
-                if ((reverseHit.collider != null && reverseHit.collider.gameObject.CompareTag("Ground")) || !(fallHit.collider != null && fallHit.collider.gameObject.CompareTag("Ground")))
+                if (feet.isGrounded)
                 {
-                    thisSpriteRenderer.flipX = !thisSpriteRenderer.flipX;
+                    counter1 = 0;
+                    counter2 = 0;
+                    transform.Translate(walk_speed * direction * Time.deltaTime, 0, 0);//walking
+                                                                                       //reverse detection section
+                    Ray2D reverseRay = new Ray2D(new Vector2(transform.position.x + ray_offX, transform.position.y + ray_offY), new Vector2(direction, 0) * reverse_length);
+                    Ray2D fallRay = new Ray2D(new Vector2(transform.position.x + ray_offX, transform.position.y + ray_offY), new Vector2(direction, -1) * fall_length);
+                    Debug.DrawRay(reverseRay.origin, new Vector2(direction, 0) * reverse_length);
+                    Debug.DrawRay(reverseRay.origin, fallRay.direction * fall_length);
+                    RaycastHit2D reverseHit = Physics2D.Raycast(reverseRay.origin, reverseRay.direction, reverse_length, thisMask);
+                    RaycastHit2D fallHit = Physics2D.Raycast(fallRay.origin, fallRay.direction, fall_length, thisMask);
+                    if ((reverseHit.collider != null && reverseHit.collider.gameObject.CompareTag("Ground")) || !(fallHit.collider != null && fallHit.collider.gameObject.CompareTag("Ground")))
+                    {
+                        thisSpriteRenderer.flipX = !thisSpriteRenderer.flipX;
+                    }
+
+                    //player detection section front
+                    Ray2D detectRay = new Ray2D(new Vector2(transform.position.x + ray_offX, transform.position.y + ray_offY), new Vector2(direction, 0) * detection_length);
+                    Debug.DrawRay(detectRay.origin, new Vector2(direction, 0) * detection_length);
+                    RaycastHit2D detectHit = Physics2D.Raycast(detectRay.origin, detectRay.direction, detection_length, playerMask);
+                    if (detectHit.collider != null && detectHit.collider.gameObject.CompareTag("Player"))
+                    {
+                        isAttacking = true;
+                        counter1 = chargeTime;
+                    }
                 }
 
-                //player detection section front
-                Ray2D detectRay = new Ray2D(new Vector2(transform.position.x + ray_offX, transform.position.y + ray_offY), new Vector2(direction, 0) * detection_length);
-                Debug.DrawRay(detectRay.origin, new Vector2(direction, 0) * detection_length);
-                RaycastHit2D detectHit = Physics2D.Raycast(detectRay.origin, detectRay.direction, detection_length, playerMask);
-                if (detectHit.collider != null && detectHit.collider.gameObject.CompareTag("Player"))
+            }
+            //if player spotted
+            else
+            {
+
+                //if attack already start
+                if (counter2 > 0)
                 {
-                    isAttacking = true;
-                    counter1 = chargeTime;
+                    counter2 -= Time.deltaTime;
+                    transform.Translate(run_speed * direction * Time.deltaTime, 0, 0);//running
+                }
+                //if still charging
+                else if (counter1 > 0)
+                {
+                    counter1 -= Time.deltaTime;
+                    //charge finished
+                    if (counter1 <= 0)
+                    {
+                        counter2 = runTime;
+                    }
+                }
+                else
+                {
+                    isAttacking = false;
                 }
             }
-
         }
-        //if player spotted
         else {
             if (hitted)
             {
+                counter3 = stunTime;
                 hitted = false;
-                isAttacking = false;
-            }
-            //if attack already start
-            if (counter2 > 0)
-            {
-                counter2 -= Time.deltaTime;
-                transform.Translate(run_speed * direction * Time.deltaTime, 0, 0);//running
-            }
-            //if still charging
-            else if(counter1>0)
-            {
-                counter1 -= Time.deltaTime;
-                //charge finished
-                if (counter1 <= 0)
-                {
-                    counter2 = runTime;
-                }
             }
             else
             {
-                isAttacking = false;
+                counter3 -= Time.deltaTime;
             }
         }
     }

@@ -7,6 +7,7 @@ public class SimplePhysicsController : MonoBehaviour {
 
     public SpriteRenderer thisSprite;
     public Rigidbody2D thisRigidbody2D;
+    public PlayerAttack playerAattack;
     public float force = 10f;
     public float jumpforce = 10;
     public bool onplatform;
@@ -85,51 +86,54 @@ public class SimplePhysicsController : MonoBehaviour {
         if (transform.rotation.eulerAngles.z != 0) {
             transform.rotation = Quaternion.identity;
         }
-        //move left with 'a'
-        if (Input.GetKey(KeyCode.A) && !isDashing) {
-            if (!leaveTheWall)
-            {
-                anim.SetBool("walking",true);
-                anim.SetBool("idle",false);
-                //walking animation
-                transform.Translate(-20 * Time.deltaTime, 0, 0);
-                isMoving = true;
-            }
-            else
-            {
-                if (wjCounter > 5)
+        //if not during a push back onground
+        if (playerAattack.counter5 <=0||playerAattack.pushed_movable) {
+            //move left with 'a'
+            if (Input.GetKey(KeyCode.A) && !isDashing) {
+                if (!leaveTheWall)
                 {
+                    anim.SetBool("walking", true);
+                    anim.SetBool("idle", false);
+                    //walking animation
                     transform.Translate(-20 * Time.deltaTime, 0, 0);
+                    isMoving = true;
                 }
-            }
-
-            if (!isOnWall)
-            {
-                movingRight = false;
-            }
-
-        }
-
-        //move right with 'd' 
-        if (Input.GetKey(KeyCode.D) && !isDashing) {
-            if (!leaveTheWall)
-            {
-                //walking animation
-                anim.SetBool("walking",true);
-                anim.SetBool("idle",false);
-                transform.Translate(20 * Time.deltaTime, 0, 0);
-                isMoving = true;
-            }
-            else
-            {
-                if (wjCounter > 5)
+                else
                 {
-                    transform.Translate(20 * Time.deltaTime, 0, 0);
+                    if (wjCounter > 5)
+                    {
+                        transform.Translate(-20 * Time.deltaTime, 0, 0);
+                    }
                 }
+
+                if (!isOnWall)
+                {
+                    movingRight = false;
+                }
+
             }
-            if (!isOnWall)
-            {
-                movingRight = true;
+
+            //move right with 'd' 
+            if (Input.GetKey(KeyCode.D) && !isDashing) {
+                if (!leaveTheWall)
+                {
+                    //walking animation
+                    anim.SetBool("walking", true);
+                    anim.SetBool("idle", false);
+                    transform.Translate(20 * Time.deltaTime, 0, 0);
+                    isMoving = true;
+                }
+                else
+                {
+                    if (wjCounter > 5)
+                    {
+                        transform.Translate(20 * Time.deltaTime, 0, 0);
+                    }
+                }
+                if (!isOnWall)
+                {
+                    movingRight = true;
+                }
             }
         }
         if (!isOnWall)

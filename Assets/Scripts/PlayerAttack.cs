@@ -10,9 +10,16 @@ public class PlayerAttack : Attack
     public float counter2 = 0;//count the invicible frame 
     public float counter3 = 0;//count the stun frame 
     public float counter4 = 0;//count the being shot away time
+    public float counter5 = 0;//count the pushed back duration
+    public float counter6 = 0;//count the attack CD
+    public float attackCD = 0.5f;
     public float invicibleTime = 1.5f;
     public float stunTime = 0.5f;
     public float launchTime = 1f;
+    public float pushed_back_time = 0.5f;
+    public Vector2 pushed_direction;
+    public float pushed_back_speed;
+    public bool pushed_movable = false;
     public Vector3 lPosition;
     public Vector3 shift;
 
@@ -49,17 +56,31 @@ public class PlayerAttack : Attack
         //if player is not hitted
         if (counter3<=0)
         {
+            //if player is pushed back by the attack
+            if (counter5 >= 0)
+            {
+                counter5 -= Time.deltaTime;
+                transform.Translate(new Vector3(-pushed_back_speed * pushed_direction.x * Time.deltaTime, -pushed_back_speed * pushed_direction.y * Time.deltaTime, 0));
+                pushed_back_speed -= pushed_back_speed * Time.deltaTime / pushed_back_time;
+            }
+            else
+            {
+                pushed_movable = false;
+            }
             //When it is not during one attack
             if (!isAttacking)
             {
+                
                 thisAnimator.SetBool("slash", false);
                 //the defualt attack direction will be the current facing
                 if (pSprite.flipX) { cHitbox = hitbox3; }
                 else { cHitbox = hitbox1; }
 
-                //if pressed attack button
-                if (Input.GetKeyDown(KeyCode.J))
+                if (counter6 > 0) { counter6 -= Time.deltaTime; }
+                //if pressed attack button and the cool down is ready
+                if (Input.GetKeyDown(KeyCode.J)&&counter6<=0)
                 {
+                    counter6 = attackCD;
                     thisAnimator.SetBool("slash", true);
                     //print("attack!");
                     isAttacking = true;

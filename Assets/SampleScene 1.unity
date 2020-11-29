@@ -7062,6 +7062,7 @@ MonoBehaviour:
   launchTime: 1
   lPosition: {x: 0, y: 0, z: 0}
   shift: {x: 0, y: 0, z: 0}
+  thisAnimator: {fileID: 1063632700}
   pSprite: {fileID: 1063632694}
   hitbox1: {fileID: 1612213450}
   hitbox2: {fileID: 1294554749}
