@@ -59,6 +59,9 @@ public class breakable : MonoBehaviour
         	par.Play();
         	par2.Play();
         	destroyed=true;
+        	if(gameObject.GetComponent<Animator>()!=null){
+        		gameObject.GetComponent<Animator>().enabled=false;
+        	}
         }
     }
 }
