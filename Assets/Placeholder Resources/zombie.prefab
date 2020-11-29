@@ -193,7 +193,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 1
+  m_LinearDrag: 5
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
@@ -265,11 +265,11 @@ MonoBehaviour:
   detection_length: 5
   reverse_length: 2.5
   fall_length: 0
-  walk_speed: 2
-  run_speed: 5
+  walk_speed: 3
+  run_speed: 10
   isAttacking: 0
   direction: 1
-  chargeTime: 0.5
+  chargeTime: 0.25
   runTime: 2
   stunTime: 0.2
   counter1: 0

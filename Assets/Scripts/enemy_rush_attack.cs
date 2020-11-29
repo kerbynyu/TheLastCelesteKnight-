@@ -39,7 +39,7 @@ public class enemy_rush_attack : Attack
             GetComponent<Rigidbody2D>().gravityScale = 1;
         }
         else {
-            GetComponent<Rigidbody2D>().gravityScale = 4;
+            GetComponent<Rigidbody2D>().gravityScale = 10;
         }
         if (counter3<=0&&!hitted)
         {
@@ -72,6 +72,17 @@ public class enemy_rush_attack : Attack
                     {
                         isAttacking = true;
                         counter1 = chargeTime;
+                    }
+
+                    //player detection section back
+                    Ray2D detectRay2 = new Ray2D(new Vector2(transform.position.x + ray_offX, transform.position.y + ray_offY), new Vector2(-direction, 0) * detection_length);
+                    Debug.DrawRay(detectRay2.origin, new Vector2(-direction, 0) * detection_length);
+                    RaycastHit2D detectHit2 = Physics2D.Raycast(detectRay2.origin, detectRay2.direction, detection_length, playerMask);
+                    if (detectHit2.collider != null && detectHit2.collider.gameObject.CompareTag("Player"))
+                    {
+                        isAttacking = true;
+                        counter1 = chargeTime;
+                        thisSpriteRenderer.flipX = !thisSpriteRenderer.flipX;
                     }
                 }
 
