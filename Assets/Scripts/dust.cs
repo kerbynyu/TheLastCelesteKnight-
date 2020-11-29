@@ -9,6 +9,7 @@ public class dust : MonoBehaviour
 	private GameObject player;
 	private bool dusting;
     private Vector3 offset;
+    private GroundCheck2 grnd;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,16 +17,17 @@ public class dust : MonoBehaviour
         player=GameObject.FindGameObjectWithTag("Player");
         anim=player.GetComponent<Animator>();
         offset=player.transform.position-runDust.transform.position;
+        grnd=player.GetComponentInChildren<GroundCheck2>();
     }
 
     // Update is called once per frame
     void Update()
     {
     	var childTransform=runDust.transform;
-        if(anim.GetBool("walking") && anim.GetBool("grounded") && !dusting){
+        if(anim.GetBool("walking") && grnd.isGrounded && !dusting){
         	runDust.Play();
         	dusting=true;
-        }else if((!anim.GetBool("walking") || !anim.GetBool("grounded")) && dusting){
+        }else if((!anim.GetBool("walking") || !grnd.isGrounded) && dusting){
         	dusting=false;
         	float t=0f;
         	if(!anim.GetBool("grounded")) t=0.2f;
