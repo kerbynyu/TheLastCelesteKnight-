@@ -34,6 +34,13 @@ public class enemy_rush_attack : Attack
     // Update is called once per frame
     public override void Update()
     {
+        if (feet.isGrounded)
+        {
+            GetComponent<Rigidbody2D>().gravityScale = 1;
+        }
+        else {
+            GetComponent<Rigidbody2D>().gravityScale = 4;
+        }
         if (counter3<=0&&!hitted)
         {
             if (thisSpriteRenderer.flipX) { direction = -1; } else { direction = 1; }
