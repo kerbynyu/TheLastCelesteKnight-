@@ -22,5 +22,6 @@ public class Health : MonoBehaviour
 
 
         lHp = Hp;
+        Hp = Mathf.Min(maxHp, Hp);
     }
 }

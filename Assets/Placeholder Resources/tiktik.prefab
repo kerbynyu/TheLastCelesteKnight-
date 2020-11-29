@@ -268,10 +268,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b5a8e7f029f48a4db361d98f08dbeb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: {fileID: 3322576769651473589}
   hitted: 0
   speed: 3.5
   rotationSpeed: -180
-  stunTime: 1
+  stunTime: 0.2
   counter1: 0
   feet1: {fileID: 3322576769616127743}
 --- !u!61 &3322576769651473590

@@ -368,8 +368,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6545542c0a2104469bc04ce75d80dfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: {fileID: 1486773700796493541}
   hitted: 0
   isAttacking: 0
+  energy: 9
+  maxEnergy: 9
+  eUsed: 0
+  eSpeed: 0
+  eSpeed_Max: 3
+  eSpeed_Acc: 1.5
   counter1: 0
   counter2: 0
   counter3: 0
@@ -386,6 +393,7 @@ MonoBehaviour:
   pushed_movable: 0
   lPosition: {x: 0, y: 0, z: 0}
   shift: {x: 0, y: 0, z: 0}
+  feet: {fileID: 1486773700289727719}
   thisAnimator: {fileID: 1486773700796493540}
   pSprite: {fileID: 1486773700796493550}
   hitbox1: {fileID: 5131447904875794185}

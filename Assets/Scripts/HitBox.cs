@@ -45,6 +45,7 @@ public class HitBox : MonoBehaviour
                         pl.pushed_direction = dir;
                         pl.pushed_back_speed = force2;
                         pl.pushed_movable = moveAble;
+                        pl.energy += 1;
                     }
                     owner.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                     //owner.GetComponent<Rigidbody2D>().AddForce(force*dir, ForceMode2D.Impulse);

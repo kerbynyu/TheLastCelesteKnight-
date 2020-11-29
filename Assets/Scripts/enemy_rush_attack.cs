@@ -23,6 +23,7 @@ public class enemy_rush_attack : Attack
     public float counter2=0;//run counter
     public float counter3 = 0;//stun counter
 
+    
     public SpriteRenderer thisSpriteRenderer;
     public GroundCheck2 feet;
     // Start is called before the first frame update
@@ -34,6 +35,8 @@ public class enemy_rush_attack : Attack
     // Update is called once per frame
     public override void Update()
     {
+        base.Update();
+
         if (feet.isGrounded)
         {
             GetComponent<Rigidbody2D>().gravityScale = 1;

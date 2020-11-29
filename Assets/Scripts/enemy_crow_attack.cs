@@ -9,11 +9,14 @@ public class enemy_crow_attack : Attack
     public float stunTime = 1f;
     public float counter1 = 0;
 
+
     public GroundCheck2 feet1;
 
 
     public override void Update()
     {
+        base.Update();
+
         if (counter1<=0&&!hitted)
         {
             transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0), Space.Self);

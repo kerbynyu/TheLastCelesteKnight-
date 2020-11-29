@@ -6,23 +6,34 @@ public class PlayerAttack : Attack
 {
 
     public bool isAttacking= false;
+    public float energy = 0;
+    public float maxEnergy = 9;
+    public float eUsed = 0;//energy used for this charge
+    public float eSpeed = 0;//energy using speed
+    public float eSpeed_Max = 3;//max energy using speed in sec
+    public float eSpeed_Acc = 3;//the acceleration of energy using in sec
+
     public float counter1 = 0;//count the hitbox duration
     public float counter2 = 0;//count the invicible frame 
     public float counter3 = 0;//count the stun frame 
     public float counter4 = 0;//count the being shot away time
     public float counter5 = 0;//count the pushed back duration
     public float counter6 = 0;//count the attack CD
+
     public float attackCD = 0.5f;
     public float invicibleTime = 1.5f;
     public float stunTime = 0.5f;
+
     public float launchTime = 1f;
     public float pushed_back_time = 0.5f;
+
     public Vector2 pushed_direction;
     public float pushed_back_speed;
     public bool pushed_movable = false;
     public Vector3 lPosition;
     public Vector3 shift;
 
+    public GroundCheck2 feet;
     public Animator thisAnimator;
     public SpriteRenderer pSprite;
     public HitBox hitbox1;
@@ -44,6 +55,8 @@ public class PlayerAttack : Attack
     // Update is called once per frame
     public override void Update()
     {
+        energy = Mathf.Min(energy, maxEnergy);
+        energy = Mathf.Max(energy, 0);
         base.Update();
         if (hitted)
         {
@@ -93,6 +106,27 @@ public class PlayerAttack : Attack
                     //Initialize the choosen hitbox
                     cHitbox.gameObject.SetActive(true);
                     counter1 = cHitbox.life;
+                }
+                //if pressed regenerate button and onground
+                if (Input.GetKey(KeyCode.O)&&feet.isGrounded&&energy>0)
+                {
+                    //print("KaMe");
+                    eSpeed += eSpeed_Acc * Time.deltaTime;
+                    eSpeed = Mathf.Min(eSpeed, eSpeed_Max);
+                    energy -= eSpeed*Time.deltaTime;
+                    eUsed += eSpeed * Time.deltaTime;
+
+                    if (eUsed > 2.9)
+                    {
+                        eUsed = 0;
+                        health.Hp += 1;
+                        print("Hp plus 1");
+                    }
+                }
+                else if (eUsed > 0)
+                {
+                    eUsed = 0;
+                    //print("Ha");
                 }
             }
             else
