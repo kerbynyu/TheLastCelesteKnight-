@@ -1,7 +1,46 @@
 fileFormatVersion: 2
 guid: 0bfb157c230a04c7b9be1e8d9e5bc78e
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 2932176503975204126
+    second: statueBits_0
+  - first:
+      213: 4717377300954193087
+    second: statueBits_1
+  - first:
+      213: 4144872784127539157
+    second: statueBits_2
+  - first:
+      213: -6228682401089722581
+    second: statueBits_3
+  - first:
+      213: 6707648170844113402
+    second: statueBits_4
+  - first:
+      213: 2009097155719481915
+    second: statueBits_5
+  - first:
+      213: 5201255177671635094
+    second: statueBits_6
+  - first:
+      213: -8629634596960661226
+    second: statueBits_7
+  - first:
+      213: -5224725749349568283
+    second: statueBits_8
+  - first:
+      213: -3574216452823738411
+    second: statueBits_9
+  - first:
+      213: -1851239816671724658
+    second: statueBits_10
+  - first:
+      213: 6722895002712726410
+    second: statueBits_11
+  - first:
+      213: 5540981173802180581
+    second: statueBits_12
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -41,12 +80,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 3
+  spritePixelsToUnits: 1.8
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -99,7 +138,280 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: statueBits_0
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 17
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e15503abefe21b820800000000000000
+      internalID: 2932176503975204126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: statueBits_1
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 11
+        width: 2
+        height: 3
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbc9dd659ad777140800000000000000
+      internalID: 4717377300954193087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: statueBits_2
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 17
+        width: 3
+        height: 2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d73b1136db858930800000000000000
+      internalID: 4144872784127539157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: statueBits_3
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 10
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b27e1507b564f89a0800000000000000
+      internalID: -6228682401089722581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: statueBits_4
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 20
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af94675097a561d50800000000000000
+      internalID: 6707648170844113402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: statueBits_5
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 13
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3a48ede73fb1eb10800000000000000
+      internalID: 2009097155719481915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: statueBits_6
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 17
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6907743d6029e2840800000000000000
+      internalID: 5201255177671635094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: statueBits_7
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 12
+        width: 3
+        height: 2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6111dba4e016d3880800000000000000
+      internalID: -8629634596960661226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: statueBits_8
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 19
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e0be2ddc9b0e77b0800000000000000
+      internalID: -5224725749349568283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: statueBits_9
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 3
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d7951bb215d56ec0800000000000000
+      internalID: -3574216452823738411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: statueBits_10
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 9
+        width: 13
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8bf83de1331f46e0800000000000000
+      internalID: -1851239816671724658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: statueBits_11
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 2
+        width: 15
+        height: 3
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8bd0f2b2658c4d50800000000000000
+      internalID: 6722895002712726410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: statueBits_12
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 10
+        width: 9
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ef1b9b250585ec40800000000000000
+      internalID: 5540981173802180581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
