@@ -100,7 +100,7 @@ public class PlayerAttack : Attack
                     //attack direction will be overwrite by directional inputs
                     if (Input.GetKey(KeyCode.D)) { cHitbox = hitbox1;thisAnimator.SetInteger("direction", 0); }
                     else if (Input.GetKey(KeyCode.A)) { cHitbox = hitbox3; thisAnimator.SetInteger("direction", 0); }
-                    if (Input.GetKey(KeyCode.S)) { cHitbox = hitbox2; thisAnimator.SetInteger("direction", -1); }
+                    if (Input.GetKey(KeyCode.S)&&!feet.isGrounded) { cHitbox = hitbox2; thisAnimator.SetInteger("direction", -1); }
                     else if (Input.GetKey(KeyCode.W)) { cHitbox = hitbox4; thisAnimator.SetInteger("direction", 1); }
 
                     //Initialize the choosen hitbox

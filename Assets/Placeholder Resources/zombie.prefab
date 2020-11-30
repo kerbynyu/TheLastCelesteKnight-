@@ -253,6 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60af48c0ec922614abe0d05d1be27d15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: {fileID: 5806763988697616717}
   hitted: 0
   thisMask:
     serializedVersion: 2
@@ -266,16 +267,15 @@ MonoBehaviour:
   reverse_length: 2.5
   fall_length: 0
   walk_speed: 3
-  run_speed: 10
+  run_speed: 20
   isAttacking: 0
   direction: 1
   chargeTime: 0.25
-  runTime: 2
+  runTime: 0.75
   stunTime: 0.2
   counter1: 0
   counter2: 0
   counter3: 0
-  health: {fileID: 5806763988697616717}
   thisSpriteRenderer: {fileID: 5806763988697616714}
   feet: {fileID: 791743547680453814}
 --- !u!1 &5806763988731472573
