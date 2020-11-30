@@ -13,6 +13,8 @@ public class HitBox : MonoBehaviour
     public bool moveAble = false;//if movable once land a hit
     public Vector2 dir = Vector2.left;
     public List<GameObject> whiteList;
+    public GameObject effect;
+    public GameObject locator;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,13 +33,18 @@ public class HitBox : MonoBehaviour
         if (collision.gameObject.CompareTag("hurtBox")&& collision.gameObject.GetComponent<HurtBox>())
         {
             HurtBox hurtbox = collision.gameObject.GetComponent<HurtBox>();
+            //if hit a new box not hitted one
             if (hurtbox.side!=side&&!whiteList.Contains(collision.gameObject)) {
+                //pass the damage and comfirm a hit
                 hurtbox.owner.GetComponent<Attack>().hitted=true;
                 hurtbox.owner.GetComponent<Health>().Hp -= damage;
-
+                
+                //add to whitelist
                 whiteList.Add(collision.gameObject);
                 //if hitted solid hurtBox instead of grass
                 if (hurtbox.solid) {
+                    //create effect
+                    Instantiate(effect, locator.transform.position, locator.transform.rotation);
                     if (owner.GetComponent<PlayerAttack>())
                     {
                         PlayerAttack pl = owner.GetComponent<PlayerAttack>();
