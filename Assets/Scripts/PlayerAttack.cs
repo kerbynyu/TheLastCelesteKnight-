@@ -108,7 +108,7 @@ public class PlayerAttack : Attack
                     counter1 = cHitbox.life;
                 }
                 //if pressed regenerate button and onground
-                if (Input.GetKey(KeyCode.O)&&feet.isGrounded&&energy>3)
+                if (Input.GetKey(KeyCode.O)&&feet.isGrounded&&(energy>=3||eUsed>0))
                 {
                     //print("KaMe");
                     eSpeed += eSpeed_Acc * Time.deltaTime;
