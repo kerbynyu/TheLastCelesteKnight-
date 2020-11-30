@@ -390,7 +390,7 @@ MonoBehaviour:
   health: {fileID: 1486773700796493541}
   hitted: 0
   isAttacking: 0
-  energy: 9
+  energy: 0
   maxEnergy: 9
   eUsed: 0
   eSpeed: 0
@@ -1045,6 +1045,10 @@ PrefabInstance:
       propertyPath: effect
       value: 
       objectReference: {fileID: 36652215514511773, guid: 0867b41d4f173b24eaf19af54606891e, type: 3}
+    - target: {fileID: 6022584162866061382, guid: 0133db9a32c32964586ac6a96e269e08, type: 3}
+      propertyPath: damage
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6022584162866061383, guid: 0133db9a32c32964586ac6a96e269e08, type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.x
       value: 0.2782443
@@ -1191,6 +1195,10 @@ PrefabInstance:
       propertyPath: effect
       value: 
       objectReference: {fileID: 36652215514511773, guid: 0867b41d4f173b24eaf19af54606891e, type: 3}
+    - target: {fileID: 4815992157841744710, guid: c112e5a447a7c744cb241fce94b52a7a, type: 3}
+      propertyPath: damage
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4815992157841744711, guid: c112e5a447a7c744cb241fce94b52a7a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.014
@@ -1344,6 +1352,10 @@ PrefabInstance:
       propertyPath: effect
       value: 
       objectReference: {fileID: 36652215514511773, guid: 0867b41d4f173b24eaf19af54606891e, type: 3}
+    - target: {fileID: 1397243379988042315, guid: e28b83362f0cbad42b357149c16fd60d, type: 3}
+      propertyPath: damage
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1397243379988042324, guid: e28b83362f0cbad42b357149c16fd60d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.014000038
@@ -1514,6 +1526,10 @@ PrefabInstance:
       propertyPath: effect
       value: 
       objectReference: {fileID: 36652215514511773, guid: 0867b41d4f173b24eaf19af54606891e, type: 3}
+    - target: {fileID: 5085918444806106925, guid: a9f96bd4cd31692478071cf347b75022, type: 3}
+      propertyPath: damage
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5085918444806106927, guid: a9f96bd4cd31692478071cf347b75022, type: 3}
       propertyPath: m_Name
       value: weapon3
