@@ -20,6 +20,7 @@ public class radianceMovement : MonoBehaviour
     public float nextLaunchIndex = 0;
     public bool launching = false;
     public bool teleportWhileLaunching = false;
+    private float teleportDistance = 0;
     public bool phase1 = false;
     public bool phase2 = false;
     //phase1 && phase2 attacks
@@ -52,13 +53,20 @@ public class radianceMovement : MonoBehaviour
     private bool goRight = false;
     //light wall variables
     public GameObject lightWallGO;
+    //orb variables
+    private float orbUp = 0;
+    private float orbDown = 0;
+    private float orbLeft = 0;
+    private float orbRight = 0;
+    public GameObject orb;
+    private int orbCount3 = 0;
     //phase2 spike
     public bool spikes1 = false;
     public bool spikes2 = false;
     // Start is called before the first frame update
     void Start()
     {
-        nextLaunchIndex = Random.Range(0, 100);
+        nextLaunchIndex = 80;
         beamBurstAngle = Random.Range(0, 90);
         floating = true;
         nextTeleportPosition = (leftMost.position.x+rightMost.position.x)/2;
@@ -112,7 +120,7 @@ public class radianceMovement : MonoBehaviour
                 }
 
                 //launch beam burst
-                else if (beamBurst)
+                if (beamBurst)
                 {
                     launchCounter += 1;
                     if (beamBurstCount3 < 3)
@@ -152,7 +160,7 @@ public class radianceMovement : MonoBehaviour
 
                 //launch sword rain
 
-                else if (swordRain)
+                if (swordRain)
                 {
                     launchCounter += 1;
                     if (launchCounter > 55 && launchCounter < 57)
@@ -190,7 +198,7 @@ public class radianceMovement : MonoBehaviour
 
                 //launch sword wall
 
-                else if (swordWall)
+                if (swordWall)
                 {
                     launchCounter += 1;
                     if (launchCounter > 65 && launchCounter < 67)
@@ -256,7 +264,7 @@ public class radianceMovement : MonoBehaviour
                         }
                     }
                 }
-                else if (lightWall)
+                if (lightWall)
                 {
                     launchCounter += 1;
                     if (launchCounter > 105 && launchCounter < 107)
@@ -291,15 +299,25 @@ public class radianceMovement : MonoBehaviour
                         }
                     }
                 }
-                else if (orbAttack)
+                if (orbAttack)
                 {
                     launchCounter += 1;
-                    if (launchCounter > 15 && launchCounter < 100)
+                    orbUp = rightMost.position.y + 5;
+                    orbDown = rightMost.position.y - 5;
+                    orbLeft = leftMost.position.x + 5;
+                    orbRight = rightMost.position.x - 5;
+                    if (launchCounter > 165 && launchCounter < 167 && orbCount3 < 3)
                     {
-                        thisSR.color = new Color(1, 1, 1);
+                        Debug.Log("inst");
+                        float orbY = Random.Range(orbUp, orbDown);
+                        float orbX = Random.Range(orbLeft, orbRight);
+                        GameObject thisOrb = Instantiate(orb, new Vector3(orbX, orbY, 0), Quaternion.Euler(0, 0, 0));
+                        orbCount3 += 1;
+                        launchCounter = 0;
                     }
-                    else if (launchCounter >= 100)
+                    else if (launchCounter >= 200)
                     {
+                        orbCount3 = 0;
                         launchCounter = 0;
                         orbAttack = false;
                         launching = false;
@@ -308,11 +326,15 @@ public class radianceMovement : MonoBehaviour
                     }
                 }
 
-                nextTeleportPosition = Random.Range(leftMost.position.x, rightMost.position.x);
+                teleportDistance = Mathf.Abs(nextTeleportPosition - transform.position.x);
+                if (teleportDistance < 15)
+                {
+                    nextTeleportPosition = Random.Range(leftMost.position.x, rightMost.position.x);
+                }
                 if (!launching)
                 {
                     
-                    if (nextLaunchIndex < 10)
+                    if (nextLaunchIndex < 15)
                     {
                         beamBurst = true;
                         launching = true;
@@ -336,23 +358,19 @@ public class radianceMovement : MonoBehaviour
                         launching = true;
                         teleportWhileLaunching = true;
                     }
-                    else if (nextLaunchIndex < 75)
+                    else if (nextLaunchIndex < 85)
                     {
                         orbAttack = true;
                         launching = true;
                         teleportWhileLaunching = false;
                     }
-                    else if (nextLaunchIndex < 100)
+                    else 
                     {
                         lightWall = true;
                         launching = true;
                         teleportWhileLaunching = true;
                     }
-                    else
-                    {
-                        launching = false;
-                        thisSR.color = new Color(0, 0, 0);
-                    }
+
                     
                 }else
 
@@ -364,6 +382,7 @@ public class radianceMovement : MonoBehaviour
 
                 if (floatCounter > nextFloatDuration)
                 {
+
                     float isOut = Random.Range(1f, 10f);
                     if (isOut > 9)
                     {
@@ -381,6 +400,7 @@ public class radianceMovement : MonoBehaviour
             if (teleport)
             {
                 resetVariables();
+                Debug.Log(teleportDistance);
                 nextFloatDuration = Random.Range(150, 200);
                 nextLaunchIndex = Random.Range(0f, 100f);
                 if (!telOutRange)
