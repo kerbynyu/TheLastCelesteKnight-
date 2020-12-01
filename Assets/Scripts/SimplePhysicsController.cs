@@ -67,7 +67,7 @@ public class SimplePhysicsController : MonoBehaviour {
         GetComponent<Rigidbody2D>();
 
         anim = GetComponent<Animator>();
-        gm = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameMaster>();
+        //gm = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameMaster>();
 
         //transform.position = gm.lastCheckPointPos;
        // transform.position = Vector3.SmoothDamp(gm.lastCheckPointPos, gm.lastCheckPointPos, ref thisVelocty, smoothTime);

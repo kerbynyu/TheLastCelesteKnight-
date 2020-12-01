@@ -13,6 +13,8 @@ public class orb : MonoBehaviour
     private Vector3 middleSpd = Vector3.zero;
     public Animator thisAnim;
     private float zRotation = 0;
+    private int hitGroundCounter = 0;
+    private bool hitGround = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +37,14 @@ public class orb : MonoBehaviour
             middle.transform.position = Vector3.SmoothDamp(middle.transform.position, player.transform.position, ref middleSpd, 0.13f);
             transform.position = Vector3.MoveTowards(transform.position,middle.transform.position,spd);
         }
+        if (hitGround)
+        {
+            hitGroundCounter += 1;
+        }
+        if (hitGroundCounter > 10)
+        {
+            Destroy(gameObject);
+        }
     }
 
     // Update is called once per frame
@@ -45,9 +55,18 @@ public class orb : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "ground")
+        if (collision.tag == "Ground")
         {
-            Destroy(gameObject);
+            hitGround = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Ground")
+        {
+            hitGround = false;
+            hitGroundCounter = 0;
         }
     }
 

@@ -23,6 +23,7 @@ public class radianceMovement : MonoBehaviour
     private float teleportDistance = 0;
     public bool phase1 = false;
     public bool phase2 = false;
+    public bool phase3 = false;
     //phase1 && phase2 attacks
     public bool beamBurst = false;
     public bool swordBurst = false;
@@ -61,17 +62,26 @@ public class radianceMovement : MonoBehaviour
     public GameObject orb;
     private int orbCount3 = 0;
     //phase2 spike
-    public bool spikes1 = false;
-    public bool spikes2 = false;
+    public Transform spikeLeft;
+    public Transform spikeRight;
+    public Transform spikeMiddle;
+    public GameObject spike;
+    private bool generateSpikeLeft = true;
+    List<GameObject> spikes1 = new List<GameObject>();
+    List<GameObject> spikes2 = new List<GameObject>();
+    private int spikeCounter = 400;
+    //phase3 variables
+    public int phase3ReadyCounter = 0;
+    public int phase3LaunchCounter = 0;
     // Start is called before the first frame update
     void Start()
     {
-        nextLaunchIndex = 80;
+        nextLaunchIndex = Random.Range(0f, 100f);
         beamBurstAngle = Random.Range(0, 90);
         floating = true;
         nextTeleportPosition = (leftMost.position.x+rightMost.position.x)/2;
         nextFloatDuration = Random.Range(50, 60);
-        phase1 = true;
+        phase3 = true;
         float wallDir = Random.Range(0, 10);
         if (wallDir < 5)
         {
@@ -81,10 +91,61 @@ public class radianceMovement : MonoBehaviour
         {
             goRight = false;
         }
+        for (float i = spikeLeft.position.x; i < spikeMiddle.position.x; i += 2.8f)
+        {
+            GameObject newSpike = Instantiate(spike, new Vector3(i, spikeMiddle.position.y, 0), Quaternion.Euler(0, 0, 0));
+            newSpike.SetActive(false);
+            spikes1.Add(newSpike);
+        }
+        for (float i = spikeRight.position.x; i > spikeMiddle.position.x; i -= 2.8f)
+        {
+            GameObject newSpike = Instantiate(spike, new Vector3(i, spikeMiddle.position.y, 0), Quaternion.Euler(0, 0, 0));
+            newSpike.SetActive(false);
+            spikes2.Add(newSpike);
+        }
     }
 
     void FixedUpdate()
     {
+
+        if (phase2)
+        {
+            spikeCounter += 1;
+            if (spikeCounter > 500)
+            {
+                if (generateSpikeLeft == true)
+                {
+                    for (int i = 0; i < spikes1.Count; i++)
+                    {
+                        GameObject thisSpike1 = spikes2[i];
+                        thisSpike1.SetActive(false);
+                    }
+                    for (int i = 0; i < spikes2.Count; i++)
+                    {
+                        GameObject thisSpike2 = spikes1[i];
+                        thisSpike2.SetActive(true);
+                    }
+                    generateSpikeLeft = false;
+                }
+                else
+                {
+                    for (int i = 0; i < spikes2.Count; i++)
+                    {
+                        GameObject thisSpike2 = spikes2[i];
+                        thisSpike2.SetActive(true);
+                    }
+                    for (int i = 0; i < spikes1.Count; i++)
+                    {
+                        GameObject thisSpike1 = spikes1[i];
+                        thisSpike1.SetActive(false);
+                    }
+                    generateSpikeLeft = true;
+                }
+                spikeCounter = 0;
+            }
+        }
+
+
         if (phase1 || phase2)
         {
             if (floating)
@@ -169,7 +230,7 @@ public class radianceMovement : MonoBehaviour
                         {
                             rainLeft = leftMost.position.x - 50;
                             rainRight = rightMost.position.x + 50;
-                            for (float i = rainLeft; i < rainRight; i += 7)
+                            for (float i = rainLeft + Random.Range(-10, 10); i < rainRight; i += 7)
                             {
                                 float ifCreate = Random.Range(0, 10);
                                 if (ifCreate < 7.5)
@@ -212,7 +273,7 @@ public class radianceMovement : MonoBehaviour
                             wallDown = downMost.position.y;
                             if (goRight)
                             {
-                                for (float i = wallDown; i < wallUp; i += 10)
+                                for (float i = wallDown + Random.Range(-10, 10); i < wallUp; i += 7)
                                 {
                                     float ifCreate = Random.Range(0, 10);
                                     if (ifCreate < 8)
@@ -228,7 +289,7 @@ public class radianceMovement : MonoBehaviour
 
                             else
                             {
-                                for (float i = wallDown; i < wallUp; i += 7)
+                                for (float i = wallDown + Random.Range(-10, 10); i < wallUp; i += 7)
                                 {
                                     float ifCreate = Random.Range(0, 10);
                                     if (ifCreate < 7.5)
@@ -400,7 +461,6 @@ public class radianceMovement : MonoBehaviour
             if (teleport)
             {
                 resetVariables();
-                Debug.Log(teleportDistance);
                 nextFloatDuration = Random.Range(150, 200);
                 nextLaunchIndex = Random.Range(0f, 100f);
                 if (!telOutRange)
@@ -413,6 +473,70 @@ public class radianceMovement : MonoBehaviour
                 }
                 teleport = false;
                 floating = true;
+            }
+        }
+
+        //phase3
+        if (phase3)
+        {
+            for (int i = 0; i < spikes1.Count; i++)
+            {
+                if (i < 6)
+                {
+                    spikes1[i].SetActive(true);
+                }
+                else
+                {
+                    spikes1[i].SetActive(false);
+                }
+            }
+            for (int i = 0; i < spikes2.Count; i++)
+            {
+                if (i < 6)
+                {
+                    spikes2[i].SetActive(true);
+                }
+                else
+                {
+                    spikes2[i].SetActive(false);
+                }
+            }
+            phase3ReadyCounter += 1;
+            if (phase3ReadyCounter > 50)
+            {
+                float middlePos = (leftMost.position.x + rightMost.position.x) / 2;
+                nextTeleportPosition = middlePos;
+                teleport = true;
+            }
+            if (teleport)
+            {
+                resetVariables();
+                transform.position = new Vector3(nextTeleportPosition, transform.position.y, transform.position.z);
+                teleport = false;
+                swordRain = true;
+            }
+            if (swordRain)
+            {
+                phase3LaunchCounter += 1;
+                if (phase3LaunchCounter > 55 && phase3LaunchCounter < 57)
+                {
+
+                    rainLeft = leftMost.position.x - 50;
+                    rainRight = rightMost.position.x + 50;
+                    for (float i = rainLeft+Random.Range(-10,10); i < rainRight; i += 7)
+                    {
+                        float ifCreate = Random.Range(0, 10);
+                        if (ifCreate < 7.5)
+                        {
+                            GameObject newSword = Instantiate(sword, new Vector3(i, upMost.position.y, 0), Quaternion.Euler(0, 0, -90));
+                            Animator swordAnim = newSword.GetComponent<Animator>();
+                            Destroy(swordAnim);
+                            sword swordScript = newSword.GetComponent<sword>();
+                            swordScript.other = true;
+                        }
+                    }
+                    phase3LaunchCounter = 0;
+                }
             }
         }
     }
