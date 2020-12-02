@@ -110,6 +110,12 @@ public class PlayerAttack : Attack
                 //if pressed regenerate button and onground
                 if (Input.GetKey(KeyCode.O)&&feet.isGrounded&&(energy>=3||eUsed>0))
                 {
+                    if (eSpeed == 0)
+                    {
+                        print("charge");
+                        thisAnimator.SetTrigger("charge");
+                    }
+                    thisAnimator.SetBool("charging", true);
                     //print("KaMe");
                     eSpeed += eSpeed_Acc * Time.deltaTime;
                     eSpeed = Mathf.Min(eSpeed, eSpeed_Max);
@@ -118,6 +124,8 @@ public class PlayerAttack : Attack
 
                     if (eUsed > 2.9)
                     {
+                        print("charged");
+                        thisAnimator.SetTrigger("charged");
                         eUsed = 0;
                         health.Hp += 1;
                         print("Hp plus 1");
@@ -125,8 +133,15 @@ public class PlayerAttack : Attack
                 }
                 else if (eUsed > 0)
                 {
+                    
                     eUsed = 0;
                     //print("Ha");
+                }
+                else
+                {
+                    eSpeed = 0;
+                    eUsed = 0; 
+                    thisAnimator.SetBool("charging", false);
                 }
             }
             else
