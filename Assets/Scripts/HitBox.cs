@@ -71,6 +71,12 @@ public class HitBox : MonoBehaviour
                     Instantiate(hurtbox.effect, hurtbox.transform.position, hurtbox.transform.rotation);
                 }
 
+                if (hurtbox.gameObject.GetComponent<ParticleSystem>())
+                {
+
+                    hurtbox.gameObject.GetComponent<ParticleSystem>().Play();
+                }
+
 
             }
             
