@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class orb : MonoBehaviour
+public class orb : Attack
 {
     public Animator ani;
     public eHit_Box hitbox;
