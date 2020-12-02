@@ -180,6 +180,8 @@ public class radianceMovement : MonoBehaviour
                 //launch sword burst
                 if (swordBurst && !telOutRange)
                 {
+                    //launching skill animation
+
                     launchCounter += 1;
                     if (launchCounter > 15 && launchCounter < 17)
                     {
@@ -196,6 +198,17 @@ public class radianceMovement : MonoBehaviour
                             swordBurstAngle += 30;
                         }
                     }
+
+                    else if (launchCounter > 100 && launchCounter < 190)
+                    {
+                        //normal animation
+                    }
+
+                    else if (launchCounter >= 190 && launchCounter < 200)
+                    {
+                        //teleport animation
+                    }
+
                     else if (launchCounter >= 200)
                     {
                         launchCounter = 0;
@@ -213,6 +226,8 @@ public class radianceMovement : MonoBehaviour
                     launchCounter += 1;
                     if (beamBurstCount3 < 3)
                     {
+                        //lauching skill animation
+
                         if (launchCounter > beamBurstStartIndex && launchCounter < beamBurstStartIndex+2)
                         {
                             if (beamBurstCount3 == 0)
@@ -236,11 +251,22 @@ public class radianceMovement : MonoBehaviour
                             launchCounter = 0;
                         }
                     }
+
+                    else if (launchCounter > 70 && launchCounter < 90)
+                    {
+                        //normal animation
+                    }
+
+                    else if (launchCounter >= 90 && launchCounter < 100)
+                    {
+                        //teleport animation
+                    }
+
                     else if (launchCounter >= 100)
                     {
-                        beamBurst = false;
-                        launching = false;
                         launchCounter = 0;
+                        launching = false;
+                        swordBurst = false;
                         teleport = true;
                         floating = false;
                     }
@@ -250,6 +276,8 @@ public class radianceMovement : MonoBehaviour
 
                 if (swordRain)
                 {
+                    //normal animation
+
                     launchCounter += 1;
                     if (launchCounter > 55 && launchCounter < 57)
                     {
@@ -273,14 +301,18 @@ public class radianceMovement : MonoBehaviour
                             count4 += 1;
                         }
                     }
+                    else if (launchCounter >= 90 && launchCounter < 100)
+                    {
+                        //teleport animation
+                    }
+
                     else if (launchCounter >= 100)
                     {
                         launchCounter = 0;
-                        swordRain = false;
                         launching = false;
+                        swordBurst = false;
                         teleport = true;
                         floating = false;
-                        count4 = 0;
                     }
                 }
 
@@ -291,6 +323,8 @@ public class radianceMovement : MonoBehaviour
                     launchCounter += 1;
                     if (launchCounter > 65 && launchCounter < 67)
                     {
+                        //normal animation
+
                         if (count4 < 4)
                         {
                             Debug.Log(count4);
@@ -333,6 +367,12 @@ public class radianceMovement : MonoBehaviour
                             count4 += 1;
                         }
                     }
+                    else if (launchCounter >= 90 && launchCounter < 100)
+                    {
+                        //teleport animation
+
+                    }
+
                     else if (launchCounter >= 100)
                     {
                         launchCounter = 0;
@@ -357,6 +397,8 @@ public class radianceMovement : MonoBehaviour
                     launchCounter += 1;
                     if (launchCounter > 105 && launchCounter < 107)
                     {
+                        //normal animation
+
                         wallLeft = leftMost.position.x - 50;
                         wallRight = rightMost.position.x + 50;
                         float wallPos = leftMost.position.y;
@@ -369,8 +411,16 @@ public class radianceMovement : MonoBehaviour
                             GameObject newSword = Instantiate(lightWallGO, new Vector3(wallRight, wallPos, 0), Quaternion.Euler(0, 0, -180));
                         }
                     }
+
+                    else if (launchCounter >= 100 && launchCounter < 110)
+                    {
+                        //teleport animation
+
+                    }
+
                     else if (launchCounter >= 110)
                     {
+
                         launchCounter = 0;
                         lightWall = false;
                         launching = false;
@@ -396,6 +446,8 @@ public class radianceMovement : MonoBehaviour
                     orbRight = rightMost.position.x - 5;
                     if (launchCounter > 165 && launchCounter < 167 && orbCount3 < 3)
                     {
+                        //lauching skill animation
+
                         Debug.Log("inst");
                         float orbY = Random.Range(orbUp, orbDown);
                         float orbX = Random.Range(orbLeft, orbRight);
@@ -403,6 +455,17 @@ public class radianceMovement : MonoBehaviour
                         orbCount3 += 1;
                         launchCounter = 0;
                     }
+
+                    else if (launchCounter > 170 && launchCounter < 190)
+                    {
+                        //normal animation
+                    }
+
+                    else if (launchCounter >= 190 && launchCounter < 200)
+                    {
+                        //teleport animation
+                    }
+
                     else if (launchCounter >= 200)
                     {
                         orbCount3 = 0;
@@ -468,6 +531,12 @@ public class radianceMovement : MonoBehaviour
                 }
 
 
+                if (floatCounter > nextFloatDuration - 10)
+                {
+                    //teleport animation
+
+                }
+
                 if (floatCounter > nextFloatDuration)
                 {
 
@@ -487,6 +556,8 @@ public class radianceMovement : MonoBehaviour
             }
             if (teleport)
             {
+                //normal animation
+
                 resetVariables();
                 nextFloatDuration = Random.Range(150, 200);
                 nextLaunchIndex = Random.Range(0f, 100f);
@@ -506,6 +577,8 @@ public class radianceMovement : MonoBehaviour
         //phase3
         if (phase3)
         {
+            //launching skill animation
+
             for (int i = 0; i < spikes1.Count; i++)
             {
                 if (i < 6)
