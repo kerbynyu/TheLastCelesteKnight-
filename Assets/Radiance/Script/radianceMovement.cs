@@ -81,7 +81,7 @@ public class radianceMovement : MonoBehaviour
         floating = true;
         nextTeleportPosition = (leftMost.position.x+rightMost.position.x)/2;
         nextFloatDuration = Random.Range(50, 60);
-        phase3 = true;
+        phase1 = true;
         float wallDir = Random.Range(0, 10);
         if (wallDir < 5)
         {
