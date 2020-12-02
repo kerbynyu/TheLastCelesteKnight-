@@ -38,7 +38,7 @@ public class beam : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (thisAnim.GetCurrentAnimatorStateInfo(0).IsName("burst2"))
+        if (thisAnim.GetCurrentAnimatorStateInfo(0).IsName("beamBurst2"))
         {
             hitbox.gameObject.SetActive(true);
         }
