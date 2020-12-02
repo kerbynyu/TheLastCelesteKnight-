@@ -410,7 +410,7 @@ public class SimplePhysicsController : MonoBehaviour {
                 moveFromWallCounter = 0;
             }
 
-            if (moveFromWallCounter < 15)
+            if (moveFromWallCounter < 15 && moveFromWallCounter > 0)
             {
                 moveFromWall = true;
             }else if (feet.isGrounded || isOnWall)
@@ -618,7 +618,7 @@ public class SimplePhysicsController : MonoBehaviour {
             if (!doubleJumped || !leaveTheWall)
             {
                 jumped = true;
-                doubleJumpEnabled = true;
+                //doubleJumpEnabled = true;
             }
         }
         else
@@ -675,6 +675,7 @@ public class SimplePhysicsController : MonoBehaviour {
             doubleJumpCounter = 0;
             doubleJumped = true;
             doubleJumpEnabled = false;
+            Debug.Log("double");
         }
 
         if (isDoubleJumping)
