@@ -1035,7 +1035,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6022584162866061382, guid: 0133db9a32c32964586ac6a96e269e08, type: 3}
       propertyPath: force
-      value: 50
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6022584162866061382, guid: 0133db9a32c32964586ac6a96e269e08, type: 3}
       propertyPath: force2
@@ -1181,7 +1181,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4815992157841744710, guid: c112e5a447a7c744cb241fce94b52a7a, type: 3}
       propertyPath: force
-      value: 50
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4815992157841744710, guid: c112e5a447a7c744cb241fce94b52a7a, type: 3}
       propertyPath: force2
@@ -1338,7 +1338,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1397243379988042315, guid: e28b83362f0cbad42b357149c16fd60d, type: 3}
       propertyPath: force
-      value: 50
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1397243379988042315, guid: e28b83362f0cbad42b357149c16fd60d, type: 3}
       propertyPath: force2
@@ -1516,7 +1516,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5085918444806106925, guid: a9f96bd4cd31692478071cf347b75022, type: 3}
       propertyPath: force
-      value: 50
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5085918444806106925, guid: a9f96bd4cd31692478071cf347b75022, type: 3}
       propertyPath: force2
