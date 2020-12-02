@@ -344,6 +344,7 @@ MonoBehaviour:
   force: 5
   xMovement: 4
   yMovement: 4
+  hitPlayer: 0
 --- !u!4 &94577181
 Transform:
   m_ObjectHideFlags: 0
@@ -769,7 +770,7 @@ GameObject:
   - component: {fileID: 333025668}
   - component: {fileID: 333025667}
   - component: {fileID: 333025666}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Tilemap
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -876,7 +877,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 1.2391305, y: 1.2391305, z: 0}
   m_MaxChunkCount: 16
@@ -2542,6 +2543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e52adf0e077100429a9ca213ad84e67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: {fileID: 1619051017}
   thisSR: {fileID: 1619051013}
   floatCounter: 0
   floating: 0
@@ -2691,7 +2693,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 523bb520c2eb7ee41a7f710fa81e0d1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 100
+  maxHp: 260
   Hp: 0
 --- !u!1 &1644196994
 GameObject:

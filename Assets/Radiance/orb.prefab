@@ -169,6 +169,11 @@ MonoBehaviour:
   hitbox: {fileID: 8694516239604238549}
   middle: {fileID: 6339770488805789695}
   thisAnim: {fileID: 6452532322389938209}
+  hitGroundCounter: 0
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 2560
+  orbHit: {fileID: 8694516239604238549}
 --- !u!95 &6452532322389938209
 Animator:
   serializedVersion: 3
@@ -201,9 +206,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.00000047683716, y: 0}
+  m_Offset: {x: -0.011358261, y: 0}
   serializedVersion: 2
-  m_Radius: 2.2197013
+  m_Radius: 2.344636
 --- !u!1 &6339770488805789695
 GameObject:
   m_ObjectHideFlags: 0
