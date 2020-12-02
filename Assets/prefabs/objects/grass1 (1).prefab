@@ -18,7 +18,6 @@ GameObject:
   - component: {fileID: 6424552832685581582}
   - component: {fileID: 2074327065826130194}
   - component: {fileID: 4707189941009322061}
-  - component: {fileID: 9017646071158575087}
   - component: {fileID: 8052790188239317118}
   m_Layer: 0
   m_Name: grass1 (1)
@@ -120,6 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c92ff387c95175947a5f93bbfe4685c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: {fileID: 0}
   hitted: 0
 --- !u!114 &2771496171111801720
 MonoBehaviour:
@@ -5012,21 +5012,6 @@ MonoBehaviour:
   spriteLeft: {fileID: -4133103754698827007, guid: b243df2a9ac2b49f5906802502994d95, type: 3}
   spriteRight: {fileID: 5085775619655523851, guid: b243df2a9ac2b49f5906802502994d95, type: 3}
   number: 1
---- !u!111 &9017646071158575087
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4235149626649809104}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 5a1e9e8568fe9a046aabbab5f3eef00a, type: 2}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!95 &8052790188239317118
 Animator:
   serializedVersion: 3

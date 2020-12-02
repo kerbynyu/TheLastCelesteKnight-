@@ -79,5 +79,6 @@ PrefabInstance:
       propertyPath: spriteRight
       value: 
       objectReference: {fileID: 2290293637383880618, guid: 6774134c2623a4ec386749a3fa9bade0, type: 3}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: fea162e831d44e646a9484e1f8aa32be, type: 3}
