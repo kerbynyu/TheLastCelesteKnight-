@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class orb : MonoBehaviour
 {
+    public Animator ani;
+    public eHit_Box hitbox;
+
     private int waitCounter = 0;
     private bool action = false;
     private int lastCounter = 0;
@@ -50,7 +53,11 @@ public class orb : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (ani.GetCurrentAnimatorStateInfo(0).IsName("phase2"))
+        {
+            hitbox.gameObject.SetActive(true);
+        }
+        else { hitbox.gameObject.SetActive(false); }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

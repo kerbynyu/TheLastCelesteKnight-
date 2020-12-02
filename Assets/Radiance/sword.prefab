@@ -42,9 +42,11 @@ GameObject:
   - component: {fileID: 4511978368179076345}
   - component: {fileID: 5392996560722115193}
   - component: {fileID: -8971491160019037556}
-  m_Layer: 0
+  - component: {fileID: 5467863127095166782}
+  - component: {fileID: 2324157178627836345}
+  m_Layer: 8
   m_Name: sword
-  m_TagString: Untagged
+  m_TagString: hitBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -132,6 +134,7 @@ MonoBehaviour:
   burstRotation: 0
   burstX: 0
   burstY: 0
+  other: 0
 --- !u!95 &-8971491160019037556
 Animator:
   serializedVersion: 3
@@ -151,6 +154,50 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!61 &5467863127095166782
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5246017740300838623}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.5049515, y: -0.036066055}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 15, y: 7.5}
+    newSize: {x: 10, y: 5}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 11.5374565, y: 0.64704514}
+  m_EdgeRadius: 0
+--- !u!114 &2324157178627836345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5246017740300838623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f58e4250320bb8d43b45fedfa69ecdfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  side: -1
+  owner: {fileID: 5246017740300838623}
+  damage: 1
+  force: 5
+  xMovement: 4
+  yMovement: 4
 --- !u!1 &6567884636448327474
 GameObject:
   m_ObjectHideFlags: 0

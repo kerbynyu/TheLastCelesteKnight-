@@ -1,5 +1,71 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &680490273233891578
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3754768718862224036}
+  - component: {fileID: 5832909266625217185}
+  - component: {fileID: 8694516239604238549}
+  m_Layer: 8
+  m_Name: hitbox
+  m_TagString: hitBox
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3754768718862224036
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680490273233891578}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2280085923517680642}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &5832909266625217185
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680490273233891578}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.010415316}
+  serializedVersion: 2
+  m_Radius: 2.2184498
+--- !u!114 &8694516239604238549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680490273233891578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f58e4250320bb8d43b45fedfa69ecdfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  side: -1
+  owner: {fileID: 943426045623633207}
+  damage: 1
+  force: 5
+  xMovement: 3
+  yMovement: 3
 --- !u!1 &943426045623633207
 GameObject:
   m_ObjectHideFlags: 0
@@ -32,6 +98,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7254067622574634523}
+  - {fileID: 3754768718862224036}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -98,6 +165,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a38b835d4289cb4e999f8c7a3c24947, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ani: {fileID: 6452532322389938209}
+  hitbox: {fileID: 8694516239604238549}
   middle: {fileID: 6339770488805789695}
   thisAnim: {fileID: 6452532322389938209}
 --- !u!95 &6452532322389938209
