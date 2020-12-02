@@ -312,7 +312,7 @@ Transform:
   m_LocalScale: {x: 3.0045002, y: 3.0045002, z: 3.0045002}
   m_Children: []
   m_Father: {fileID: 1084148015}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &60421536
 SpriteRenderer:
@@ -609,11 +609,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 192836846}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -33.4, y: -4.4937935, z: 6305.56}
+  m_LocalPosition: {x: 15.64, y: -6.89, z: 6305.56}
   m_LocalScale: {x: 3.0070832, y: 3.0070832, z: 3.0070832}
   m_Children: []
   m_Father: {fileID: 1084148015}
-  m_RootOrder: 8
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &192836848
 MonoBehaviour:
@@ -1842,7 +1842,7 @@ Transform:
   m_LocalScale: {x: 3.0036826, y: 3.0036826, z: 3.0036826}
   m_Children: []
   m_Father: {fileID: 1084148015}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &576158373
 SpriteRenderer:
@@ -2129,7 +2129,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 675231812}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 92.4, y: -5.1537933, z: 6305.56}
+  m_LocalPosition: {x: 92.6, y: -5.1537933, z: 6305.56}
   m_LocalScale: {x: 3.0261898, y: 3.0261898, z: 3.0261898}
   m_Children: []
   m_Father: {fileID: 1084148015}
@@ -2836,12 +2836,12 @@ Transform:
   - {fileID: 482808392}
   - {fileID: 1148476761}
   - {fileID: 654526171}
+  - {fileID: 192836847}
   - {fileID: 576158372}
   - {fileID: 1618786904}
   - {fileID: 1566649468}
   - {fileID: 60421535}
   - {fileID: 2066090890}
-  - {fileID: 192836847}
   - {fileID: 1024103220}
   - {fileID: 354212213}
   - {fileID: 2145377013}
@@ -3331,7 +3331,7 @@ Transform:
   m_LocalScale: {x: 3.0400417, y: 3.0400417, z: 3.0400417}
   m_Children: []
   m_Father: {fileID: 1084148015}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1566649469
 SpriteRenderer:
@@ -3510,7 +3510,7 @@ Transform:
   m_LocalScale: {x: 3.0261898, y: 3.0261898, z: 3.0261898}
   m_Children: []
   m_Father: {fileID: 1084148015}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1618786905
 SpriteRenderer:
@@ -4292,7 +4292,7 @@ Transform:
   m_LocalScale: {x: 3.052092, y: 3.052092, z: 3.052092}
   m_Children: []
   m_Father: {fileID: 1084148015}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2066090891
 SpriteRenderer:
