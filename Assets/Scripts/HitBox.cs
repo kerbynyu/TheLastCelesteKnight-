@@ -64,6 +64,13 @@ public class HitBox : MonoBehaviour
                     hurtbox.thisRigidbody2d.AddForce(force * dir, ForceMode2D.Impulse);
                 }
 
+                //if the hurtbox have it's own effect
+                if (hurtbox.haveEffect)
+                {
+                   
+                    Instantiate(hurtbox.effect, hurtbox.transform.position, hurtbox.transform.rotation);
+                }
+
 
             }
             

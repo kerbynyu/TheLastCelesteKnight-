@@ -9,6 +9,8 @@ public class HurtBox : MonoBehaviour
     public bool steel = false;//wether this is not moveable or not
     public GameObject owner;
     public Rigidbody2D thisRigidbody2d;
+    public bool haveEffect = false;
+    public GameObject effect;
     // Start is called before the first frame update
     void Start()
     {

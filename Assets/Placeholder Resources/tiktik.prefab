@@ -411,3 +411,5 @@ MonoBehaviour:
   steel: 1
   owner: {fileID: 3322576769651473594}
   thisRigidbody2d: {fileID: 3322576769651473588}
+  haveEffect: 1
+  effect: {fileID: 36652215514511773, guid: 141822e7fa0513f449bc5b40e4d4712b, type: 3}
