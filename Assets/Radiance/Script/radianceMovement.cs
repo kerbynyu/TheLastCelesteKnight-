@@ -18,6 +18,7 @@ public class radianceMovement : MonoBehaviour
     public bool floating = false;
     public bool teleport = false;
     public bool telOutRange = false;
+    private int outRangeIndex = 0;
     public bool casting = false;
     public float nextTeleportPosition = 0;
     public int nextFloatDuration = 0;
@@ -246,27 +247,28 @@ public class radianceMovement : MonoBehaviour
                                 GameObject thisBeam = Instantiate(beam, new Vector3(newX, newY, 0), Quaternion.Euler(0, 0, beamBurstAngle));
                                 beamBurstAngle += 45;
                             }
-                            beamBurstStartIndex = 65;
+                            beamBurstStartIndex = 75;
                             beamBurstCount3 += 1;
                             launchCounter = 0;
                         }
                     }
 
-                    else if (launchCounter > 70 && launchCounter < 90)
+                    else if (launchCounter > 70 && launchCounter < 80)
                     {
                         //normal animation
                     }
 
-                    else if (launchCounter >= 90 && launchCounter < 100)
+                    else if (launchCounter >=80 && launchCounter < 90)
                     {
                         //teleport animation
                     }
 
                     else if (launchCounter >= 100)
                     {
+                        resetVariables();
                         launchCounter = 0;
                         launching = false;
-                        swordBurst = false;
+                        beamBurst = false;
                         teleport = true;
                         floating = false;
                     }
@@ -274,7 +276,7 @@ public class radianceMovement : MonoBehaviour
 
                 //launch sword rain
 
-                if (swordRain)
+                else if (swordRain)
                 {
                     //normal animation
 
@@ -310,7 +312,7 @@ public class radianceMovement : MonoBehaviour
                     {
                         launchCounter = 0;
                         launching = false;
-                        swordBurst = false;
+                        swordRain = false;
                         teleport = true;
                         floating = false;
                     }
@@ -318,7 +320,7 @@ public class radianceMovement : MonoBehaviour
 
                 //launch sword wall
 
-                if (swordWall)
+                else if (swordWall)
                 {
                     launchCounter += 1;
                     if (launchCounter > 65 && launchCounter < 67)
@@ -392,7 +394,7 @@ public class radianceMovement : MonoBehaviour
                         }
                     }
                 }
-                if (lightWall)
+                else if (lightWall)
                 {
                     launchCounter += 1;
                     if (launchCounter > 105 && launchCounter < 107)
@@ -437,7 +439,7 @@ public class radianceMovement : MonoBehaviour
                         }
                     }
                 }
-                if (orbAttack && !telOutRange)
+                else if (orbAttack && !telOutRange)
                 {
                     launchCounter += 1;
                     orbUp = rightMost.position.y + 5;
@@ -554,6 +556,26 @@ public class radianceMovement : MonoBehaviour
                     floating = false;
                 }
             }
+
+            if (telOutRange)
+            {
+                outRangeIndex += 1;
+                if (outRangeIndex > 50)
+                {
+                    telOutRange = false;
+                    outRangeIndex = 0;
+                    nextFloatDuration = Random.Range(150, 200);
+                    nextLaunchIndex = Random.Range(0f, 100f);
+                    transform.position = new Vector3(nextTeleportPosition, transform.position.y, transform.position.z);
+                    teleport = false;
+                    floating = true;
+                }
+            }
+            else
+            {
+                outRangeIndex = 0;
+            }
+
             if (teleport)
             {
                 //normal animation
