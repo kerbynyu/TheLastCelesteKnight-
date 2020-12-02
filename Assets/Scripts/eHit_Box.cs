@@ -10,6 +10,7 @@ public class eHit_Box : MonoBehaviour
     public float force = 5f;
     public float xMovement = 5f;
     public float yMovement = 5f;
+    public bool hitPlayer = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,9 +34,9 @@ public class eHit_Box : MonoBehaviour
                 hurtbox.owner.GetComponent<Attack>().hitted = true;
                 hurtbox.owner.GetComponent<Health>().Hp -= damage;
                 //print("hitted");
-                hurtbox.owner.transform.Translate(new Vector3(xMovement*Mathf.Sign(hurtbox.owner.transform.position.x- owner.transform.position.x), yMovement, 0)); 
-                
+                hurtbox.owner.transform.Translate(new Vector3(xMovement*Mathf.Sign(hurtbox.owner.transform.position.x- owner.transform.position.x), yMovement, 0));
 
+                hitPlayer = true;
             }
 
         }

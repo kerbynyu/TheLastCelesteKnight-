@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class radianceMovement : MonoBehaviour
 {
+    //phase1 health 50
+    //phase2 health 60
+    //phase3 health 40
+    //phase4 health 100
+    //phase5 health 1
+
+    public Health health;
+
     //public Transform player;
     public SpriteRenderer thisSR;
     public int floatCounter = 0;
@@ -108,6 +116,25 @@ public class radianceMovement : MonoBehaviour
     void FixedUpdate()
     {
 
+        if (health.Hp > 210)
+        {
+            phase1 = true;
+            phase2 = false;
+        }
+        else if (health.Hp > 150)
+        {
+            phase2 = true;
+            phase1 = false;
+            phase3 = false;
+        }
+        else if (health.Hp > 110)
+        {
+            phase3 = true;
+            phase2 = false;
+            phase1 = false;
+        }
+
+
         if (phase2)
         {
             spikeCounter += 1;
@@ -151,7 +178,7 @@ public class radianceMovement : MonoBehaviour
             if (floating)
             {
                 //launch sword burst
-                if (swordBurst)
+                if (swordBurst && !telOutRange)
                 {
                     launchCounter += 1;
                     if (launchCounter > 15 && launchCounter < 17)
@@ -181,7 +208,7 @@ public class radianceMovement : MonoBehaviour
                 }
 
                 //launch beam burst
-                if (beamBurst)
+                if (beamBurst && !telOutRange)
                 {
                     launchCounter += 1;
                     if (beamBurstCount3 < 3)
@@ -360,7 +387,7 @@ public class radianceMovement : MonoBehaviour
                         }
                     }
                 }
-                if (orbAttack)
+                if (orbAttack && !telOutRange)
                 {
                     launchCounter += 1;
                     orbUp = rightMost.position.y + 5;
