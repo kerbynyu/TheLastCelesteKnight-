@@ -94,6 +94,12 @@ public class SimplePhysicsController : MonoBehaviour {
             {
                 transform.rotation = Quaternion.identity;
             }
+
+            if (thisRigidbody2D.velocity.y < -40)
+            {
+                thisRigidbody2D.velocity = new Vector2(thisRigidbody2D.velocity.x, -40);
+            }
+
             //if not during a push back onground
             if (playerAattack.counter5 <= 0 || playerAattack.pushed_movable)
             {
@@ -576,7 +582,10 @@ public class SimplePhysicsController : MonoBehaviour {
             }
             if (WJ1.onWall == true || WJ2.onWall == true)
             {
-                isOnWall = true;
+                if (!feet.isGrounded)
+                {
+                    isOnWall = true;
+                }
             }
             else
             {
