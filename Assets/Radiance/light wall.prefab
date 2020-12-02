@@ -12,9 +12,11 @@ GameObject:
   - component: {fileID: 7308667516114444494}
   - component: {fileID: 8261172688211102388}
   - component: {fileID: 6323384273384438924}
-  m_Layer: 0
+  - component: {fileID: 2943591726519990637}
+  - component: {fileID: -7426373499300417222}
+  m_Layer: 8
   m_Name: light wall
-  m_TagString: Untagged
+  m_TagString: hitBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,3 +117,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c595ca4d2705774b8cad4e27dba47de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2943591726519990637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5167948099195607384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f58e4250320bb8d43b45fedfa69ecdfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  side: -1
+  owner: {fileID: 5167948099195607384}
+  damage: 1
+  force: 5
+  xMovement: 4
+  yMovement: 4
+--- !u!61 &-7426373499300417222
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5167948099195607384}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 30, y: 100}
+    newSize: {x: 30, y: 100}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 30, y: 100}
+  m_EdgeRadius: 0

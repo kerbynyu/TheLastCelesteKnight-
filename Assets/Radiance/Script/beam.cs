@@ -5,6 +5,7 @@ using UnityEngine;
 public class beam : MonoBehaviour
 {
     public Animator thisAnim;
+    public eHit_Box hitbox;
     private int destroyCounter = 0;
     private int lastCounter = 0;
     // Start is called before the first frame update
@@ -37,6 +38,10 @@ public class beam : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (thisAnim.GetCurrentAnimatorStateInfo(0).IsName("burst2"))
+        {
+            hitbox.gameObject.SetActive(true);
+        }
+        else { hitbox.gameObject.SetActive(false); }
     }
 }
