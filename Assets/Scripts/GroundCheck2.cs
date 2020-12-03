@@ -37,14 +37,10 @@ public class GroundCheck2 : MonoBehaviour {
         }
     }
     public void OnTriggerExit2D(Collider2D other) {
-        
+        isGrounded = false;
 
         if (other.gameObject.CompareTag("Enemy")) {
             isGrounded = true;
-        }
-        else
-        {
-            isGrounded = false;
         }
 
     }

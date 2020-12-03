@@ -37,6 +37,13 @@ public class SimplePhysicsController : MonoBehaviour {
     private  bool dashed = false;
     public int dashAgainCounter = 0;
     public int dashAgainCounterMax = 25;
+    //dark dash
+    public bool darkDashEnabled = false;
+    public int darkDashCounter = 0;
+    public int darkDashCounterMax = 100;
+    public bool darkDash = false;
+    public GameObject darkCoolDown;
+    public ParticleSystem dark;
 
     //double jump variables
     public bool doubleJumpEnabled;
@@ -67,8 +74,9 @@ public class SimplePhysicsController : MonoBehaviour {
     private GameMaster gm;
 
     void Start() {
+        darkCoolDown.SetActive(false);
         GetComponent<Rigidbody2D>();
-
+        darkDashCounter = darkDashCounterMax;
         anim = GetComponent<Animator>();
         //gm = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameMaster>();
 
@@ -77,7 +85,6 @@ public class SimplePhysicsController : MonoBehaviour {
         //THIS IS THE CODE 
 
     }
-
 
     void FixedUpdate() {
         //if not using charging
@@ -296,16 +303,49 @@ public class SimplePhysicsController : MonoBehaviour {
             }
 
             //dash control in fixed update
+
+                //dark dash
+            if (darkDashCounter < darkDashCounterMax + 10)
+            {
+                darkDashCounter += 1;
+            }
+            if (darkDashCounter > darkDashCounterMax - 10)
+            {
+                Animator CDAnim = darkCoolDown.GetComponent<Animator>();
+                CDAnim.SetBool("ready", true);
+
+            }
+
+            if (darkDashCounter < darkDashCounterMax)
+            {
+                darkDashEnabled = false;
+            }
+            else
+            {
+                darkDashEnabled = true;
+                darkCoolDown.SetActive(false);
+            }
+
             if (dashAgainCounter > -5)
             {
                 dashAgainCounter -= 1;
             }
             if (isDashing)
             {
+               
                 wings.SetActive(false);
                 //dash animation
                 dashed = true;
-                anim.SetBool("dash", true);
+                if (!darkDash)
+                {
+                    anim.SetBool("dash", true);
+                }
+                else
+                {
+                    dark.Play();
+                    anim.SetBool("darkDash", true);
+                }
+
                 anim.SetBool("idle", false);
                 thisRigidbody2D.velocity = new Vector2(thisRigidbody2D.velocity.x, 0);
                 if (!wallDash)
@@ -365,6 +405,7 @@ public class SimplePhysicsController : MonoBehaviour {
             }
             else
             {
+                dark.Stop();
                 thisRigidbody2D.velocity = new Vector2(0, thisRigidbody2D.velocity.y);
             }
 
@@ -527,7 +568,15 @@ public class SimplePhysicsController : MonoBehaviour {
             anim.SetBool("walking",false);
         }
         if(!isDashing){
-            anim.SetBool("dash",false);
+            if (darkDash)
+            {
+                darkDash = false;
+                anim.SetBool("darkDash", false);
+            }
+            else
+            {
+                anim.SetBool("dash", false);
+            }
         }
         if(!isOnWall){
             anim.SetBool("onWall",false);
@@ -601,6 +650,13 @@ public class SimplePhysicsController : MonoBehaviour {
         {
             isDashing = true;
             dashAgainCounter = dashAgainCounterMax;
+            if (darkDashEnabled)
+            {
+                darkDashCounter = 0;
+                darkDash = true;
+                darkCoolDown.SetActive(true);
+                darkDashEnabled = false;
+            }
         }
 
         if (dashed && feet.isGrounded)

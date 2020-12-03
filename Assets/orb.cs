@@ -62,7 +62,7 @@ public class orb : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (hitGroundCounter > 5)
+        if (hitGroundCounter > 2)
         {
             thisAnim.SetBool("hit", true);
         }
@@ -81,9 +81,11 @@ public class orb : MonoBehaviour
             thisAnim.SetBool("hit", true);
         }
 
-        Ray2D detectRay = new Ray2D(new Vector2(transform.position.x, transform.position.y), Vector3.right * 2);
-        RaycastHit2D detectHit = Physics2D.Raycast(detectRay.origin, detectRay.direction, 1, playerMask);
-        if (detectHit.collider != null && detectHit.collider.gameObject.CompareTag("Ground"))
+        Ray2D detectRay = new Ray2D(new Vector2(transform.position.x, transform.position.y), Vector3.right * 1);
+        RaycastHit2D detectHit = Physics2D.Raycast(detectRay.origin, detectRay.direction, 5, playerMask);
+        Ray2D detectRay2 = new Ray2D(new Vector2(transform.position.x, transform.position.y), Vector3.left * 1);
+        RaycastHit2D detectHit2 = Physics2D.Raycast(detectRay.origin, detectRay.direction, 5, playerMask);
+        if ((detectHit.collider != null && detectHit.collider.gameObject.CompareTag("Ground"))|| (detectHit2.collider != null && detectHit2.collider.gameObject.CompareTag("Ground")))
         {
             hitGroundCounter += 1;
         }
