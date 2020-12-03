@@ -40,7 +40,7 @@ public class sword : MonoBehaviour
         {
             destroyCounter += 1;
             transform.position += transform.right * 0.6f;
-            if (destroyCounter > 200)
+            if (destroyCounter > 300)
             {
                 Destroy(gameObject);
             }

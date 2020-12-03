@@ -106,7 +106,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 372dc8b80df0fd0459f3473c37efaa54, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -198,6 +198,7 @@ MonoBehaviour:
   force: 5
   xMovement: 4
   yMovement: 4
+  hitPlayer: 0
 --- !u!1 &6567884636448327474
 GameObject:
   m_ObjectHideFlags: 0

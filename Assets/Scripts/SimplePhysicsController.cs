@@ -326,6 +326,11 @@ public class SimplePhysicsController : MonoBehaviour {
                 darkCoolDown.SetActive(false);
             }
 
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("charging")|| anim.GetCurrentAnimatorStateInfo(0).IsName("aboutToCharge"))
+            {
+                darkCoolDown.SetActive(false);
+            }
+
             if (dashAgainCounter > -5)
             {
                 dashAgainCounter -= 1;
