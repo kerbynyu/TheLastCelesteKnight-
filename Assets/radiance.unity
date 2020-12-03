@@ -16005,8 +16005,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myRenderer: {fileID: 2052011867}
   myAttack: {fileID: 1619051012}
-  flashTime: 0.1
+  flashTime: 0.15
   counter1: 0
+  vibx: 0.5
+  viby: 0.5
 --- !u!1 &1631812701
 GameObject:
   m_ObjectHideFlags: 0

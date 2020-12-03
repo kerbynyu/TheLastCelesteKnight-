@@ -6,8 +6,10 @@ public class flashEffect : MonoBehaviour
 {
     public SpriteRenderer myRenderer;
     public Attack myAttack;
-    public float flashTime = 0.5f;
+    public float flashTime = 0.15f;
     public float counter1 = 0;
+    public float vibx = 0.5f;
+    public float viby = 0.5f;
     private Shader shaderGUItext;
     private Shader shaderSpritesDefault;
     // Start is called before the first frame update
@@ -24,14 +26,21 @@ public class flashEffect : MonoBehaviour
         if (myAttack.hitted)
         {
             whiteSprite();
+            transform.Translate(vibx, viby, 0);
             counter1 = flashTime;
             print("flash");
         }
         else
         {
-            if (counter1 <= 0)
+            if (counter1 <=0&&counter1 >-1)
             {
+                transform.Translate(-vibx, -viby, 0);
                 normalSprite();
+                counter1 = -1;
+            }
+            else if (counter1 == -1)
+            {
+
             }
             else
             {
