@@ -33,6 +33,7 @@ public class PlayerAttack : Attack
     public Vector3 lPosition;
     public Vector3 shift;
 
+    public SimplePhysicsController cont;
     public GroundCheck2 feet;
     public Animator thisAnimator;
     public SpriteRenderer pSprite;
@@ -192,5 +193,13 @@ public class PlayerAttack : Attack
         }
 
         lPosition = transform.position;
+        if (cont.darkDash)
+        {
+            hutbox.gameObject.SetActive(false);
+        }
+        else
+        {
+            hutbox.gameObject.SetActive(true);
+        }
     }
 }
