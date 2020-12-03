@@ -11,7 +11,15 @@ public class radianceMovement : MonoBehaviour
     //phase5 health 1
 
     public Health health;
-
+    public ParticleSystem feather;
+    private int featherCounter = 0;
+    public ParticleSystem ring;
+    public Transform ringT;
+    private int ringCounter;
+    public SpriteRenderer bigWhiteCircle;
+    public Transform whiteCircleT;
+    private float whiteCircleTrans = 0;
+    private bool whiteCirclePlus = false;
     //public Transform player;
     public SpriteRenderer thisSR;
     public int floatCounter = 0;
@@ -46,6 +54,8 @@ public class radianceMovement : MonoBehaviour
     private int swordBurstDistance = 10;
     public GameObject sword;
     //beam burst variables
+    public GameObject middle;
+    private float middleTrans = 0;
     public float beamBurstAngle = 0;
     private int beamBurstCount3 = 0;
     public GameObject beam;
@@ -87,8 +97,11 @@ public class radianceMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        bigWhiteCircle.color = new Color(1, 1, 1, whiteCircleTrans);
+        ring.Stop();
         anim=GetComponentInChildren<Animator>();
-
+        SpriteRenderer middleSR = middle.GetComponent<SpriteRenderer>();
+        middleSR.color = new Color(1, 1, 1, 0);
         nextLaunchIndex = Random.Range(0f, 100f);
         beamBurstAngle = Random.Range(0, 90);
         floating = true;
@@ -120,6 +133,8 @@ public class radianceMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        float middleX = middle.transform.position.x;
+        float middleY = middle.transform.position.y;
 
         if (health.Hp > 210)
         {
@@ -182,9 +197,64 @@ public class radianceMovement : MonoBehaviour
         {
             if (floating)
             {
+                //white circle
+                whiteCircleT.position = ringT.position;
+                if (whiteCirclePlus)
+                {
+                    if (whiteCircleTrans < 0.8f)
+                    {
+                        whiteCircleTrans += 0.1f;
+                        bigWhiteCircle.color = new Color(1, 1, 1, whiteCircleTrans);
+                    }
+                    else
+                    {
+                        whiteCirclePlus = false;
+                    }
+                }
+                else
+                {
+                    if (whiteCircleTrans > 0)
+                    {
+                        whiteCircleTrans -= 0.1f;
+                        bigWhiteCircle.color = new Color(1, 1, 1, whiteCircleTrans);
+                    }
+                }
+                //ring particle
+                if (ring.isPlaying)
+                {
+                    if (ringCounter < 20)
+                    {
+                        ringCounter += 1;
+                    }
+                    else if (ringCounter > 10)
+                    {
+                        ring.Stop();
+                    }
+                }
+                else
+                {
+                    ringT.position = new Vector3(transform.position.x, transform.position.y, 0);
+                }
+
+
+
+                //feather particle
+                if (featherCounter < 30)
+                {
+                    featherCounter += 1;
+                }
+                if (featherCounter < 25)
+                {
+                    feather.Play();
+                }
+                else
+                {
+                    feather.Stop();
+                }
                 //launch sword burst
                 if (swordBurst && !telOutRange)
                 {
+                    floatCounter = 0;
                     //launching skill animation
                     anim.SetBool("flying",true);
                     anim.SetBool("spin",false);
@@ -196,8 +266,8 @@ public class radianceMovement : MonoBehaviour
                             float radians = (Mathf.PI / 180) * swordBurstAngle;
                             float thisX = swordBurstDistance * Mathf.Sin(radians);
                             float thisY = swordBurstDistance * Mathf.Cos(radians);
-                            float newX = transform.position.x + thisX;
-                            float newY = transform.position.y + thisY;
+                            float newX = middleX + thisX;
+                            float newY = middleY + thisY;
                             GameObject newSword =  Instantiate(sword, new Vector3(newX, newY, 0), Quaternion.Euler(0,0,-swordBurstAngle+90));
                             sword ifBurst = newSword.GetComponent<sword>();
                             ifBurst.burstRotation = -swordBurstAngle + 90;
@@ -214,14 +284,14 @@ public class radianceMovement : MonoBehaviour
 
                     }
 
-                    else if (launchCounter >= 190 && launchCounter < 200)
+                    else if (launchCounter >= 250 && launchCounter < 260)
                     {
                         //teleport animation
                         anim.SetBool("spin",true);
                         anim.SetBool("flying",false);
                     }
 
-                    else if (launchCounter >= 200)
+                    else if (launchCounter >= 260)
                     {
                         launchCounter = 0;
                         launching = false;
@@ -236,8 +306,15 @@ public class radianceMovement : MonoBehaviour
                 if (beamBurst && !telOutRange)
                 {
                     launchCounter += 1;
+                    floatCounter = 0;
                     if (beamBurstCount3 < 3)
                     {
+                        if (middleTrans < 1)
+                        {
+                            middleTrans += 0.1f;
+                        }
+                        SpriteRenderer middleSR = middle.GetComponent<SpriteRenderer>();
+                        middleSR.color = new Color(1, 1, 1, middleTrans);
                         //lauching skill animation
                         anim.SetBool("flying",true);
                         anim.SetBool("spin",false);;
@@ -255,8 +332,8 @@ public class radianceMovement : MonoBehaviour
                             }
                             for (int i = 0; i < 8; i++)
                             {
-                                float newX = transform.position.x;
-                                float newY = transform.position.y;
+                                float newX = middleX;
+                                float newY = middleY;
                                 GameObject thisBeam = Instantiate(beam, new Vector3(newX, newY, 0), Quaternion.Euler(0, 0, beamBurstAngle));
                                 beamBurstAngle += 45;
                             }
@@ -268,12 +345,18 @@ public class radianceMovement : MonoBehaviour
 
                     else if (launchCounter > 70 && launchCounter < 80)
                     {
+                        if (middleTrans > 0)
+                        {
+                            middleTrans -= 0.1f;
+                        }
+                        SpriteRenderer middleSR = middle.GetComponent<SpriteRenderer>();
+                        middleSR.color = new Color(1, 1, 1, middleTrans);
                         //normal animation
                         anim.SetBool("flying",false);
                         anim.SetBool("spin",false);
                     }
 
-                    else if (launchCounter >=80 && launchCounter < 90)
+                    else if (launchCounter >=150 && launchCounter < 160)
                     {
                         //teleport animation
                         anim.SetBool("spin",true);
@@ -281,7 +364,7 @@ public class radianceMovement : MonoBehaviour
 
                     }
 
-                    else if (launchCounter >= 100)
+                    else if (launchCounter >= 160)
                     {
                         resetVariables();
                         launchCounter = 0;
@@ -323,14 +406,14 @@ public class radianceMovement : MonoBehaviour
                             count4 += 1;
                         }
                     }
-                    else if (launchCounter >= 90 && launchCounter < 100)
+                    else if (launchCounter >= 120 && launchCounter < 130)
                     {
                         //teleport animation
                         anim.SetBool("spin",true);
                         anim.SetBool("flying",false);
                     }
 
-                    else if (launchCounter >= 100)
+                    else if (launchCounter >= 130)
                     {
                         launchCounter = 0;
                         launching = false;
@@ -393,7 +476,7 @@ public class radianceMovement : MonoBehaviour
                             count4 += 1;
                         }
                     }
-                    else if (launchCounter >= 90 && launchCounter < 100)
+                    else if (launchCounter >= 150 && launchCounter < 160)
                     {
                         //teleport animation
                         anim.SetBool("spin",true);
@@ -401,7 +484,7 @@ public class radianceMovement : MonoBehaviour
 
                     }
 
-                    else if (launchCounter >= 100)
+                    else if (launchCounter >= 160)
                     {
                         launchCounter = 0;
                         swordWall = false;
@@ -442,7 +525,7 @@ public class radianceMovement : MonoBehaviour
                         }
                     }
 
-                    else if (launchCounter >= 100 && launchCounter < 110)
+                    else if (launchCounter >= 180 && launchCounter < 190)
                     {
                         //teleport animation
                         anim.SetBool("spin",true);
@@ -450,7 +533,7 @@ public class radianceMovement : MonoBehaviour
 
                     }
 
-                    else if (launchCounter >= 110)
+                    else if (launchCounter >= 190)
                     {
 
                         launchCounter = 0;
@@ -471,12 +554,13 @@ public class radianceMovement : MonoBehaviour
                 }
                 else if (orbAttack && !telOutRange)
                 {
+                    floatCounter = 0;
                     launchCounter += 1;
                     orbUp = rightMost.position.y + 5;
                     orbDown = rightMost.position.y - 5;
                     orbLeft = leftMost.position.x + 5;
                     orbRight = rightMost.position.x - 5;
-                    if (launchCounter > 165 && launchCounter < 167 && orbCount3 < 3)
+                    if (launchCounter > 105 && launchCounter < 107 && orbCount3 < 3)
                     {
                         //lauching skill animation
                         anim.SetBool("flying",true);
@@ -601,7 +685,7 @@ public class radianceMovement : MonoBehaviour
                 {
                     telOutRange = false;
                     outRangeIndex = 0;
-                    nextFloatDuration = Random.Range(150, 200);
+                    nextFloatDuration = Random.Range(200, 250);
                     nextLaunchIndex = Random.Range(0f, 100f);
                     transform.position = new Vector3(nextTeleportPosition, transform.position.y, transform.position.z);
                     teleport = false;
@@ -615,12 +699,16 @@ public class radianceMovement : MonoBehaviour
 
             if (teleport)
             {
+                ring.Play();
+                ringCounter = 0;
+                featherCounter = 0;
+                whiteCirclePlus = true;
                 //normal animation
                 anim.SetBool("flying",false);
                 anim.SetBool("spin",false);
 
                 resetVariables();
-                nextFloatDuration = Random.Range(150, 200);
+                nextFloatDuration = Random.Range(200, 250);
                 nextLaunchIndex = Random.Range(0f, 100f);
                 if (!telOutRange)
                 {
@@ -638,9 +726,7 @@ public class radianceMovement : MonoBehaviour
         //phase3
         if (phase3)
         {
-            //launching skill animation
-                    anim.SetBool("flying",true);
-                    anim.SetBool("spin",false);
+            
             for (int i = 0; i < spikes1.Count; i++)
             {
                 if (i < 6)
@@ -664,6 +750,14 @@ public class radianceMovement : MonoBehaviour
                 }
             }
             phase3ReadyCounter += 1;
+            if (phase3ReadyCounter > 40 && phase3ReadyCounter < 50)
+            {
+                //teleport animation
+                anim.SetBool("spin", true);
+                anim.SetBool("flying", false);
+            }
+            else
+
             if (phase3ReadyCounter > 50)
             {
                 float middlePos = (leftMost.position.x + rightMost.position.x) / 2;
@@ -672,6 +766,9 @@ public class radianceMovement : MonoBehaviour
             }
             if (teleport)
             {
+                //launching skill animation
+                anim.SetBool("flying", true);
+                anim.SetBool("spin", false);
                 resetVariables();
                 transform.position = new Vector3(nextTeleportPosition, transform.position.y, transform.position.z);
                 teleport = false;
