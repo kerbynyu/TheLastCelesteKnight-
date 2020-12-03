@@ -82,9 +82,13 @@ public class radianceMovement : MonoBehaviour
     //phase3 variables
     public int phase3ReadyCounter = 0;
     public int phase3LaunchCounter = 0;
+
+    private Animator anim;
     // Start is called before the first frame update
     void Start()
     {
+        anim=GetComponentInChildren<Animator>();
+
         nextLaunchIndex = Random.Range(0f, 100f);
         beamBurstAngle = Random.Range(0, 90);
         floating = true;
@@ -182,6 +186,8 @@ public class radianceMovement : MonoBehaviour
                 if (swordBurst && !telOutRange)
                 {
                     //launching skill animation
+                    anim.SetBool("flying",true);
+                    anim.SetBool("spin",false);
 
                     launchCounter += 1;
                     if (launchCounter > 15 && launchCounter < 17)
@@ -203,11 +209,16 @@ public class radianceMovement : MonoBehaviour
                     else if (launchCounter > 100 && launchCounter < 190)
                     {
                         //normal animation
+                        anim.SetBool("flying",false);
+                        anim.SetBool("spin",false);
+
                     }
 
                     else if (launchCounter >= 190 && launchCounter < 200)
                     {
                         //teleport animation
+                        anim.SetBool("spin",true);
+                        anim.SetBool("flying",false);
                     }
 
                     else if (launchCounter >= 200)
@@ -228,6 +239,8 @@ public class radianceMovement : MonoBehaviour
                     if (beamBurstCount3 < 3)
                     {
                         //lauching skill animation
+                        anim.SetBool("flying",true);
+                        anim.SetBool("spin",false);;
 
                         if (launchCounter > beamBurstStartIndex && launchCounter < beamBurstStartIndex+2)
                         {
@@ -256,11 +269,16 @@ public class radianceMovement : MonoBehaviour
                     else if (launchCounter > 70 && launchCounter < 80)
                     {
                         //normal animation
+                        anim.SetBool("flying",false);
+                        anim.SetBool("spin",false);
                     }
 
                     else if (launchCounter >=80 && launchCounter < 90)
                     {
                         //teleport animation
+                        anim.SetBool("spin",true);
+                        anim.SetBool("flying",false);
+
                     }
 
                     else if (launchCounter >= 100)
@@ -279,6 +297,8 @@ public class radianceMovement : MonoBehaviour
                 else if (swordRain)
                 {
                     //normal animation
+                    anim.SetBool("flying",false);
+                    anim.SetBool("spin",false);
 
                     launchCounter += 1;
                     if (launchCounter > 55 && launchCounter < 57)
@@ -306,6 +326,8 @@ public class radianceMovement : MonoBehaviour
                     else if (launchCounter >= 90 && launchCounter < 100)
                     {
                         //teleport animation
+                        anim.SetBool("spin",true);
+                        anim.SetBool("flying",false);
                     }
 
                     else if (launchCounter >= 100)
@@ -326,6 +348,8 @@ public class radianceMovement : MonoBehaviour
                     if (launchCounter > 65 && launchCounter < 67)
                     {
                         //normal animation
+                        anim.SetBool("flying",false);
+                        anim.SetBool("spin",false);
 
                         if (count4 < 4)
                         {
@@ -372,6 +396,8 @@ public class radianceMovement : MonoBehaviour
                     else if (launchCounter >= 90 && launchCounter < 100)
                     {
                         //teleport animation
+                        anim.SetBool("spin",true);
+                        anim.SetBool("flying",false);
 
                     }
 
@@ -400,6 +426,8 @@ public class radianceMovement : MonoBehaviour
                     if (launchCounter > 105 && launchCounter < 107)
                     {
                         //normal animation
+                        anim.SetBool("flying",false);
+                        anim.SetBool("spin",false);
 
                         wallLeft = leftMost.position.x - 50;
                         wallRight = rightMost.position.x + 50;
@@ -417,6 +445,8 @@ public class radianceMovement : MonoBehaviour
                     else if (launchCounter >= 100 && launchCounter < 110)
                     {
                         //teleport animation
+                        anim.SetBool("spin",true);
+                        anim.SetBool("flying",false);
 
                     }
 
@@ -449,6 +479,8 @@ public class radianceMovement : MonoBehaviour
                     if (launchCounter > 165 && launchCounter < 167 && orbCount3 < 3)
                     {
                         //lauching skill animation
+                        anim.SetBool("flying",true);
+                        anim.SetBool("spin",false);
 
                         Debug.Log("inst");
                         float orbY = Random.Range(orbUp, orbDown);
@@ -461,11 +493,15 @@ public class radianceMovement : MonoBehaviour
                     else if (launchCounter > 170 && launchCounter < 190)
                     {
                         //normal animation
+                        anim.SetBool("flying",false);
+                        anim.SetBool("spin",false);
                     }
 
                     else if (launchCounter >= 190 && launchCounter < 200)
                     {
                         //teleport animation
+                        anim.SetBool("spin",true);
+                        anim.SetBool("flying",false);
                     }
 
                     else if (launchCounter >= 200)
@@ -536,7 +572,8 @@ public class radianceMovement : MonoBehaviour
                 if (floatCounter > nextFloatDuration - 10)
                 {
                     //teleport animation
-
+                    anim.SetBool("spin",true);
+                    anim.SetBool("flying",false);
                 }
 
                 if (floatCounter > nextFloatDuration)
@@ -579,6 +616,8 @@ public class radianceMovement : MonoBehaviour
             if (teleport)
             {
                 //normal animation
+                anim.SetBool("flying",false);
+                anim.SetBool("spin",false);
 
                 resetVariables();
                 nextFloatDuration = Random.Range(150, 200);
@@ -600,7 +639,8 @@ public class radianceMovement : MonoBehaviour
         if (phase3)
         {
             //launching skill animation
-
+                    anim.SetBool("flying",true);
+                    anim.SetBool("spin",false);
             for (int i = 0; i < spikes1.Count; i++)
             {
                 if (i < 6)
