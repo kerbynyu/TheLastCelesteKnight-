@@ -32,10 +32,14 @@ public class enemy_rush_attack : Attack
         fall_length = Mathf.Sqrt(2) * reverse_length;
     }
 
+    private void LateUpdate()
+    {
+        base.Update();
+    }
     // Update is called once per frame
     public override void Update()
     {
-        base.Update();
+        
 
         if (feet.isGrounded)
         {
@@ -47,7 +51,7 @@ public class enemy_rush_attack : Attack
             thisAnim.SetBool("grounded", false);
         }
         if (counter3<=0&&!hitted)
-        {
+        { 
             if (thisSpriteRenderer.flipX) { direction = 1; } else { direction = -1; }
             //if no player spotted
             if (!isAttacking)

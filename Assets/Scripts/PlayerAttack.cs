@@ -53,12 +53,16 @@ public class PlayerAttack : Attack
         hitbox4.gameObject.SetActive(false);
     }
 
+    private void LateUpdate()
+    {
+        //base.Update();
+    }
     // Update is called once per frame
     public override void Update()
     {
         energy = Mathf.Min(energy, maxEnergy);
         energy = Mathf.Max(energy, 0);
-        base.Update();
+        
         if (hitted)
         {
             hitted = false;

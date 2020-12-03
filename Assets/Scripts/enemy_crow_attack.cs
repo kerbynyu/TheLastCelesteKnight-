@@ -12,10 +12,13 @@ public class enemy_crow_attack : Attack
 
     public GroundCheck2 feet1;
 
-
-    public override void Update()
+    private void LateUpdate()
     {
         base.Update();
+    }
+    public override void Update()
+    {
+        
 
         if (counter1<=0&&!hitted)
         {
