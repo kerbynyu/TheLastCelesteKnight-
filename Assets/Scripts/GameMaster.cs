@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameMaster : MonoBehaviour
 {
@@ -20,9 +21,11 @@ public class GameMaster : MonoBehaviour
     public float counter1 = 0;
     public float pauseTime = 2;
     public float counter2 = 0;
-    public float counter3 = 0;
+    public float counter3 = -1;
+    public float counter4 = -1;
     public float theAlpha = 0f;
     public float theAlpha2 = 0f;
+    public float deathTime = 2;
 
     public int score = 0;
 
@@ -37,6 +40,7 @@ public class GameMaster : MonoBehaviour
     private void Update() {
         //newScore = sc.score;
         health.rectTransform.sizeDelta = new Vector2(hl.Hp * 10f, 10f);
+
         energyBar.rectTransform.sizeDelta = new Vector2(50f, (50f/9f)*pa.energy);
         if (pa.energy >= 3||pa.eUsed>0) { energyBar.GetComponent<Image>().color = new Color(1, 1, 1);  }
         else { energyBar.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f);  }
@@ -48,6 +52,20 @@ public class GameMaster : MonoBehaviour
             theAlpha -=0.7f/transTime*Time.deltaTime;
             theAlpha = Mathf.Max(0, theAlpha);
         }
+
+        if (counter4 > 0)
+        {
+            counter4 -= Time.unscaledDeltaTime;
+            theAlpha += 1 / deathTime * Time.unscaledDeltaTime;
+            theAlpha = Mathf.Min(1, theAlpha);
+        }
+        else if (counter4 > -1)
+        {
+            counter4 = -1;
+            Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
+            ResumeGame();
+        }
+        
         Color c = dark.color;
         c.a = theAlpha;
         dark.color = c;
@@ -57,8 +75,9 @@ public class GameMaster : MonoBehaviour
 
             counter3 -= Time.unscaledDeltaTime;
         }
-        else
+        else if(counter3 >-1)
         {
+            counter3 = -1;
             ResumeGame();
             counter2 = transTime;
         }
@@ -66,7 +85,7 @@ public class GameMaster : MonoBehaviour
         {
 
             counter2 -= Time.unscaledDeltaTime;
-            theAlpha2 -= 1 /pauseTime * Time.unscaledDeltaTime;
+            theAlpha2 -= 1 /transTime * Time.unscaledDeltaTime;
             theAlpha2 = Mathf.Max(0, theAlpha2);
         }
 
@@ -98,6 +117,16 @@ public class GameMaster : MonoBehaviour
         counter1 = transTime;
         Color c = dark.color;
         theAlpha = 0.7f;
+        c.a = theAlpha;
+        dark.color = c;
+    }
+
+    public void deathScreen()
+    {
+        PauseGame();
+        counter4 = deathTime;
+        Color c = dark.color;
+        theAlpha = 0f;
         c.a = theAlpha;
         dark.color = c;
     }
