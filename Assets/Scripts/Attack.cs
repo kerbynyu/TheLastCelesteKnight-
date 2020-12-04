@@ -7,7 +7,6 @@ public class Attack : MonoBehaviour
 
 
     public bool alive = true;
-    public HitBox killer;
     public Health health;
     public bool hitted=false;
     // Start is called before the first frame update
