@@ -168,6 +168,7 @@ public class enemy_rush_attack : Attack
             }
             else
             {
+                thisAnim.SetBool("grounded", true);
                 gameObject.GetComponent<Rigidbody2D>().gravityScale = 1 ;
             }
         }
