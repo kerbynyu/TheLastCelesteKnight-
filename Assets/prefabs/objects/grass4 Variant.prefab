@@ -59,6 +59,10 @@ PrefabInstance:
       propertyPath: brokenSprite
       value: 
       objectReference: {fileID: -1470488447379196347, guid: 0731493dc1cca4d9982fdd83b08e3571, type: 3}
+    - target: {fileID: 2947357826161770999, guid: 29a367f1f78fe8c44992595de945dc5e, type: 3}
+      propertyPath: health
+      value: 
+      objectReference: {fileID: 9063643606133464640}
     - target: {fileID: 4235149626649809104, guid: 29a367f1f78fe8c44992595de945dc5e, type: 3}
       propertyPath: m_Name
       value: grass4 Variant
@@ -86,3 +90,14 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 9017646071158575087, guid: 29a367f1f78fe8c44992595de945dc5e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 29a367f1f78fe8c44992595de945dc5e, type: 3}
+--- !u!114 &9063643606133464640 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5146464639884497999, guid: 29a367f1f78fe8c44992595de945dc5e, type: 3}
+  m_PrefabInstance: {fileID: 4225341289362606607}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 523bb520c2eb7ee41a7f710fa81e0d1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

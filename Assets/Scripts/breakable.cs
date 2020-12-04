@@ -24,7 +24,7 @@ public class breakable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(attack.hitted && !destroyed){
+        if(!attack.alive && !destroyed){
         	ParticleSystem.ShapeModule shape=par.shape;
         	ParticleSystem.VelocityOverLifetimeModule v=par2.velocityOverLifetime;
         	if(player.cHitbox==player.hitbox2){

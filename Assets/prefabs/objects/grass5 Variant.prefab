@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: grass5 Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 1316304361330625528, guid: fea162e831d44e646a9484e1f8aa32be, type: 3}
+      propertyPath: health
+      value: 
+      objectReference: {fileID: 5929616284616906953}
     - target: {fileID: 2077629000272226679, guid: fea162e831d44e646a9484e1f8aa32be, type: 3}
       propertyPath: brokenSprite
       value: 
@@ -82,3 +86,14 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: fea162e831d44e646a9484e1f8aa32be, type: 3}
+--- !u!114 &5929616284616906953 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9063643606133464640, guid: fea162e831d44e646a9484e1f8aa32be, type: 3}
+  m_PrefabInstance: {fileID: 3423506811618395785}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 523bb520c2eb7ee41a7f710fa81e0d1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

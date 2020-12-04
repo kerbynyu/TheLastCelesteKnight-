@@ -59,9 +59,23 @@ public class SoundManager2 : MonoBehaviour
         }
 
         if(pAttack.isAttacking && !boneCrush.isPlaying){
-            var attacks=FindObjectsOfType<Attack>();
-            foreach(Attack a in attacks){
-                if(a!=pAttack && a.hitted && (a is enemy_rush_attack || a is enemy_crow_attack)){
+            var attacks=FindObjectsOfType<enemy_rush_attack>();
+            foreach(enemy_rush_attack a in attacks){
+                if(a.alive && (a.hitted || a.counter3>0)){
+                    if(Time.time-timeSinceSlash<2f){
+                        boneCrush.clip=boneCrushSounds[0];
+                    }else{
+                        var i=Random.Range(0,4);
+                        if(i!=0) i=1;
+                        boneCrush.clip=boneCrushSounds[i];
+                    }
+                    boneCrush.Play();
+                    timeSinceSlash=Time.time;
+                }
+            }
+            var attacks2=FindObjectsOfType<enemy_crow_attack>();
+            foreach(enemy_crow_attack a in attacks2){
+                if(a.alive && (a.hitted || a.counter1>0)){
                     if(Time.time-timeSinceSlash<2f){
                         boneCrush.clip=boneCrushSounds[0];
                     }else{
@@ -79,9 +93,10 @@ public class SoundManager2 : MonoBehaviour
             dash.Play();
         }
 
-        // if(pAttack.isAttacking && !isAttacking){
-        //     swoosh.Stop();
-        //     swoosh.Play();
+        if(pAttack.isAttacking && !isAttacking){
+            swoosh.Stop();
+            swoosh.Play();
+        }
 
         //     GameObject clone=Instantiate(pAttack.cHitbox.gameObject,player.transform);
         //     print(clone);

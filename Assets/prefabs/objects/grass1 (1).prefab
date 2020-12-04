@@ -119,7 +119,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c92ff387c95175947a5f93bbfe4685c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: {fileID: 0}
+  alive: 1
+  killer: {fileID: 0}
+  health: {fileID: 5146464639884497999}
   hitted: 0
 --- !u!114 &2771496171111801720
 MonoBehaviour:
