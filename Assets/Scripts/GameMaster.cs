@@ -14,13 +14,24 @@ public class GameMaster : MonoBehaviour
     private Health hl;
     public Image health;
     public Image energyBar;
+    public Image dark;
+    public Image white;
+    public float transTime = 1;
+    public float counter1 = 0;
+    public float pauseTime = 2;
+    public float counter2 = 0;
+    public float counter3 = 0;
+    public float theAlpha = 0f;
+    public float theAlpha2 = 0f;
 
     public int score = 0;
 
     private void Start() {
+       
         sc = GameObject.FindGameObjectWithTag("Player").GetComponent<SimplePhysicsController>();
         pa = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
         hl = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
+        
     }
 
     private void Update() {
@@ -29,16 +40,85 @@ public class GameMaster : MonoBehaviour
         energyBar.rectTransform.sizeDelta = new Vector2(50f, (50f/9f)*pa.energy);
         if (pa.energy >= 3||pa.eUsed>0) { energyBar.GetComponent<Image>().color = new Color(1, 1, 1);  }
         else { energyBar.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f);  }
+
+        if (counter1 > 0)
+        {
+            
+            counter1 -= Time.deltaTime;
+            theAlpha -=0.7f/transTime*Time.deltaTime;
+            theAlpha = Mathf.Max(0, theAlpha);
+        }
+        Color c = dark.color;
+        c.a = theAlpha;
+        dark.color = c;
+
+        if (counter3 > 0)
+        {
+
+            counter3 -= Time.unscaledDeltaTime;
+        }
+        else
+        {
+            ResumeGame();
+            counter2 = transTime;
+        }
+        if (counter2 > 0)
+        {
+
+            counter2 -= Time.unscaledDeltaTime;
+            theAlpha2 -= 1 /pauseTime * Time.unscaledDeltaTime;
+            theAlpha2 = Mathf.Max(0, theAlpha2);
+        }
+
+        Color c2 = white.color;
+        c2.a = theAlpha2;
+        white.color = c2;
     }
 
     private void Awake() {
-        if(instance == null) {
+        whiteScreen();
+        if (instance == null) {
             instance = this;
-            DontDestroyOnLoad(instance);
+            //DontDestroyOnLoad(instance);
+            /*DontDestroyOnLoad(health);
+            DontDestroyOnLoad(energyBar);
+            DontDestroyOnLoad(dark);*/
 
-        }else {
+        }
+        else {
             Destroy(gameObject);
 
         }
+        
+       
+    }
+
+    public void blackScreen()
+    {
+        counter1 = transTime;
+        Color c = dark.color;
+        theAlpha = 0.7f;
+        c.a = theAlpha;
+        dark.color = c;
+    }
+
+    public void whiteScreen()
+    {
+        PauseGame();
+        counter3 = pauseTime;
+        Color c = white.color;
+        theAlpha2 = 1f;
+        c.a = theAlpha2;
+        white.color = c;
+    }
+
+    void PauseGame()
+    {
+        Time.timeScale = 0;
+    }
+
+    void ResumeGame()
+    {
+        Time.timeScale = 1;
     }
 }
