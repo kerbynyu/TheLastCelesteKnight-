@@ -24,7 +24,7 @@ public class enemy_crow_attack : Attack
         {
             if (counter1 <= 0 && !hitted)
             {
-                thisAnim.SetBool("stun", false);
+                thisAnim.SetBool("stunned", false);
                 thisAnim.SetBool("grounded", true);
                 transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0), Space.Self);
                 //ground attach
@@ -42,7 +42,7 @@ public class enemy_crow_attack : Attack
                 }
                 else
                 {
-                    thisAnim.SetBool("stun", true);
+                    thisAnim.SetBool("stunned", true);
                     counter1 -= Time.deltaTime;
                 }
 
