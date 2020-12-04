@@ -103,7 +103,8 @@ public class radianceMovement : Attack
     private Animator anim;
     private int choosePlatform = 0;
     private Vector3 teleportPos2d = new Vector3(0, 0, 0);
-    private bool attackStart = false;
+    public bool attackStart = false;
+    private int forceToStart = 0;
     private void LateUpdate()
     {
         base.Update();
@@ -793,7 +794,16 @@ public class radianceMovement : Attack
         //phase4
         else if (phase4)
         {
-            swordRain = false;
+           
+           swordRain = false;
+            if (forceToStart > 500)
+            {
+                attackStart = true;
+            }
+            else
+            {
+                forceToStart += 1;
+            }
            for (int i = 0; i < spikes1.Count; i++)
             {
                 GameObject thisSpike = spikes1[i];
