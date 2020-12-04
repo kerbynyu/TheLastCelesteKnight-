@@ -168,7 +168,7 @@ public class enemy_rush_attack : Attack
             }
             else
             {
-                //gameObject.GetComponent<Rigidbody2D>().gravityScale = 1000 ;
+                gameObject.GetComponent<Rigidbody2D>().gravityScale = 1 ;
             }
         }
     }
