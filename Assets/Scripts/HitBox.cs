@@ -29,12 +29,14 @@ public class HitBox : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+        
         //if the tag is hurtbox and they really have hurboxes
         if (collision.gameObject.CompareTag("hurtBox")&& collision.gameObject.GetComponent<HurtBox>())
         {
             HurtBox hurtbox = collision.gameObject.GetComponent<HurtBox>();
             //if hit a new box not hitted one
             if (hurtbox.side!=side&&!whiteList.Contains(collision.gameObject)) {
+                
                 //pass the damage and comfirm a hit
                 hurtbox.owner.GetComponent<Attack>().hitted=true;
                 hurtbox.owner.GetComponent<Health>().Hp -= damage;
@@ -67,8 +69,8 @@ public class HitBox : MonoBehaviour
                 //if the hurtbox have it's own effect
                 if (hurtbox.haveEffect)
                 {
-                   
-                    Instantiate(hurtbox.effect, hurtbox.transform.position, hurtbox.transform.rotation);
+                    //print(Vector2.SignedAngle(Vector2.down, dir));
+                    Instantiate(hurtbox.effect, hurtbox.transform.position, Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.down, dir)));
                 }
 
 
