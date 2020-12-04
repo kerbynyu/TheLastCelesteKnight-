@@ -24,7 +24,8 @@ public class grassSway : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    	if(gameObject.GetComponent<Attack>().hitted) sway=0;
+        gameObject.GetComponent<Attack>().health=gameObject.GetComponent<Health>();
+    	if(!gameObject.GetComponent<Attack>().alive) sway=0;
         if(sway==1){
         	spr.sprite=spriteLeft;
         }else if(sway==-1){
@@ -32,7 +33,7 @@ public class grassSway : MonoBehaviour
         }
         if(Time.time>time+duration){
         	sway=0;
-    		if(!gameObject.GetComponent<Attack>().hitted) gameObject.GetComponent<Animator>().enabled=true;
+    		if(gameObject.GetComponent<Attack>().alive) gameObject.GetComponent<Animator>().enabled=true;
     	}
     }
 

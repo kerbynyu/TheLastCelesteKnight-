@@ -565,7 +565,9 @@ MonoBehaviour:
   clang: {fileID: 600418344461848461}
   boneCrush: {fileID: 3732557920747629914}
   dash: {fileID: 8765539688087663520}
-  boneCrushSounds: []
+  boneCrushSounds:
+  - {fileID: 8300000, guid: 83b2e0b6ffc334549b21c3c9ef67f1eb, type: 3}
+  - {fileID: 8300000, guid: 563667cbdd01c1a4c9ad339082259bd5, type: 3}
   initialLength: 0
   lowpitch: 0.7
   highpitch: 1.4
@@ -866,7 +868,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 9796a43e901a7ff46b53b5e59ebe0d79, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.368
+  m_Volume: 0.102
   m_Pitch: 1
   Loop: 0
   Mute: 0
