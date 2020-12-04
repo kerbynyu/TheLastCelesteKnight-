@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class radianceMovement : MonoBehaviour
+public class radianceMovement : Attack
 {
     //phase1 health 50
     //phase2 health 60
@@ -10,7 +10,7 @@ public class radianceMovement : MonoBehaviour
     //phase4 health 100
     //phase5 health 1
 
-    public Health health;
+    //public Health health;
     public ParticleSystem feather;
     private int featherCounter = 0;
     public ParticleSystem ring;
@@ -94,6 +94,10 @@ public class radianceMovement : MonoBehaviour
     public int phase3LaunchCounter = 0;
 
     private Animator anim;
+    private void LateUpdate()
+    {
+        base.Update();
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -816,7 +820,7 @@ public class radianceMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public override void Update()
     {
         
     }

@@ -86,6 +86,7 @@ GameObject:
   - component: {fileID: 5806763988697616712}
   - component: {fileID: 5806763988697616717}
   - component: {fileID: 1039409677034586637}
+  - component: {fileID: 4866256770646133966}
   m_Layer: 10
   m_Name: Husk
   m_TagString: Enemy
@@ -279,6 +280,24 @@ MonoBehaviour:
   thisAnim: {fileID: 5806763988697616715}
   thisSpriteRenderer: {fileID: 5806763988697616714}
   feet: {fileID: 791743547680453814}
+--- !u!114 &4866256770646133966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5806763988697616708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bb91c7ec8d3b744c99f8d00f32ce357, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myRenderer: {fileID: 5806763988697616714}
+  myAttack: {fileID: 1039409677034586637}
+  flashTime: 0.15
+  counter1: 0
+  vibx: 0.5
+  viby: 0.5
 --- !u!1 &5806763988731472573
 GameObject:
   m_ObjectHideFlags: 0

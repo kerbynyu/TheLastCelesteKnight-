@@ -510,7 +510,7 @@ MonoBehaviour:
   owner: {fileID: 1619051011}
   thisRigidbody2d: {fileID: 1619051015}
   haveEffect: 1
-  effect: {fileID: 36652215514511773, guid: 141822e7fa0513f449bc5b40e4d4712b, type: 3}
+  effect: {fileID: 36652215514511773, guid: 0552dd497caea0449b4590ed4328c44e, type: 3}
 --- !u!61 &57153895
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -15822,8 +15822,8 @@ GameObject:
   - component: {fileID: 1619051013}
   - component: {fileID: 1619051012}
   - component: {fileID: 1619051015}
-  - component: {fileID: 1619051016}
   - component: {fileID: 1619051017}
+  - component: {fileID: 1619051018}
   m_Layer: 0
   m_Name: radiance
   m_TagString: Untagged
@@ -15844,6 +15844,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 1619051017}
+  hitted: 0
   feather: {fileID: 570234089}
   ring: {fileID: 680309260}
   ringT: {fileID: 680309258}
@@ -15905,7 +15906,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -15976,20 +15977,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1619051016
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1619051011}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c92ff387c95175947a5f93bbfe4685c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: {fileID: 1619051017}
-  hitted: 0
 --- !u!114 &1619051017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16004,6 +15991,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHp: 260
   Hp: 0
+--- !u!114 &1619051018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1619051011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bb91c7ec8d3b744c99f8d00f32ce357, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myRenderer: {fileID: 2052011867}
+  myAttack: {fileID: 1619051012}
+  flashTime: 0.15
+  counter1: 0
+  vibx: 0.5
+  viby: 0.5
 --- !u!1 &1631812701
 GameObject:
   m_ObjectHideFlags: 0
@@ -16778,6 +16783,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c25d3263abd972f40829b708fe86309f, type: 3}
+--- !u!212 &2052011867 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 4860090081721037188, guid: c25d3263abd972f40829b708fe86309f, type: 3}
+  m_PrefabInstance: {fileID: 2052011866}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2055705186
 GameObject:
   m_ObjectHideFlags: 0
