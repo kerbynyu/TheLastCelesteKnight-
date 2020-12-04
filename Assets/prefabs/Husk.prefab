@@ -254,8 +254,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60af48c0ec922614abe0d05d1be27d15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alive: 1
+  killer: {fileID: 0}
   health: {fileID: 5806763988697616717}
   hitted: 0
+  thisRigidbody2d: {fileID: 5806763988697616718}
   thisMask:
     serializedVersion: 2
     m_Bits: 1
@@ -280,6 +283,8 @@ MonoBehaviour:
   thisAnim: {fileID: 5806763988697616715}
   thisSpriteRenderer: {fileID: 5806763988697616714}
   feet: {fileID: 791743547680453814}
+  hitbox: {fileID: 5806763988731472547}
+  hurtbox: {fileID: 5806763989253202244}
 --- !u!114 &4866256770646133966
 MonoBehaviour:
   m_ObjectHideFlags: 0

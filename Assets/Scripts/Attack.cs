@@ -6,7 +6,8 @@ public class Attack : MonoBehaviour
 {
 
 
-
+    public bool alive = true;
+    public HitBox killer;
     public Health health;
     public bool hitted=false;
     // Start is called before the first frame update
@@ -15,7 +16,8 @@ public class Attack : MonoBehaviour
     {
         if (health.Hp <= 0)
         {
-            Destroy(gameObject);
+            alive = false;
+            
         }
         //print("atttack update");
         hitted = false;

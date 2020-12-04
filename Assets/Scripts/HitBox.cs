@@ -41,10 +41,18 @@ public class HitBox : MonoBehaviour
                 hurtbox.owner.GetComponent<Attack>().hitted=true;
                 hurtbox.owner.GetComponent<Health>().Hp -= damage;
                 
+                
                 //add to whitelist
                 whiteList.Add(collision.gameObject);
                 //if hitted solid hurtBox instead of grass
                 if (hurtbox.solid) {
+                    //death fly
+                    if (hurtbox.owner.GetComponent<Health>().Hp <= 0)
+                    {
+                        hurtbox.owner.GetComponent<Rigidbody2D>().gravityScale = 10;
+                        hurtbox.owner.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+                        hurtbox.owner.GetComponent<Rigidbody2D>().AddForce(dir * force * 2, ForceMode2D.Impulse);
+                    }
                     //create effect
                     Instantiate(effect, locator.transform.position, locator.transform.rotation);
                     if (owner.GetComponent<PlayerAttack>())

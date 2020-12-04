@@ -11,6 +11,8 @@ public class enemy_crow_attack : Attack
 
 
     public GroundCheck2 feet1;
+    public eHit_Box hitbox;
+    public HurtBox hurtbox;
 
     private void LateUpdate()
     {
@@ -18,32 +20,36 @@ public class enemy_crow_attack : Attack
     }
     public override void Update()
     {
-        
-
-        if (counter1<=0&&!hitted)
+        if (alive)
         {
-            transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0), Space.Self);
-            //ground attach
-            if (!feet1.isGrounded)
+            if (counter1 <= 0 && !hitted)
             {
-                transform.Rotate(new Vector3(0, 0, rotationSpeed * Time.deltaTime), Space.World);
+                transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0), Space.Self);
+                //ground attach
+                if (!feet1.isGrounded)
+                {
+                    transform.Rotate(new Vector3(0, 0, rotationSpeed * Time.deltaTime), Space.World);
+                }
+            }
+            else
+            {
+                if (hitted)
+                {
+                    hitted = false;
+                    counter1 = stunTime;
+                }
+                else
+                {
+                    counter1 -= Time.deltaTime;
+                }
+
             }
         }
         else
         {
-            if (hitted)
-            {
-                hitted = false;
-                counter1 = stunTime;
-            }
-            else {
-                counter1 -= Time.deltaTime;
-            }
 
+            hitbox.gameObject.SetActive(false);
+            hurtbox.gameObject.SetActive(false);
         }
-
-        
-        
-        
     }
 }
