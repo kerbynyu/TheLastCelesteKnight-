@@ -278,6 +278,7 @@ MonoBehaviour:
   rotationSpeed: -180
   stunTime: 0.2
   counter1: 0
+  thisAnim: {fileID: 3322576769651473595}
   feet1: {fileID: 3322576769616127743}
   hitbox: {fileID: 3322576768664794050}
   hurtbox: {fileID: 3322576770161470303}

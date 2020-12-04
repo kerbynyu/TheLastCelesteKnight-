@@ -9,7 +9,7 @@ public class enemy_crow_attack : Attack
     public float stunTime = 1f;
     public float counter1 = 0;
 
-
+    public Animator thisAnim;
     public GroundCheck2 feet1;
     public eHit_Box hitbox;
     public HurtBox hurtbox;
@@ -24,6 +24,8 @@ public class enemy_crow_attack : Attack
         {
             if (counter1 <= 0 && !hitted)
             {
+                thisAnim.SetBool("stun", false);
+                thisAnim.SetBool("grounded", true);
                 transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0), Space.Self);
                 //ground attach
                 if (!feet1.isGrounded)
@@ -40,6 +42,7 @@ public class enemy_crow_attack : Attack
                 }
                 else
                 {
+                    thisAnim.SetBool("stun", true);
                     counter1 -= Time.deltaTime;
                 }
 
@@ -47,7 +50,7 @@ public class enemy_crow_attack : Attack
         }
         else
         {
-
+            thisAnim.SetBool("death", true);
             hitbox.gameObject.SetActive(false);
             hurtbox.gameObject.SetActive(false);
         }
