@@ -22,6 +22,7 @@ public class enemy_rush_attack : Attack
     public float counter1=0;//charge counter
     public float counter2=0;//run counter
     public float counter3 = 0;//stun counter
+    public float counter4 = 0;//death bouncy counter
 
     public Animator thisAnim;
     public SpriteRenderer thisSpriteRenderer;
@@ -111,12 +112,12 @@ public class enemy_rush_attack : Attack
                 //if player spotted
                 else
                 {
-
+                    thisAnim.SetBool("walking", false);
                     //if attack already start
                     if (counter2 > 0)
                     {
                         thisAnim.SetBool("running", true);
-                        thisAnim.SetBool("walking", false);
+                        
                         counter2 -= Time.deltaTime;
                         transform.Translate(run_speed * direction * Time.deltaTime, 0, 0);//running
                     }
@@ -152,10 +153,23 @@ public class enemy_rush_attack : Attack
         else
         {
             gameObject.GetComponent<Rigidbody2D>().gravityScale = 15;
-            //gameObject.GetComponent<Rigidbody2D>().drag = 1;
+            gameObject.GetComponent<Rigidbody2D>().drag = 2f;
             hitbox.gameObject.SetActive(false);
             hurtbox.gameObject.SetActive(false);
             thisAnim.SetBool("death", true);
+            if (counter4 == 0)
+            {
+                counter4 = 3;
+            }
+
+            if (counter4 > 1)
+            {
+                counter4 -= Time.deltaTime;
+            }
+            else
+            {
+                //gameObject.GetComponent<Rigidbody2D>().gravityScale = 1000 ;
+            }
         }
     }
 }
