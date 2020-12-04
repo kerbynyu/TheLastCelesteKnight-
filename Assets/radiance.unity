@@ -1354,10 +1354,12 @@ MonoBehaviour:
   transTime: 1
   counter1: 0
   pauseTime: 3
-  counter2: 0
-  counter3: 0
+  counter2: -1
+  counter3: -1
+  counter4: -1
   theAlpha: 0
   theAlpha2: 0
+  deathTime: 2
   score: 0
 --- !u!4 &178038627
 Transform:
@@ -17296,10 +17298,9 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 43.036137, y: -16.070225, z: -379.8536}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 251582490}
+  m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2028071613
 GameObject:

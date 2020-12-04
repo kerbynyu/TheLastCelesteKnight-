@@ -45,6 +45,8 @@ public class PlayerAttack : Attack
     public HitBox cHitbox;//record the current hitbox
     public HurtBox hutbox;
 
+    private GameMaster gm;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -63,7 +65,9 @@ public class PlayerAttack : Attack
     {
         if (!alive)
         {
-            Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
+            gm = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameMaster>();
+            gm.deathScreen();
+            Destroy(gameObject);
         }
         else
         {
