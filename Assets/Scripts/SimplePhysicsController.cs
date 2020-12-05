@@ -44,14 +44,14 @@ public class SimplePhysicsController : MonoBehaviour {
     public bool darkDash = false;
     public GameObject darkCoolDown;
     public ParticleSystem dark;
-
+    public Animator CDAnim;
     //double jump variables
     public bool doubleJumpEnabled;
     public bool isDoubleJumping;
     public float doubleJumpHeight = 0.5f;
     public int doubleJumpCounter = 0;
     public bool doubleJumped = false;
-
+    public bool afterDash = false;
     //wall jump variables
     public wallJump WJ1;
     public wallJump WJ2;
@@ -311,7 +311,6 @@ public class SimplePhysicsController : MonoBehaviour {
             }
             if (darkDashCounter > darkDashCounterMax - 10)
             {
-                Animator CDAnim = darkCoolDown.GetComponent<Animator>();
                 CDAnim.SetBool("ready", true);
 
             }
@@ -337,7 +336,10 @@ public class SimplePhysicsController : MonoBehaviour {
             }
             if (isDashing)
             {
-               
+               if (doubleJumped)
+                {
+
+                }
                 wings.SetActive(false);
                 //dash animation
                 dashed = true;
@@ -412,6 +414,16 @@ public class SimplePhysicsController : MonoBehaviour {
             {
                 dark.Stop();
                 thisRigidbody2D.velocity = new Vector2(0, thisRigidbody2D.velocity.y);
+                if (afterDash)
+                {
+                    isDoubleJumping = true;
+                    releasedJump = false;
+                    thisRigidbody2D.gravityScale = jumpingGravity;
+                    doubleJumpCounter = 0;
+                    doubleJumped = true;
+                    doubleJumpEnabled = false;
+                    afterDash = false;
+                }
             }
 
             //wall jump control in fixed update
@@ -539,6 +551,7 @@ public class SimplePhysicsController : MonoBehaviour {
                 dirChanged = false;
                 wings.SetActive(false);
                 dashed = false;
+                doubleJumpEnabled = true;
             }
             
             //reset dash
@@ -625,6 +638,7 @@ public class SimplePhysicsController : MonoBehaviour {
         
         if (isOnWall == true)
         {
+            doubleJumpEnabled = true;
             if (Input.GetKeyDown(KeyCode.K))
             {
                 wjCount = true;
@@ -737,15 +751,22 @@ public class SimplePhysicsController : MonoBehaviour {
 
         //double jump control in update
         
-        if (doubleJumpEnabled && Input.GetKey(KeyCode.K) && releasedJump)
+        if ((doubleJumpEnabled && Input.GetKey(KeyCode.K) && releasedJump)|| (isDashing && !feet.isGrounded && Input.GetKey(KeyCode.K)))
         {
-            isDoubleJumping = true;
-            releasedJump = false;
-            thisRigidbody2D.gravityScale = jumpingGravity;
-            doubleJumpCounter = 0;
-            doubleJumped = true;
-            doubleJumpEnabled = false;
-            Debug.Log("double");
+            if (!isDashing)
+            {
+                isDoubleJumping = true;
+                releasedJump = false;
+                thisRigidbody2D.gravityScale = jumpingGravity;
+                doubleJumpCounter = 0;
+                doubleJumped = true;
+                doubleJumpEnabled = false;
+                Debug.Log("double");
+            }
+            else
+            {
+                afterDash = true;
+            }
         }
 
         if (isDoubleJumping)

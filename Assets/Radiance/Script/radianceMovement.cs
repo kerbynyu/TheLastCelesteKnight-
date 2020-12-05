@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class radianceMovement : Attack
 {
     //phase1 health 50
@@ -42,6 +43,7 @@ public class radianceMovement : Attack
     public bool phase2 = false;
     public bool phase3 = false;
     public bool phase4 = false;
+    public bool phase5 = false;
     //phase1 && phase2 attacks
     public bool beamBurst = false;
     public bool swordBurst = false;
@@ -97,14 +99,28 @@ public class radianceMovement : Attack
     public GameObject uniquePlatform;
     public GameObject phase4platforms;
     List<Transform> phase4position = new List<Transform>();
-    private int uniquePlatformCounter = 0;
-    private bool phase4ready = false;
-    private bool phase4LongTeleport = true;
+    public int uniquePlatformCounter = 0;
+    public bool phase4ready = false;
+    public bool phase4LongTeleport = true;
     private Animator anim;
     private int choosePlatform = 0;
     private Vector3 teleportPos2d = new Vector3(0, 0, 0);
     public bool attackStart = false;
-    private int forceToStart = 0;
+    public int forceToStart = 0;
+    private bool justDoSomething = false;
+    //phase5 variables
+    public GameObject phase5platforms;
+    public Transform followPlayer;
+    public Transform phase5pos;
+    private int phase5teleportCounter = 0;
+    private float x;
+    private float y;
+    private double x1;
+    private double y1;
+    private float long_x;
+    private float long_y;
+    Vector3 thisVelocity = Vector3.zero;
+    public float smoothTime = 0.3f;
     private void LateUpdate()
     {
         base.Update();
@@ -112,6 +128,7 @@ public class radianceMovement : Attack
     // Start is called before the first frame update
     void Start()
     {
+        phase5platforms.SetActive(false);
         foreach (Transform platform in phase4platforms.transform)
         {
             phase4position.Add(platform);
@@ -167,6 +184,7 @@ public class radianceMovement : Attack
             phase2 = false;
             phase3 = false;
             phase4 = false;
+            phase5 = false;
         }
         else if (health.Hp > 150)
         {
@@ -174,22 +192,32 @@ public class radianceMovement : Attack
             phase1 = false;
             phase3 = false;
             phase4 = false;
+            phase5 = false;
         }
-        else if (health.Hp > 110)
+        else if (health.Hp > 90)
         {
             phase3 = true;
             phase2 = false;
             phase1 = false;
             phase4 = false;
-        }else if (health.Hp > 20)
+            phase5 = false;
+        }else if (health.Hp > 7)
         {
             phase4 = true;
             phase1 = false;
             phase2 = false;
             phase3 = false;
+            phase5 = false;
+        }else
+        {
+            phase5 = true;
+            phase1 = false;
+            phase2 = false;
+            phase3 = false;
+            phase4 = false;
         }
 
-
+        //phase2 spikes
         if (phase2)
         {
             spikeCounter += 1;
@@ -227,7 +255,7 @@ public class radianceMovement : Attack
             }
         }
 
-
+        //phase1 & 2
         if (phase1 || phase2)
         {
             if (floating)
@@ -706,7 +734,7 @@ public class radianceMovement : Attack
         }
 
         //phase3
-        if (phase3)
+        else if (phase3)
         {
             middle.SetActive(false);
             for (int i = 0; i < spikes1.Count; i++)
@@ -794,13 +822,23 @@ public class radianceMovement : Attack
         //phase4
         else if (phase4)
         {
-           
+            middle.SetActive(true);
            swordRain = false;
-            if (forceToStart > 500)
+            if (forceToStart > 500 && forceToStart < 600)
             {
                 attackStart = true;
+                if (!orbAttack && !swordWall && !lightWall && !beamBurst)
+                {
+                    justDoSomething = true;
+                }
+                if (justDoSomething)
+                {
+                    lightWall = true;
+                    justDoSomething = false;
+                    forceToStart = 700;
+                }
             }
-            else
+            else if (forceToStart < 650)
             {
                 forceToStart += 1;
             }
@@ -818,7 +856,7 @@ public class radianceMovement : Attack
             if (uniquePlatformCounter < 300)
             {
                 uniquePlatformCounter += 1;
-                if (uniquePlatformCounter > 280)
+                if (uniquePlatformCounter > 280 && uniquePlatformCounter < 290)
                 {
                     PolygonCollider2D uniquePC = uniquePlatform.GetComponent<PolygonCollider2D>();
                     Destroy(uniquePC);
@@ -827,17 +865,19 @@ public class radianceMovement : Attack
                     uniqueAlpha -= 0.1f;
                     uniqueSR.color = new Color(1, 1, 1, uniqueAlpha);
                 }
-                if (uniquePlatformCounter > 290)
+                else if (uniquePlatformCounter > 290)
                 {
                     uniquePlatform.SetActive(false);
                 }
-                else if (uniquePlatformCounter > 50)
+                if (uniquePlatformCounter > 50)
                 {
                     phase4platforms.SetActive(true);
                 }
+                if (uniquePlatformCounter > 10 && uniquePlatformCounter < 290)
                 {
                     uniquePlatform.SetActive(true);
                 }
+
                 if (uniquePlatformCounter > 200)
                 {
                     phase4ready = true;
@@ -1026,7 +1066,7 @@ public class radianceMovement : Attack
                                 wallDown = downMost.position.y;
                                 if (goRight)
                                 {
-                                    for (float i = wallDown + Random.Range(-10, 10); i < wallUp; i += 7)
+                                    for (float i = wallDown + Random.Range(-10, 10); i < wallUp; i += 9)
                                     {
                                         float ifCreate = Random.Range(0, 10);
                                         if (ifCreate < 8)
@@ -1163,15 +1203,14 @@ public class radianceMovement : Attack
                         orbDown = player.transform.position.y + 10;
                         orbLeft = player.transform.position.x - 10;
                         orbRight = player.transform.position.x + 10;
-                        bool posFound = false;
                         Vector2 pos = new Vector2(Random.Range(orbLeft, orbRight), Random.Range(orbUp, orbDown));
-                        while (!posFound)
+                        for (int i=0;i<50;i++)
                         {
                             pos = new Vector2(Random.Range(orbLeft, orbRight), Random.Range(orbUp, orbDown));
                             Collider2D tryBox = Physics2D.OverlapBox(pos, new Vector2(5, 5), 0);
                             if (tryBox == null)
                             {
-                                posFound = true;
+                                break;
                             }
                         }
                         
@@ -1277,6 +1316,7 @@ public class radianceMovement : Attack
                         floatCounter = 0;
                         teleport = true;
                         floating = false;
+                        nextLaunchIndex = Random.Range(0, 100);
                     }
 
                 }
@@ -1312,6 +1352,85 @@ public class radianceMovement : Attack
                     teleport = false;
                     floating = true;
                 }
+            }
+        }
+
+        //phase5
+        else if (phase5)
+        {
+            middle.SetActive(true);
+            swordWall = false;
+            swordRain = false;
+            swordBurst = false;
+            orbAttack = false;
+            lightWall = false;
+            phase5platforms.SetActive(true);
+            if (phase5teleportCounter < 30)
+            {
+                phase5teleportCounter += 1;
+                if (phase5teleportCounter>20 && phase5teleportCounter < 22)
+                {
+                    teleport = true;
+                }else if (phase5teleportCounter < 20)
+                {
+                    beamBurst = false;
+                    teleport = false;
+                }
+            }
+            if (teleport)
+            {
+                ring.Play();
+                ringCounter = 0;
+                featherCounter = 0;
+                whiteCirclePlus = true;
+                whiteCircleTrans = 0;
+                //launching skill animation
+                anim.SetBool("flying", true);
+                anim.SetBool("spin", false);
+                resetVariables();
+                transform.position = phase5pos.position;
+                teleport = false;
+                beamBurst = true;
+                launchCounter = 0;
+            }
+            if (beamBurst)
+            {
+                anim.SetBool("flying", true);
+                anim.SetBool("spin", false); ;
+                SpriteRenderer middleSR = middle.GetComponent<SpriteRenderer>();
+                middleSR.color = new Color(1, 1, 1, 1);
+                teleportParticles();
+                launchCounter += 1;
+                GameObject player = GameObject.Find("Player");
+                y = Mathf.Abs(transform.position.y - player.transform.position.y);
+                x = Mathf.Abs(transform.position.x - player.transform.position.x);
+                long_y = Mathf.Abs(transform.position.y - followPlayer.position.y);
+                long_x = Mathf.Abs(transform.position.x - followPlayer.position.x);
+                float flong_x = Mathf.Round(long_x);
+                float flong_y = Mathf.Round(long_y);
+                double radians = Mathf.Atan(flong_x / flong_y);
+                double degrees = radians * (180 / Mathf.PI);
+                float fdegrees = (float)degrees;
+                y1 = Mathf.Sqrt(3500 / (x * x / y) + 1);
+                x1 = (x / y) * y1;
+                float fy = (float)y1;
+                float fx = (float)x1;
+                launchCounter += 1;
+                if (launchCounter <= 200)
+                {
+                    Vector3 targetPosition = player.transform.TransformPoint(new Vector3(-fx, -fy, -10));
+                    followPlayer.position = Vector3.SmoothDamp(followPlayer.position, targetPosition, ref thisVelocity, smoothTime);
+                }
+                else if(launchCounter>226 && launchCounter < 230)
+                {
+
+                    GameObject newBeam = Instantiate(beam,new Vector3(middle.transform.position.x,middle.transform.position.y), Quaternion.Euler(0, 0, -fdegrees-90));
+                }
+                else if (launchCounter > 230)
+                {
+                    launchCounter = 0;
+                }
+                
             }
         }
     }
