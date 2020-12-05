@@ -121,6 +121,9 @@ public class radianceMovement : Attack
     private float long_y;
     Vector3 thisVelocity = Vector3.zero;
     public float smoothTime = 0.3f;
+    //audios
+    public AudioSource teleportAudio;
+
     private void LateUpdate()
     {
         base.Update();
@@ -282,6 +285,10 @@ public class radianceMovement : Attack
                             sword ifBurst = newSword.GetComponent<sword>();
                             ifBurst.burstRotation = -swordBurstAngle + 90;
                             ifBurst.burst = true;
+                            if (i == 0)
+                            {
+                                ifBurst.ifPlay = true;
+                            }
                             swordBurstAngle += 30;
                         }
                     }
@@ -345,12 +352,18 @@ public class radianceMovement : Attack
                                 float newX = middleX;
                                 float newY = middleY;
                                 GameObject thisBeam = Instantiate(beam, new Vector3(newX, newY, 0), Quaternion.Euler(0, 0, beamBurstAngle));
+                                beam beamScr = thisBeam.GetComponent<beam>();
+                                if (i == 0)
+                                {
+                                    beamScr.ifPlay = true;      
+                                }
                                 beamBurstAngle += 45;
                             }
                             beamBurstStartIndex = 75;
                             beamBurstCount3 += 1;
                             launchCounter = 0;
                         }
+                        
                     }
 
                     else if (launchCounter > 70 && launchCounter < 80)
@@ -400,16 +413,22 @@ public class radianceMovement : Attack
                         {
                             rainLeft = leftMost.position.x - 50;
                             rainRight = rightMost.position.x + 50;
+                            int num = 0;
                             for (float i = rainLeft + Random.Range(-10, 10); i < rainRight; i += 7)
                             {
+                                num += 1;
                                 float ifCreate = Random.Range(0, 10);
-                                if (ifCreate < 7.5)
+                                if (ifCreate < 7.5 || num == 1)
                                 {
                                     GameObject newSword = Instantiate(sword, new Vector3(i, upMost.position.y, 0), Quaternion.Euler(0, 0, -90));
                                     Animator swordAnim = newSword.GetComponent<Animator>();
                                     Destroy(swordAnim);
                                     sword swordScript = newSword.GetComponent<sword>();
                                     swordScript.other = true;
+                                    if (num == 1)
+                                    {
+                                        swordScript.ifPlay = true;
+                                    }
                                 }
                             }
                             launchCounter = 0;
@@ -452,32 +471,44 @@ public class radianceMovement : Attack
                             wallDown = downMost.position.y;
                             if (goRight)
                             {
+                                int num = 0;
                                 for (float i = wallDown + Random.Range(-10, 10); i < wallUp; i += 7)
                                 {
+                                    num += 1;
                                     float ifCreate = Random.Range(0, 10);
-                                    if (ifCreate < 8)
+                                    if (ifCreate < 7.5 || num == 1)
                                     {
                                         GameObject newSword = Instantiate(sword, new Vector3(wallLeft,i, 0), Quaternion.Euler(0, 0, 0));
                                         Animator swordAnim = newSword.GetComponent<Animator>();
                                         Destroy(swordAnim);
                                         sword swordScript = newSword.GetComponent<sword>();
                                         swordScript.other = true;
+                                        if (num == 1)
+                                        {
+                                            swordScript.ifPlay = true;
+                                        }
                                     }
                                 }
                             }
 
                             else
                             {
+                                int num = 0;
                                 for (float i = wallDown + Random.Range(-10, 10); i < wallUp; i += 7)
                                 {
+                                    num += 1;
                                     float ifCreate = Random.Range(0, 10);
-                                    if (ifCreate < 7.5)
+                                    if (ifCreate < 7.5 || num == 1)
                                     {
                                         GameObject newSword = Instantiate(sword, new Vector3(wallRight, i, 0), Quaternion.Euler(0, 0, -180));
                                         Animator swordAnim = newSword.GetComponent<Animator>();
                                         Destroy(swordAnim);
                                         sword swordScript = newSword.GetComponent<sword>();
                                         swordScript.other = true;
+                                        if (num == 1)
+                                        {
+                                            swordScript.ifPlay = true;
+                                        }
                                     }
                                 }
                             }
@@ -708,6 +739,7 @@ public class radianceMovement : Attack
 
             if (teleport)
             {
+                teleportAudio.Play();
                 ring.Play();
                 ringCounter = 0;
                 featherCounter = 0;
@@ -780,6 +812,7 @@ public class radianceMovement : Attack
             }
             if (teleport)
             {
+                teleportAudio.Play();
                 ring.Play();
                 ringCounter = 0;
                 featherCounter = 0;
@@ -802,16 +835,22 @@ public class radianceMovement : Attack
 
                     rainLeft = leftMost.position.x - 50;
                     rainRight = rightMost.position.x + 50;
+                    int num = 0;
                     for (float i = rainLeft+Random.Range(-10,10); i < rainRight; i += 7)
                     {
+                        num += 1;
                         float ifCreate = Random.Range(0, 10);
-                        if (ifCreate < 7.5)
+                        if (ifCreate < 7.5 || num == 1)
                         {
                             GameObject newSword = Instantiate(sword, new Vector3(i, upMost.position.y-20, 0), Quaternion.Euler(0, 0, -90));
                             Animator swordAnim = newSword.GetComponent<Animator>();
                             Destroy(swordAnim);
                             sword swordScript = newSword.GetComponent<sword>();
                             swordScript.other = true;
+                            if (num == 1)
+                            {
+                                swordScript.ifPlay = true;
+                            }
                         }
                     }
                     phase3LaunchCounter = 0;
@@ -823,7 +862,7 @@ public class radianceMovement : Attack
         else if (phase4)
         {
             middle.SetActive(true);
-           swordRain = false;
+            swordRain = false;
             if (forceToStart > 500 && forceToStart < 600)
             {
                 attackStart = true;
@@ -938,6 +977,10 @@ public class radianceMovement : Attack
                                     sword ifBurst = newSword.GetComponent<sword>();
                                     ifBurst.burstRotation = -swordBurstAngle + 90;
                                     ifBurst.burst = true;
+                                    if (i == 0)
+                                    {
+                                        ifBurst.ifPlay = true;
+                                    }
                                 }
                                 swordBurstAngle += 30;
                             }
@@ -1005,6 +1048,11 @@ public class radianceMovement : Attack
                                     if (attackStart)
                                     {
                                         GameObject thisBeam = Instantiate(beam, new Vector3(newX, newY, 0), Quaternion.Euler(0, 0, beamBurstAngle));
+                                        if (i == 0)
+                                        {
+                                            beam beamScr = thisBeam.GetComponent<beam>();
+                                            beamScr.ifPlay = true;
+                                        }
                                     }
                                     beamBurstAngle += 45;
                                 }
@@ -1066,10 +1114,12 @@ public class radianceMovement : Attack
                                 wallDown = downMost.position.y;
                                 if (goRight)
                                 {
+                                    int num = 0;
                                     for (float i = wallDown + Random.Range(-10, 10); i < wallUp; i += 9)
                                     {
+                                        num += 1;
                                         float ifCreate = Random.Range(0, 10);
-                                        if (ifCreate < 8)
+                                        if (ifCreate < 8 || num == 1)
                                         {
                                             if (attackStart)
                                             {
@@ -1078,6 +1128,10 @@ public class radianceMovement : Attack
                                                 Destroy(swordAnim);
                                                 sword swordScript = newSword.GetComponent<sword>();
                                                 swordScript.other = true;
+                                                if (num == 1)
+                                                {
+                                                    swordScript.ifPlay = true;
+                                                }
                                             }
                                         }
                                     }
@@ -1085,10 +1139,12 @@ public class radianceMovement : Attack
 
                                 else
                                 {
+                                    int num = 0;
                                     for (float i = wallDown + Random.Range(-10, 10); i < wallUp; i += 7)
                                     {
+                                        num += 1;
                                         float ifCreate = Random.Range(0, 10);
-                                        if (ifCreate < 7.5)
+                                        if (ifCreate < 7.5 || num == 1)
                                         {
                                             if (attackStart)
                                             {
@@ -1097,6 +1153,10 @@ public class radianceMovement : Attack
                                                 Destroy(swordAnim);
                                                 sword swordScript = newSword.GetComponent<sword>();
                                                 swordScript.other = true;
+                                                if (num == 1)
+                                                {
+                                                    swordScript.ifPlay = true;
+                                                }
                                             }
                                         }
                                     }
@@ -1328,7 +1388,7 @@ public class radianceMovement : Attack
 
             if (teleport)
             {
-                
+                teleportAudio.Play();
                 if (phase4LongTeleport)
                 {
                     transform.position = new Vector3(leftMost.position.x - 100, transform.position.y, 0);
@@ -1379,6 +1439,7 @@ public class radianceMovement : Attack
             }
             if (teleport)
             {
+                teleportAudio.Play();
                 ring.Play();
                 ringCounter = 0;
                 featherCounter = 0;
@@ -1425,6 +1486,8 @@ public class radianceMovement : Attack
                 {
 
                     GameObject newBeam = Instantiate(beam,new Vector3(middle.transform.position.x,middle.transform.position.y), Quaternion.Euler(0, 0, -fdegrees-90));
+                    beam beamScr = newBeam.GetComponent<beam>();
+                    beamScr.ifPlay = true;
                 }
                 else if (launchCounter > 230)
                 {
@@ -1504,7 +1567,10 @@ public class radianceMovement : Attack
         }
     }
 
-
+    void playTeleport()
+    {
+            teleportAudio.Play();
+    }
 
     // Update is called once per frame
     public override void Update()

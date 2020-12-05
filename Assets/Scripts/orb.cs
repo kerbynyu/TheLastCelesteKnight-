@@ -22,6 +22,14 @@ public class orb : MonoBehaviour
     private int destroyCounter = 0;
     public eHit_Box orbHit;
     private int justCounter = 0;
+    public AudioSource orbGenerate;
+    public AudioSource orbDestroy;
+    private bool hitPlay = false;
+    public CircleCollider2D coll;
+    public SpriteRenderer thisSR;
+    public CircleCollider2D coll2;
+    private bool stopGenerate = false;
+    private bool generatePlayed = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,12 +39,18 @@ public class orb : MonoBehaviour
     void FixedUpdate()
     {
         waitCounter += 1;
+        if (!orbGenerate.isPlaying && !hitPlay && !stopGenerate && !generatePlayed)
+        {
+            orbGenerate.Play();
+            generatePlayed = true;
+        }
         if (waitCounter > 30)
         {
             action = true;
         }
         if (action)
         {
+            
             justCounter += 1;
             thisAnim.SetBool("action", true);
             zRotation += 5;
@@ -51,7 +65,8 @@ public class orb : MonoBehaviour
 
         if (justCounter > 80)
         {
-            
+            Destroy(coll2);
+            Destroy(coll);
             float scX = transform.localScale.x - 0.05f;
             float scY = transform.localScale.y - 0.05f;
             transform.localScale = new Vector3(scX, scY, 1);
@@ -59,19 +74,43 @@ public class orb : MonoBehaviour
 
         if (justCounter > 100)
         {
-            Destroy(gameObject);
+            
+            Destroy(thisSR);
         }
 
+        if (justCounter > 200)
+        {
+            Destroy(gameObject);
+        }
         if (hitGroundCounter > 2)
         {
             thisAnim.SetBool("hit", true);
+            hitPlay = true;
+            if (orbGenerate.isPlaying)
+            {
+                orbGenerate.Stop();
+                stopGenerate = true;
+            }
+            if (!orbDestroy.isPlaying && hitPlay)
+            {
+                orbDestroy.Play();
+            }
         }
 
         if (thisAnim.GetBool("hit")==true)
         {
+            
             destroyCounter += 1;
         }
         if (destroyCounter > 10)
+        {
+            Destroy(coll);
+            Destroy(coll2);
+            Destroy(thisSR);
+
+           
+        }
+        if (destroyCounter > 50)
         {
             Destroy(gameObject);
         }
@@ -79,19 +118,32 @@ public class orb : MonoBehaviour
         if (orbHit.hitPlayer == true)
         {
             thisAnim.SetBool("hit", true);
+            hitPlay = true;
+            if (orbGenerate.isPlaying)
+            {
+                orbGenerate.Stop();
+                stopGenerate = true;
+            }
+            if (!orbDestroy.isPlaying && hitPlay)
+            {
+                orbDestroy.Play();
+            }
         }
 
         Ray2D detectRay = new Ray2D(new Vector2(transform.position.x, transform.position.y), Vector3.right * 1);
         RaycastHit2D detectHit = Physics2D.Raycast(detectRay.origin, detectRay.direction, 5, playerMask);
         Ray2D detectRay2 = new Ray2D(new Vector2(transform.position.x, transform.position.y), Vector3.left * 1);
         RaycastHit2D detectHit2 = Physics2D.Raycast(detectRay.origin, detectRay.direction, 5, playerMask);
-        if ((detectHit.collider != null && detectHit.collider.gameObject.CompareTag("Ground"))|| (detectHit2.collider != null && detectHit2.collider.gameObject.CompareTag("Ground")))
+        if (justCounter < 80)
         {
-            hitGroundCounter += 1;
-        }
-        else 
-        {
-            hitGroundCounter = 0;
+            if ((detectHit.collider != null && detectHit.collider.gameObject.CompareTag("Ground")) || (detectHit2.collider != null && detectHit2.collider.gameObject.CompareTag("Ground")))
+            {
+                hitGroundCounter += 1;
+            }
+            else
+            {
+                hitGroundCounter = 0;
+            }
         }
     }
 

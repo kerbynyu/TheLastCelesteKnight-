@@ -8,6 +8,9 @@ public class beam : MonoBehaviour
     public eHit_Box hitbox;
     private int destroyCounter = 0;
     private int lastCounter = 0;
+    public bool ifPlay = false;
+    public AudioSource beamAudio;
+    private bool its2 = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,8 +19,15 @@ public class beam : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!beamAudio.isPlaying && ifPlay && its2)
+        {
+            beamAudio.Play();
+            ifPlay = false;
+        }
+
         if (thisAnim.GetCurrentAnimatorStateInfo(0).IsName("beamBurst2"))
         {
+            its2 = true;
             lastCounter += 1;
             if (lastCounter > 25)
             {
