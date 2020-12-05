@@ -255,7 +255,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alive: 1
-  killer: {fileID: 0}
   health: {fileID: 5806763988697616717}
   hitted: 0
   thisMask:
@@ -279,6 +278,7 @@ MonoBehaviour:
   counter1: 0
   counter2: 0
   counter3: 0
+  counter4: 0
   thisAnim: {fileID: 5806763988697616715}
   thisSpriteRenderer: {fileID: 5806763988697616714}
   feet: {fileID: 791743547680453814}
@@ -293,7 +293,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5806763988697616708}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bb91c7ec8d3b744c99f8d00f32ce357, type: 3}
+  m_Script: {fileID: 11500000, guid: 188a79fe5544bb34a9d2e0e3d2d4a7ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   myRenderer: {fileID: 5806763988697616714}
