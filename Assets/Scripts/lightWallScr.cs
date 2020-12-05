@@ -7,7 +7,8 @@ public class lightWallScr : MonoBehaviour
     private int destroyCounter;
     public float movingSpd = 0.6f;
     public bool phase4 = false;
-    private int lastingTime = 200;
+    private int lastingTime = 300;
+    public AudioSource thisAudio;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +16,10 @@ public class lightWallScr : MonoBehaviour
     }
     void FixedUpdate()
     {
+        if (!thisAudio.isPlaying)
+        {
+            thisAudio.Play();
+        }
         destroyCounter += 1;
         transform.position += transform.right * movingSpd;
         if (destroyCounter > lastingTime)
