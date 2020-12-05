@@ -49,7 +49,7 @@ public class GameMaster : MonoBehaviour
         {
             
             counter1 -= Time.deltaTime;
-            theAlpha -=0.7f/transTime*Time.deltaTime;
+            theAlpha -=1f/transTime*Time.deltaTime;
             theAlpha = Mathf.Max(0, theAlpha);
         }
 
@@ -116,7 +116,7 @@ public class GameMaster : MonoBehaviour
     {
         counter1 = transTime;
         Color c = dark.color;
-        theAlpha = 0.7f;
+        theAlpha = 1f;
         c.a = theAlpha;
         dark.color = c;
     }
