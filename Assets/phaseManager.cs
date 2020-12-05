@@ -1,9 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class phaseManager : MonoBehaviour
 {
+    public Image dark;
+    public float theAlpha;
     public radianceMovement rad;
     public GameObject edge1;
     public GameObject respawn1;
@@ -16,6 +20,9 @@ public class phaseManager : MonoBehaviour
     public Vector2 p4;
     public Vector2 ep41;
     public Vector2 ep42;
+    public float endTime = 3;
+    public float counter1 = -1;
+    public float slowAni = 0.5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -48,5 +55,31 @@ public class phaseManager : MonoBehaviour
             edge1.transform.position = ep41;
             edge2.transform.position = ep42;
         }
+
+        if (!rad.alive)
+        {
+            if (counter1 == -1)
+            {
+                counter1 = endTime;
+                Time.timeScale = slowAni;
+            }
+            else if (counter1 > 0)
+            {
+                counter1 -= Time.unscaledDeltaTime;
+                theAlpha += 1 / endTime * Time.unscaledDeltaTime;
+                theAlpha = Mathf.Min(1, theAlpha);
+                Color c = dark.color;
+                c.a = theAlpha;
+                dark.color = c;
+            }
+            else
+            {
+                Time.timeScale = 1;
+                //counter1 = -1;
+                SceneManager.LoadScene("End");
+            }
+        }
+
+        
     }
 }

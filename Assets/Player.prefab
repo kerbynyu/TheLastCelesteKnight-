@@ -5150,11 +5150,13 @@ MonoBehaviour:
   darkDash: 0
   darkCoolDown: {fileID: 3213534098245791654}
   dark: {fileID: 3213534097311597841}
+  CDAnim: {fileID: 3213534098245791704}
   doubleJumpEnabled: 0
   isDoubleJumping: 0
   doubleJumpHeight: 17
   doubleJumpCounter: 0
   doubleJumped: 0
+  afterDash: 0
   WJ1: {fileID: 4051780551501621371}
   WJ2: {fileID: 4051780551550862779}
   isOnWall: 0
