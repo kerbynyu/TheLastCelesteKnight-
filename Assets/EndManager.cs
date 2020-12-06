@@ -16,7 +16,7 @@ public class EndManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            SceneManager.LoadScene("final");
+            SceneManager.LoadScene("Main");
         }
     }
 }
