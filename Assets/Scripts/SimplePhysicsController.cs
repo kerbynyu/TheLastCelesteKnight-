@@ -38,6 +38,7 @@ public class SimplePhysicsController : MonoBehaviour {
     public int dashAgainCounter = 0;
     public int dashAgainCounterMax = 25;
     //dark dash
+    public bool allowDarkDash = false;
     public bool darkDashEnabled = false;
     public int darkDashCounter = 0;
     public int darkDashCounterMax = 100;
@@ -311,7 +312,10 @@ public class SimplePhysicsController : MonoBehaviour {
             }
             if (darkDashCounter > darkDashCounterMax - 10)
             {
-                CDAnim.SetBool("ready", true);
+                if (CDAnim.gameObject.activeSelf)
+                {
+                    CDAnim.SetBool("ready", true);
+                }
 
             }
 
@@ -669,7 +673,7 @@ public class SimplePhysicsController : MonoBehaviour {
         {
             isDashing = true;
             dashAgainCounter = dashAgainCounterMax;
-            if (darkDashEnabled)
+            if (darkDashEnabled && allowDarkDash)
             {
                 darkDashCounter = 0;
                 darkDash = true;
@@ -792,6 +796,13 @@ public class SimplePhysicsController : MonoBehaviour {
         if (other.gameObject.CompareTag("Respawn")) {
             Hurt();
 
+        }
+        if (other.name == "darkCircle")
+        {
+            GameObject darkCircle = other.gameObject;
+            darkCircleScr scr = darkCircle.GetComponent<darkCircleScr>();
+            scr.ifEmission = true;
+            allowDarkDash = true;
         }
     }
 
