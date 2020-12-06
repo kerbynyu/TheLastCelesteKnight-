@@ -134,7 +134,7 @@ public class PlayerAttack : Attack
                             thisAnimator.SetTrigger("charge");
                         }
                         thisAnimator.SetBool("charging", true);
-                        if (eUsed % 1 <0.01 ) { soundManager.playCharging(); }
+                        if (eUsed % 1 <0.01&&eUsed>0.1 ) { soundManager.playCharging(); }
                         //print("KaMe");
                         eSpeed += eSpeed_Acc * Time.deltaTime;
                         eSpeed = Mathf.Min(eSpeed, eSpeed_Max);

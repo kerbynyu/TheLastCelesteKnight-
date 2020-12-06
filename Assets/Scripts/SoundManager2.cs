@@ -14,6 +14,9 @@ public class SoundManager2 : MonoBehaviour
     public AudioSource clang;
     public AudioSource boneCrush;
     public AudioSource dash;
+    public AudioSource hurt;
+    public AudioSource charging;
+    public AudioSource charged;
     public AudioClip[] boneCrushSounds;
 	public float initialLength;
     public float lowpitch=0.7f;
@@ -196,49 +199,16 @@ public class SoundManager2 : MonoBehaviour
 
     public void playCharge()
     {
-        if (Time.time - timeSinceSlash < 2f)
-        {
-            boneCrush.clip = boneCrushSounds[0];
-        }
-        else
-        {
-            var i = Random.Range(0, 4);
-            if (i != 0) i = 1;
-            boneCrush.clip = boneCrushSounds[i];
-        }
-        boneCrush.Play();
-        timeSinceSlash = Time.time;
+        charged.Play();
     }
 
     public void playCharging()
     {
-        if (Time.time - timeSinceSlash < 2f)
-        {
-            boneCrush.clip = boneCrushSounds[0];
-        }
-        else
-        {
-            var i = Random.Range(0, 4);
-            if (i != 0) i = 1;
-            boneCrush.clip = boneCrushSounds[i];
-        }
-        boneCrush.Play();
-        timeSinceSlash = Time.time;
+        charging.Play();
     }
 
     public void playHitted()
     {
-        if (Time.time - timeSinceSlash < 2f)
-        {
-            boneCrush.clip = boneCrushSounds[0];
-        }
-        else
-        {
-            var i = Random.Range(0, 4);
-            if (i != 0) i = 1;
-            boneCrush.clip = boneCrushSounds[i];
-        }
-        boneCrush.Play();
-        timeSinceSlash = Time.time;
+        hurt.Play();
     }
 }
