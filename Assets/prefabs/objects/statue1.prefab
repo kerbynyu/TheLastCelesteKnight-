@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 1084260863707686284}
   - component: {fileID: 1084260863707686274}
   - component: {fileID: 1084260863707686285}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: statue1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4979,7 +4979,7 @@ GameObject:
   - component: {fileID: 1084260863716687421}
   - component: {fileID: 1084260863716687411}
   - component: {fileID: 1084260863716687410}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Particle System 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9851,6 +9851,10 @@ PrefabInstance:
     - target: {fileID: 8703749182909007088, guid: 71ebf6336d86f6a44876cf3d480884fd, type: 3}
       propertyPath: m_Name
       value: hurtBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703749182909007088, guid: 71ebf6336d86f6a44876cf3d480884fd, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8703749182909007090, guid: 71ebf6336d86f6a44876cf3d480884fd, type: 3}
       propertyPath: owner

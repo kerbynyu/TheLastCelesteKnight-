@@ -4874,7 +4874,7 @@ GameObject:
   - component: {fileID: 3764685037398855556}
   - component: {fileID: 3764685037398855557}
   - component: {fileID: 3764685037398855558}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: statue5
   m_TagString: Untagged
   m_Icon: {fileID: 0}

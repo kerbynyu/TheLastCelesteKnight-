@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 9164588144964162481}
   - component: {fileID: 9164588144964162480}
   - component: {fileID: 9164588144964162483}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: statue2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
