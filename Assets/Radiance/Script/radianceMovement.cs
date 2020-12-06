@@ -44,6 +44,7 @@ public class radianceMovement : Attack
     public bool phase3 = false;
     public bool phase4 = false;
     public bool phase5 = false;
+    private bool dontChange5 = false;
     //phase1 && phase2 attacks
     public bool beamBurst = false;
     public bool swordBurst = false;
@@ -108,6 +109,7 @@ public class radianceMovement : Attack
     public bool attackStart = false;
     public int forceToStart = 0;
     private bool justDoSomething = false;
+    private int hardCodeFixCounter = 0;
     //phase5 variables
     public GameObject phase5platforms;
     public Transform followPlayer;
@@ -181,43 +183,49 @@ public class radianceMovement : Attack
     {
         float middleX = middle.transform.position.x;
         float middleY = middle.transform.position.y;
-        if (health.Hp > 210)
+        if (!dontChange5)
         {
-            phase1 = true;
-            phase2 = false;
-            phase3 = false;
-            phase4 = false;
-            phase5 = false;
-        }
-        else if (health.Hp > 150)
-        {
-            phase2 = true;
-            phase1 = false;
-            phase3 = false;
-            phase4 = false;
-            phase5 = false;
-        }
-        else if (health.Hp > 90)
-        {
-            phase3 = true;
-            phase2 = false;
-            phase1 = false;
-            phase4 = false;
-            phase5 = false;
-        }else if (health.Hp > 7)
-        {
-            phase4 = true;
-            phase1 = false;
-            phase2 = false;
-            phase3 = false;
-            phase5 = false;
-        }else
-        {
-            phase5 = true;
-            phase1 = false;
-            phase2 = false;
-            phase3 = false;
-            phase4 = false;
+            if (health.Hp > 210)
+            {
+                phase1 = true;
+                phase2 = false;
+                phase3 = false;
+                phase4 = false;
+                phase5 = false;
+            }
+            else if (health.Hp > 150)
+            {
+                phase2 = true;
+                phase1 = false;
+                phase3 = false;
+                phase4 = false;
+                phase5 = false;
+            }
+            else if (health.Hp > 90)
+            {
+                phase3 = true;
+                phase2 = false;
+                phase1 = false;
+                phase4 = false;
+                phase5 = false;
+            }
+            else if (health.Hp > 15)
+            {
+                phase4 = true;
+                phase1 = false;
+                phase2 = false;
+                phase3 = false;
+                phase5 = false;
+            }
+            else
+            {
+                phase5 = true;
+                phase1 = false;
+                phase2 = false;
+                phase3 = false;
+                phase4 = false;
+                dontChange5 = true;
+            }
         }
 
         //phase2 spikes
@@ -953,6 +961,7 @@ public class radianceMovement : Attack
                 teleportParticles();
                 if (!phase4LongTeleport)
                 {
+                    hardCodeFixCounter = launchCounter;
                     //launch sword burst
                     if (swordBurst)
                     {
@@ -960,7 +969,6 @@ public class radianceMovement : Attack
                         //launching skill animation
                         anim.SetBool("flying", true);
                         anim.SetBool("spin", false);
-
                         launchCounter += 1;
                         if (launchCounter > 15 && launchCounter < 17)
                         {
@@ -1014,7 +1022,7 @@ public class radianceMovement : Attack
                     }
 
                     //launch beam burst
-                    if (beamBurst)
+                    else if (beamBurst)
                     {
                         launchCounter += 1;
                         floatCounter = 0;
@@ -1193,7 +1201,7 @@ public class radianceMovement : Attack
                             }
                         }
                     }
-                    else if (lightWall)
+                    else if (lightWall && health.Hp > 45)
                     {
                         launchCounter += 1;
                         if (launchCounter > 105 && launchCounter < 107)
@@ -1312,7 +1320,11 @@ public class radianceMovement : Attack
                             floating = false;
                         }
                     }
-                    
+
+                    if (launchCounter - hardCodeFixCounter > 1)
+                    {
+                        launchCounter = hardCodeFixCounter + 1;
+                    }
                     teleportDistance = Mathf.Abs(teleportPos2d.x - transform.position.x);
                     if (teleportDistance < 15)
                     {
@@ -1418,6 +1430,7 @@ public class radianceMovement : Attack
         //phase5
         else if (phase5)
         {
+            
             middle.SetActive(true);
             swordWall = false;
             swordRain = false;
@@ -1435,6 +1448,7 @@ public class radianceMovement : Attack
                 {
                     beamBurst = false;
                     teleport = false;
+                    health.Hp = 50;
                 }
             }
             if (teleport)
@@ -1453,6 +1467,7 @@ public class radianceMovement : Attack
                 teleport = false;
                 beamBurst = true;
                 launchCounter = 0;
+                health.Hp = 2;
             }
             if (beamBurst)
             {
@@ -1493,8 +1508,15 @@ public class radianceMovement : Attack
                 {
                     launchCounter = 0;
                 }
-                
+                if (health.Hp < 0)
+                {
+                    GameObject thisBeam = GameObject.Find("beam(Clone)");
+                    Destroy(thisBeam);
+                    middle.SetActive(false);
+                }
+
             }
+
         }
     }
 
