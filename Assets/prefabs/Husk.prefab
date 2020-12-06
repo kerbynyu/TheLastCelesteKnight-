@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6816034770010431962}
   - component: {fileID: 791743547680453814}
   - component: {fileID: 1629288739564477720}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: feet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,7 +265,7 @@ MonoBehaviour:
     m_Bits: 512
   ray_offX: 0
   ray_offY: -1
-  detection_length: 5
+  detection_length: 12
   reverse_length: 5
   fall_length: 0
   walk_speed: 3
@@ -353,6 +353,7 @@ MonoBehaviour:
   xMovement: 4
   yMovement: 4
   hitPlayer: 0
+  projectile: 1
 --- !u!61 &5806763988731472546
 BoxCollider2D:
   m_ObjectHideFlags: 0

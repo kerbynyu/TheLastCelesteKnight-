@@ -77,6 +77,7 @@ MonoBehaviour:
   xMovement: 4
   yMovement: 4
   hitPlayer: 0
+  projectile: 1
 --- !u!1 &3322576769616127713
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,7 +89,7 @@ GameObject:
   - component: {fileID: 3322576769616127742}
   - component: {fileID: 3322576769616127740}
   - component: {fileID: 3322576769616127743}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: feet
   m_TagString: Untagged
   m_Icon: {fileID: 0}

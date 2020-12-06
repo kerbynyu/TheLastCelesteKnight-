@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4137216988495862844}
   - component: {fileID: 7913527712006795223}
   - component: {fileID: 810117016133431982}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: feet1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,7 +159,7 @@ GameObject:
   - component: {fileID: 8357164394229502274}
   - component: {fileID: 5909268228068497528}
   - component: {fileID: 4016702487570983829}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: feet4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -230,7 +230,7 @@ GameObject:
   - component: {fileID: 3519879550779311242}
   - component: {fileID: 1997816409898384205}
   - component: {fileID: 7399194534088136946}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: feet3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -367,6 +367,7 @@ MonoBehaviour:
   xMovement: 3
   yMovement: 3
   hitPlayer: 0
+  projectile: 1
 --- !u!1 &7774829759685163023
 GameObject:
   m_ObjectHideFlags: 0
@@ -599,7 +600,7 @@ GameObject:
   - component: {fileID: 6341791791788405798}
   - component: {fileID: 4068659939734714492}
   - component: {fileID: 6872962322500754719}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: feet2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
