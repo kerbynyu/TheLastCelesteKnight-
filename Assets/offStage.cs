@@ -23,6 +23,7 @@ public class offStage : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             if (collision.gameObject.GetComponent<Health>()) { collision.gameObject.GetComponent<Health>().Hp -= 1; }
+            if (collision.gameObject.GetComponent<PlayerAttack>()) { collision.gameObject.GetComponent<PlayerAttack>().counter2 = collision.gameObject.GetComponent<PlayerAttack>().invicibleTime;}
             collision.gameObject.transform.position = locator.transform.position;
             gm.blackScreen();
         }

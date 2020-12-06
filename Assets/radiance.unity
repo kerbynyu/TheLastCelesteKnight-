@@ -29312,6 +29312,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5831247518009220662, guid: ac7d88c09ac3d1f47ac0652a91cf4d6b, type: 3}
+      propertyPath: allowDarkDash
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5831247518009220662, guid: ac7d88c09ac3d1f47ac0652a91cf4d6b, type: 3}
+      propertyPath: darkDashEnabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7759232197098229627, guid: ac7d88c09ac3d1f47ac0652a91cf4d6b, type: 3}
       propertyPath: damage
       value: 5
@@ -58241,9 +58249,9 @@ Transform:
   - {fileID: 245897052}
   - {fileID: 1484462861}
   - {fileID: 1318879222}
-  - {fileID: 1358684624}
-  - {fileID: 2127406847}
   - {fileID: 1338079348}
+  - {fileID: 2127406847}
+  - {fileID: 1358684624}
   - {fileID: 1669608195}
   m_Father: {fileID: 0}
   m_RootOrder: 25
