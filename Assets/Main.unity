@@ -7609,7 +7609,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &155887567
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12692,7 +12692,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!114 &519420030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22605,9 +22605,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -584.10004, y: 300.7}
+  m_AnchoredPosition: {x: -584.4, y: 265.4}
   m_SizeDelta: {x: 74.92698, y: 89.7015}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1225716400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23041,8 +23041,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastCheckPointPos: {x: 0, y: 0}
-  health: {fileID: 0}
-  energyBar: {fileID: 155887568}
+  energyBar: {fileID: 1225716400}
   dark: {fileID: 1576778014}
   white: {fileID: 1524229369}
   transTime: 1
@@ -23055,6 +23054,19 @@ MonoBehaviour:
   theAlpha2: 0
   deathTime: 2
   score: 0
+  hearts:
+  - {fileID: 141641195}
+  - {fileID: 1486479431}
+  - {fileID: 1876819736}
+  - {fileID: 1307189331}
+  - {fileID: 383369219}
+  - {fileID: 862814721}
+  - {fileID: 1821555220}
+  - {fileID: 520277055}
+  - {fileID: 392838173}
+  - {fileID: 332687652}
+  fullHeart: {fileID: -8630923909508717717, guid: e00c596882a3a4fa294c44f9b134787e, type: 3}
+  emptyHeart: {fileID: 5407656843090688360, guid: e00c596882a3a4fa294c44f9b134787e, type: 3}
 --- !u!4 &1267487460
 Transform:
   m_ObjectHideFlags: 0
