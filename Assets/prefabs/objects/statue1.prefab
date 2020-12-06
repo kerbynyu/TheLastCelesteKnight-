@@ -177,6 +177,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c92ff387c95175947a5f93bbfe4685c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alive: 1
+  health: {fileID: 0}
   hitted: 0
 --- !u!198 &1084260863707686274
 ParticleSystem:
@@ -9856,7 +9858,7 @@ PrefabInstance:
       objectReference: {fileID: 1084260863707686293}
     - target: {fileID: 8703749182909007090, guid: 71ebf6336d86f6a44876cf3d480884fd, type: 3}
       propertyPath: side
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8703749182909007090, guid: 71ebf6336d86f6a44876cf3d480884fd, type: 3}
       propertyPath: thisRigidbody2d
