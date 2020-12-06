@@ -87,6 +87,46 @@ public class SoundManager2 : MonoBehaviour
                     timeSinceSlash=Time.time;
                 }
             }
+
+            var attacks3 = FindObjectsOfType<gruzzerAttack>();
+            foreach (gruzzerAttack a in attacks3)
+            {
+                if (a.alive && (a.hitted))
+                {
+                    if (Time.time - timeSinceSlash < 2f)
+                    {
+                        boneCrush.clip = boneCrushSounds[0];
+                    }
+                    else
+                    {
+                        var i = Random.Range(0, 4);
+                        if (i != 0) i = 1;
+                        boneCrush.clip = boneCrushSounds[i];
+                    }
+                    boneCrush.Play();
+                    timeSinceSlash = Time.time;
+                }
+            }
+
+            var attacks4 = FindObjectsOfType<radianceMovement>();
+            foreach (radianceMovement a in attacks4)
+            {
+                if (a.alive && (a.hitted))
+                {
+                    if (Time.time - timeSinceSlash < 2f)
+                    {
+                        boneCrush.clip = boneCrushSounds[0];
+                    }
+                    else
+                    {
+                        var i = Random.Range(0, 4);
+                        if (i != 0) i = 1;
+                        boneCrush.clip = boneCrushSounds[i];
+                    }
+                    boneCrush.Play();
+                    timeSinceSlash = Time.time;
+                }
+            }
         }
 
         if(player.GetComponent<SimplePhysicsController>().dashCounter>0 && !dash.isPlaying){

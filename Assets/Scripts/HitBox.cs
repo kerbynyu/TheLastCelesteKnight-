@@ -51,7 +51,7 @@ public class HitBox : MonoBehaviour
                     {
                         hurtbox.owner.GetComponent<Rigidbody2D>().gravityScale = 10;
                         hurtbox.owner.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-                        hurtbox.owner.GetComponent<Rigidbody2D>().AddForce(new Vector2(dir.x+Random.Range(-1f,1f),Random.Range(1, 2)) * force * 2, ForceMode2D.Impulse);
+                        hurtbox.owner.GetComponent<Rigidbody2D>().AddForce(new Vector2(dir.x+Random.Range(-1f,1f), dir.y+Random.Range(1, 2)) * force * 2, ForceMode2D.Impulse);
                     }
                     //create effect
                     Instantiate(effect, locator.transform.position, locator.transform.rotation);
