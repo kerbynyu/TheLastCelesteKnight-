@@ -5277,6 +5277,7 @@ MonoBehaviour:
   pushed_movable: 0
   lPosition: {x: 0, y: 0, z: 0}
   shift: {x: 0, y: 0, z: 0}
+  soundManager: {fileID: 8920445256118559673}
   cont: {fileID: 5831247518009220662}
   feet: {fileID: 2012409652625682013}
   thisAnimator: {fileID: 3662818913647625462}
@@ -5917,6 +5918,7 @@ MonoBehaviour:
   whiteList: []
   effect: {fileID: 36652215514511773, guid: 20b0071a69c916d4681005911ec1dc5f, type: 3}
   locator: {fileID: 1547027739545786490}
+  soundManager: {fileID: 8920445256118559673}
 --- !u!95 &3052206835412448470
 Animator:
   serializedVersion: 3
@@ -6071,6 +6073,7 @@ MonoBehaviour:
   whiteList: []
   effect: {fileID: 36652215514511773, guid: 20b0071a69c916d4681005911ec1dc5f, type: 3}
   locator: {fileID: 78960160702400739}
+  soundManager: {fileID: 8920445256118559673}
 --- !u!95 &6457129005054665202
 Animator:
   serializedVersion: 3
@@ -11169,6 +11172,7 @@ MonoBehaviour:
   whiteList: []
   effect: {fileID: 36652215514511773, guid: 20b0071a69c916d4681005911ec1dc5f, type: 3}
   locator: {fileID: 7405797575952727659}
+  soundManager: {fileID: 8920445256118559673}
 --- !u!95 &7670420468604146889
 Animator:
   serializedVersion: 3
@@ -11323,6 +11327,7 @@ MonoBehaviour:
   whiteList: []
   effect: {fileID: 36652215514511773, guid: 20b0071a69c916d4681005911ec1dc5f, type: 3}
   locator: {fileID: 7983666399416308973}
+  soundManager: {fileID: 8920445256118559673}
 --- !u!95 &7984612694101268663
 Animator:
   serializedVersion: 3
@@ -11519,3 +11524,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3223052797843357821, guid: 67e7ead2eff0a214aa23040ef053f393, type: 3}
   m_PrefabInstance: {fileID: 6300919349922997190}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8920445256118559673 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3223052797843357823, guid: 67e7ead2eff0a214aa23040ef053f393, type: 3}
+  m_PrefabInstance: {fileID: 6300919349922997190}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 705fbdb385b91444694e4af4d6440595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

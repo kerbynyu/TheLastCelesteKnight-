@@ -34,6 +34,7 @@ public class PlayerAttack : Attack
     public Vector3 lPosition;
     public Vector3 shift;
 
+    public SoundManager2 soundManager;
     public SimplePhysicsController cont;
     public GroundCheck2 feet;
     public Animator thisAnimator;
@@ -76,6 +77,7 @@ public class PlayerAttack : Attack
 
             if (hitted)
             {
+                soundManager.playHitted();
                 hitted = false;
                 counter2 = invicibleTime;
                 counter3 = stunTime;
@@ -132,6 +134,7 @@ public class PlayerAttack : Attack
                             thisAnimator.SetTrigger("charge");
                         }
                         thisAnimator.SetBool("charging", true);
+                        if (eUsed % 1 <0.01 ) { soundManager.playCharging(); }
                         //print("KaMe");
                         eSpeed += eSpeed_Acc * Time.deltaTime;
                         eSpeed = Mathf.Min(eSpeed, eSpeed_Max);
@@ -145,6 +148,7 @@ public class PlayerAttack : Attack
                             eUsed = 0;
                             health.Hp += 1;
                             print("Hp plus 1");
+                            soundManager.playCharge();
                         }
                     }
                     else if (eUsed > 0)

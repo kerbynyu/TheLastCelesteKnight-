@@ -59,6 +59,7 @@ public class SoundManager2 : MonoBehaviour
         }
 
         if(pAttack.isAttacking && !boneCrush.isPlaying){
+            /*
             var attacks=FindObjectsOfType<enemy_rush_attack>();
             foreach(enemy_rush_attack a in attacks){
                 if(a.alive && (a.hitted || a.counter3>0)){
@@ -127,6 +128,7 @@ public class SoundManager2 : MonoBehaviour
                     timeSinceSlash = Time.time;
                 }
             }
+            */
         }
 
         if(player.GetComponent<SimplePhysicsController>().dashCounter>0 && !dash.isPlaying){
@@ -174,5 +176,69 @@ public class SoundManager2 : MonoBehaviour
     		stepSound.Stop();
     	} 	
     	stepping=false;
+    }   
+
+    public void playHit()
+    {
+        if (Time.time - timeSinceSlash < 2f)
+        {
+            boneCrush.clip = boneCrushSounds[0];
+        }
+        else
+        {
+            var i = Random.Range(0, 4);
+            if (i != 0) i = 1;
+            boneCrush.clip = boneCrushSounds[i];
+        }
+        boneCrush.Play();
+        timeSinceSlash = Time.time;
+    }
+
+    public void playCharge()
+    {
+        if (Time.time - timeSinceSlash < 2f)
+        {
+            boneCrush.clip = boneCrushSounds[0];
+        }
+        else
+        {
+            var i = Random.Range(0, 4);
+            if (i != 0) i = 1;
+            boneCrush.clip = boneCrushSounds[i];
+        }
+        boneCrush.Play();
+        timeSinceSlash = Time.time;
+    }
+
+    public void playCharging()
+    {
+        if (Time.time - timeSinceSlash < 2f)
+        {
+            boneCrush.clip = boneCrushSounds[0];
+        }
+        else
+        {
+            var i = Random.Range(0, 4);
+            if (i != 0) i = 1;
+            boneCrush.clip = boneCrushSounds[i];
+        }
+        boneCrush.Play();
+        timeSinceSlash = Time.time;
+    }
+
+    public void playHitted()
+    {
+        if (Time.time - timeSinceSlash < 2f)
+        {
+            boneCrush.clip = boneCrushSounds[0];
+        }
+        else
+        {
+            var i = Random.Range(0, 4);
+            if (i != 0) i = 1;
+            boneCrush.clip = boneCrushSounds[i];
+        }
+        boneCrush.Play();
+        timeSinceSlash = Time.time;
     }
 }

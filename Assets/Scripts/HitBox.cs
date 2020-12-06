@@ -15,6 +15,7 @@ public class HitBox : MonoBehaviour
     public List<GameObject> whiteList;
     public GameObject effect;
     public GameObject locator;
+    public SoundManager2 soundManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +30,14 @@ public class HitBox : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        
+        if (collision.gameObject.CompareTag("wall"))
+        {
+            if (!whiteList.Contains(collision.gameObject))
+            {
+                whiteList.Add(collision.gameObject);
+                soundManager.playHit();
+            }
+        }
         //if the tag is hurtbox and they really have hurboxes
         if (collision.gameObject.CompareTag("hurtBox")&& collision.gameObject.GetComponent<HurtBox>())
         {
@@ -45,7 +53,9 @@ public class HitBox : MonoBehaviour
                 //add to whitelist
                 whiteList.Add(collision.gameObject);
                 //if hitted solid hurtBox instead of grass
+                
                 if (hurtbox.solid) {
+                    soundManager.playHit();
                     //death fly
                     if (hurtbox.owner.GetComponent<Health>().Hp <= 0)
                     {
