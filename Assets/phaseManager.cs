@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class phaseManager : MonoBehaviour
 {
+    public AudioSource bgm;
     public Image dark;
     public float theAlpha;
     public radianceMovement rad;
@@ -26,7 +27,7 @@ public class phaseManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        bgm.Play();
     }
 
     // Update is called once per frame
@@ -65,12 +66,14 @@ public class phaseManager : MonoBehaviour
             }
             else if (counter1 > 0)
             {
+                
                 counter1 -= Time.unscaledDeltaTime;
                 theAlpha += 1 / endTime * Time.unscaledDeltaTime;
                 theAlpha = Mathf.Min(1, theAlpha);
                 Color c = dark.color;
                 c.a = theAlpha;
                 dark.color = c;
+                bgm.volume = (1 - theAlpha)/2;
             }
             else
             {
