@@ -11,9 +11,7 @@ public class Health : MonoBehaviour
     public float Hp;
     float lHp;
 
-    public Image[] hearts;
-    public Sprite fullHeart;
-    public Sprite emptyHeart; 
+
 
     // Start is called before the first frame update
     void Start()
@@ -32,19 +30,6 @@ public class Health : MonoBehaviour
         }
         
 
-        for(int i = 0; i < hearts.Length; i++) {
-            if (i < Hp) {
-                hearts[i].sprite = fullHeart; 
-            } else {
-                hearts[i].sprite = emptyHeart;
-            }
 
-
-            if (i < maxHp) {
-                hearts[i].enabled = true;
-            } else {
-                hearts[i].enabled = false;
-            }
-        }
     }
 }

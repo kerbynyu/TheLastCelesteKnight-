@@ -13,7 +13,7 @@ public class GameMaster : MonoBehaviour
     private SimplePhysicsController sc;
     private PlayerAttack pa;
     private Health hl;
-    public Image health;
+    //public Image health;
     public Image energyBar;
     public Image dark;
     public Image white;
@@ -29,6 +29,9 @@ public class GameMaster : MonoBehaviour
 
     public int score = 0;
 
+    public Image[] hearts;
+    public Sprite fullHeart;
+    public Sprite emptyHeart;
     private void Start() {
        
         sc = GameObject.FindGameObjectWithTag("Player").GetComponent<SimplePhysicsController>();
@@ -39,9 +42,30 @@ public class GameMaster : MonoBehaviour
 
     private void Update() {
         //newScore = sc.score;
-        health.rectTransform.sizeDelta = new Vector2(hl.Hp * 10f, 10f);
+        //health.rectTransform.sizeDelta = new Vector2(hl.Hp * 10f, 10f);
+        for (int i = 0; i < hearts.Length; i++)
+        {
+            if (i < hl.Hp)
+            {
+                hearts[i].sprite = fullHeart;
+            }
+            else
+            {
+                hearts[i].sprite = emptyHeart;
+            }
 
-        energyBar.rectTransform.sizeDelta = new Vector2(50f, (50f/9f)*pa.energy);
+
+            if (i < hl.maxHp)
+            {
+                hearts[i].enabled = true;
+            }
+            else
+            {
+                hearts[i].enabled = false;
+            }
+        }
+
+        energyBar.fillAmount = pa.energy/9;
         if (pa.energy >= 3||pa.eUsed>0) { energyBar.GetComponent<Image>().color = new Color(1, 1, 1);  }
         else { energyBar.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f);  }
 
