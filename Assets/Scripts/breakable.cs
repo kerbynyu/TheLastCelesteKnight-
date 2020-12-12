@@ -62,6 +62,10 @@ public class breakable : MonoBehaviour
         	if(gameObject.GetComponent<Animator>()!=null){
         		gameObject.GetComponent<Animator>().enabled=false;
         	}
+
+            if (gameObject.CompareTag("Ground")) {
+                Destroy(gameObject);
+            }
         }
     }
 }

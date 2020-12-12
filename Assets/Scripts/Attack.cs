@@ -16,11 +16,8 @@ public class Attack : MonoBehaviour
         if (health.Hp <= 0)
         {
             alive = false;
-            
         }
         //print("atttack update");
         hitted = false;
     }
-
-
 }

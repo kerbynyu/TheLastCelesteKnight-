@@ -11,6 +11,7 @@ TagManager:
   - hitBox
   - hurtBox
   - wall
+  - door
   layers:
   - Default
   - TransparentFX
