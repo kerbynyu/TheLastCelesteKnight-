@@ -26,12 +26,20 @@ public class GameMaster : MonoBehaviour
     public float theAlpha = 0f;
     public float theAlpha2 = 0f;
     public float deathTime = 2;
-
+    public float disabledDarkness = 0.6f;
     public int score = 0;
 
     public Image[] hearts;
     public Sprite fullHeart;
     public Sprite emptyHeart;
+    public Text textJ;
+    public Text textK;
+    public Text textL;
+    public Text textO;
+    public Image attackBlank;
+    public Image jumpBlank;
+    public Image dashBlank;
+    public Image chargeBlank;
     private void Start() {
        
         sc = GameObject.FindGameObjectWithTag("Player").GetComponent<SimplePhysicsController>();
@@ -41,6 +49,15 @@ public class GameMaster : MonoBehaviour
     }
 
     private void Update() {
+        if (Input.GetKey(KeyCode.J)) { textJ.fontStyle = FontStyle.Bold; } else { textJ.fontStyle = FontStyle.Normal; }
+        if (Input.GetKey(KeyCode.K)) { textK.fontStyle = FontStyle.Bold; } else { textK.fontStyle = FontStyle.Normal; }
+        if (Input.GetKey(KeyCode.L)) { textL.fontStyle = FontStyle.Bold; } else { textL.fontStyle = FontStyle.Normal; }
+        if (Input.GetKey(KeyCode.O)) { textO.fontStyle = FontStyle.Bold; } else { textO.fontStyle = FontStyle.Normal; }
+
+        if (pa.counter6 > 0) { Color tc= attackBlank.color; tc.a = disabledDarkness; attackBlank.color = tc; } else { Color tc = attackBlank.color; tc.a = 0; attackBlank.color = tc; }
+        if (!sc.doubleJumpEnabled) { Color tc = jumpBlank.color; tc.a = disabledDarkness; jumpBlank.color = tc; } else { Color tc = jumpBlank.color; tc.a = 0; jumpBlank.color = tc; }
+        if (sc.dashAgainCounter>0) { Color tc = dashBlank.color; tc.a = disabledDarkness; dashBlank.color = tc; } else { Color tc = dashBlank.color; tc.a = 0; dashBlank.color = tc; }
+        if (pa.energy<3&&pa.eUsed==0) { Color tc = chargeBlank.color; tc.a = disabledDarkness; chargeBlank.color = tc; } else { Color tc = chargeBlank.color; tc.a = 0; chargeBlank.color = tc; }
         //newScore = sc.score;
         //health.rectTransform.sizeDelta = new Vector2(hl.Hp * 10f, 10f);
         for (int i = 0; i < hearts.Length; i++)
