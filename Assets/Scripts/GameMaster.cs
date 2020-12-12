@@ -40,6 +40,13 @@ public class GameMaster : MonoBehaviour
     public Image jumpBlank;
     public Image dashBlank;
     public Image chargeBlank;
+
+    public int shakeFrames=10;
+    public int shakeCounter=0;
+    public float shakeOffset=5f;
+
+
+
     private void Start() {
        
         sc = GameObject.FindGameObjectWithTag("Player").GetComponent<SimplePhysicsController>();
@@ -133,6 +140,11 @@ public class GameMaster : MonoBehaviour
         Color c2 = white.color;
         c2.a = theAlpha2;
         white.color = c2;
+
+        if(shakeCounter>0){
+            shakeCounter--;            
+            Camera.main.transform.position=Camera.main.transform.position + new Vector3(Random.Range(-shakeOffset,shakeOffset),Random.Range(-shakeOffset,shakeOffset),0);
+        }
     }
 
     private void Awake() {

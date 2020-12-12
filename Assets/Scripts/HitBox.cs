@@ -16,10 +16,13 @@ public class HitBox : MonoBehaviour
     public GameObject effect;
     public GameObject locator;
     public SoundManager2 soundManager;
+
+
+    private GameMaster gm;
     // Start is called before the first frame update
     void Start()
     {
-        
+        gm = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameMaster>();
     }
 
     // Update is called once per frame
@@ -56,6 +59,7 @@ public class HitBox : MonoBehaviour
                 
                 if (hurtbox.solid) {
                     soundManager.playHit();
+                    gm.shakeCounter=gm.shakeFrames;
                     //death fly
                     if (hurtbox.owner.GetComponent<Health>().Hp <= 0)
                     {
