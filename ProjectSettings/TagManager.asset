@@ -12,6 +12,8 @@ TagManager:
   - hurtBox
   - wall
   - door
+  - groundIgnore
+  - SoundManager
   layers:
   - Default
   - TransparentFX

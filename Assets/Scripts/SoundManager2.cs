@@ -17,7 +17,9 @@ public class SoundManager2 : MonoBehaviour
     public AudioSource hurt;
     public AudioSource charging;
     public AudioSource charged;
+    public AudioSource rockSound;
     public AudioClip[] boneCrushSounds;
+    public AudioClip[] rockSounds;
 	public float initialLength;
     public float lowpitch=0.7f;
     public float highpitch=1.3f;
@@ -49,8 +51,7 @@ public class SoundManager2 : MonoBehaviour
         if((player.GetComponent<SimplePhysicsController>().isJumping && !jumpSound.isPlaying) || (!previousDJump && previousDJump!=player.GetComponent<SimplePhysicsController>().isDoubleJumping)){
             jumpSound.Stop();
             jumpSound.Play();
-        }
-        if(grnd.isGrounded && !previousGrnd){
+        }else if(grnd.isGrounded && !previousGrnd){
             jumpSound.Stop();
             landSound.Play();
         }

@@ -158,7 +158,7 @@ public class PlayerAttack : Attack
                             health.Hp += 1;
                             print("Hp plus 1");
                             soundManager.playCharge();
-                            gm.shakeCounter=gm.shakeFrames;
+                            gm.shakeCounter=gm.shakeFrames/2;
                         }
                     }
                     else if (eUsed > 0)

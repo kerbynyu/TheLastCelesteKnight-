@@ -124182,6 +124182,14 @@ PrefabInstance:
       propertyPath: hearts.Array.data[9]
       value: 
       objectReference: {fileID: 332687652}
+    - target: {fileID: 8920445256118559673, guid: ac7d88c09ac3d1f47ac0652a91cf4d6b, type: 3}
+      propertyPath: rockSounds.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8920445256118559673, guid: ac7d88c09ac3d1f47ac0652a91cf4d6b, type: 3}
+      propertyPath: rockSounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: fa40e8d49393a2244b49f259d19f3725, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac7d88c09ac3d1f47ac0652a91cf4d6b, type: 3}
 --- !u!1001 &2541693510714266567
