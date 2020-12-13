@@ -218,22 +218,23 @@ public class SimplePhysicsController : MonoBehaviour {
                 anim.SetBool("falling", false);
                 thisRigidbody2D.gravityScale = jumpingGravity;
                 jumpcounter += 1;
-                if (jumpcounter < jumpHeight)
+
+                int minusIdx = 100;
+                if (jumpcounter > 8)
                 {
+                    minusIdx = 110;
+                }
+
                     if (!leaveTheWall)
                     {
-                        thisRigidbody2D.AddForce(Vector2.up * 4500 * Time.deltaTime, ForceMode2D.Impulse);
+                        thisRigidbody2D.AddForce(Vector2.up * (1800-jumpcounter*minusIdx) * Time.deltaTime, ForceMode2D.Impulse);
                     }
                     else
                     {
-                        thisRigidbody2D.AddForce(Vector2.up * 500 * Time.deltaTime, ForceMode2D.Impulse);
+                        minusIdx = 80;
+                        thisRigidbody2D.AddForce(Vector2.up * (1200 - jumpcounter * minusIdx) * Time.deltaTime, ForceMode2D.Impulse);
                     }
-                }
-                else if (jumpcounter < jumpHeight + 3)
-                {
-                    thisRigidbody2D.AddForce(Vector2.down * 600 * Time.deltaTime, ForceMode2D.Impulse);
 
-                }
                 if (thisRigidbody2D.velocity.y > 40)
                 {
                     thisRigidbody2D.velocity = new Vector2(0, 40);
@@ -268,15 +269,16 @@ public class SimplePhysicsController : MonoBehaviour {
 
                 jumped = false;
                 doubleJumpCounter += 1;
+                int minusIdx = 110;
+                if (doubleJumpCounter > 8)
+                {
+                    minusIdx = 120;
+                }
                 if (doubleJumpCounter < doubleJumpHeight)
                 {
-                    thisRigidbody2D.AddForce(Vector2.up * 4500 * Time.deltaTime, ForceMode2D.Impulse);
+                    thisRigidbody2D.AddForce(Vector2.up * (1800-minusIdx*doubleJumpCounter) * Time.deltaTime, ForceMode2D.Impulse);
                 }
-                else if (doubleJumpCounter < doubleJumpHeight + 1)
-                {
-                    thisRigidbody2D.AddForce(Vector2.down * 600 * Time.deltaTime, ForceMode2D.Impulse);
 
-                }
                 if (thisRigidbody2D.velocity.y > 30)
                 {
                     thisRigidbody2D.velocity = new Vector2(0, 30);
