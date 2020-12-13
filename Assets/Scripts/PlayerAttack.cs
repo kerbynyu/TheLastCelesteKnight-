@@ -194,7 +194,6 @@ public class PlayerAttack : Attack
                 hitbox4.gameObject.SetActive(false);
 
                 counter3 -= Time.deltaTime;
-
             }
 
             if (counter2 > 0)
