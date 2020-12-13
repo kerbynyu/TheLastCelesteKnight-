@@ -9,11 +9,11 @@ EditorBuildSettings:
     path: Assets/SampleScene_wuji.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/radiance.unity
-    guid: 0ca51656c747b534ab280153a0619c21
-  - enabled: 1
     path: Assets/Main.unity
     guid: 65ed7a59b47506d4f91841b26e114b14
+  - enabled: 1
+    path: Assets/radiance.unity
+    guid: 0ca51656c747b534ab280153a0619c21
   - enabled: 1
     path: Assets/End.unity
     guid: 0e5d9e447f98daa48a2837c74b7adec1
