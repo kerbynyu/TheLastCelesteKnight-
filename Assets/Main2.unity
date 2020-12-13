@@ -32823,7 +32823,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: d915dc959bf6442a89af533ead704dcd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -108426,7 +108426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d55d40fe3a1281042a6131b4f651b62c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dark: {fileID: 0}
+  dark: {fileID: 1576778014}
   end: 0
   theAlpha: 0
   endTime: 1
@@ -124190,6 +124190,10 @@ PrefabInstance:
       propertyPath: rockSounds.Array.data[1]
       value: 
       objectReference: {fileID: 8300000, guid: fa40e8d49393a2244b49f259d19f3725, type: 3}
+    - target: {fileID: 8933767975881284816, guid: ac7d88c09ac3d1f47ac0652a91cf4d6b, type: 3}
+      propertyPath: dark
+      value: 
+      objectReference: {fileID: 1576778012}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac7d88c09ac3d1f47ac0652a91cf4d6b, type: 3}
 --- !u!1001 &2541693510714266567
