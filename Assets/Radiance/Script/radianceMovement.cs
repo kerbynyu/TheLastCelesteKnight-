@@ -201,7 +201,7 @@ public class radianceMovement : Attack
                 phase4 = false;
                 phase5 = false;
             }
-            else if (health.Hp > 90)
+            else if (health.Hp > 100)
             {
                 phase3 = true;
                 phase2 = false;
