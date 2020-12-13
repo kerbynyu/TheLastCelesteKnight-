@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
+
 
 public class SoundManager2 : MonoBehaviour
 {
@@ -17,7 +19,9 @@ public class SoundManager2 : MonoBehaviour
     public AudioSource hurt;
     public AudioSource charging;
     public AudioSource charged;
+    public AudioSource rockSound;
     public AudioClip[] boneCrushSounds;
+    public AudioClip[] rockSounds;
 	public float initialLength;
     public float lowpitch=0.7f;
     public float highpitch=1.3f;
@@ -27,6 +31,12 @@ public class SoundManager2 : MonoBehaviour
     private PlayerAttack pAttack;
     private bool isAttacking=false;
     private float timeSinceSlash=0f;
+
+    public AudioMixer mixer;
+    private AudioMixerSnapshot start;
+    private AudioMixerSnapshot dampened;
+
+    private bool hurtDamping=false;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +48,8 @@ public class SoundManager2 : MonoBehaviour
     	initialLength=0.42f;
         previousGrnd=grnd.isGrounded;
         previousDJump=false;
+        start=mixer.FindSnapshot("start");
+        dampened=mixer.FindSnapshot("dampened");
     }
 
     // Update is called once per frame
@@ -49,8 +61,7 @@ public class SoundManager2 : MonoBehaviour
         if((player.GetComponent<SimplePhysicsController>().isJumping && !jumpSound.isPlaying) || (!previousDJump && previousDJump!=player.GetComponent<SimplePhysicsController>().isDoubleJumping)){
             jumpSound.Stop();
             jumpSound.Play();
-        }
-        if(grnd.isGrounded && !previousGrnd){
+        }else if(grnd.isGrounded && !previousGrnd){
             jumpSound.Stop();
             landSound.Play();
         }
@@ -168,6 +179,11 @@ public class SoundManager2 : MonoBehaviour
         // }
 
         isAttacking=pAttack.isAttacking;
+
+        if(hurtDamping){
+            mixer.TransitionToSnapshots(new AudioMixerSnapshot[]{dampened,start}, new float[]{0f,1f},3f);
+            hurtDamping=false;
+        }
     }
 
     IEnumerator step(){
@@ -210,5 +226,9 @@ public class SoundManager2 : MonoBehaviour
     public void playHitted()
     {
         hurt.Play();
+        //dampened.TransitionTo(0.5f);
+        mixer.TransitionToSnapshots(new AudioMixerSnapshot[]{dampened,start}, new float[]{1f,0f},0f);
+        hurtDamping=true;
+        
     }
 }

@@ -12,10 +12,12 @@ public class breakable : MonoBehaviour
 	private ParticleSystem par2;
 	private bool destroyed=false;
 	private bool isGrass=false;
+    public SoundManager2 soundManager;
     // Start is called before the first frame update
     void Start()
     {
     	player=GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
+        soundManager=GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager2>();
         attack=gameObject.GetComponent<Attack>();
         spr=gameObject.GetComponent<SpriteRenderer>();
         par=gameObject.GetComponent<ParticleSystem>();
@@ -27,6 +29,11 @@ public class breakable : MonoBehaviour
     void Update()
     {
         if(!attack.alive && !destroyed){
+            if(!isGrass){
+                soundManager.rockSound.Stop();
+                soundManager.rockSound.clip=soundManager.rockSounds[Random.Range(0,soundManager.rockSounds.Length)];
+                soundManager.rockSound.Play();
+            }
         	ParticleSystem.ShapeModule shape=par.shape;
         	ParticleSystem.VelocityOverLifetimeModule v=par2.velocityOverLifetime;
         	if(player.cHitbox==player.hitbox2){
