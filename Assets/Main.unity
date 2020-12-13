@@ -115558,6 +115558,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5831247518009220662, guid: ac7d88c09ac3d1f47ac0652a91cf4d6b, type: 3}
+      propertyPath: doubleJumpHeight
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 5831247518009220662, guid: ac7d88c09ac3d1f47ac0652a91cf4d6b, type: 3}
+      propertyPath: fallingGravity
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5831247518009220662, guid: ac7d88c09ac3d1f47ac0652a91cf4d6b, type: 3}
+      propertyPath: jumpHeight
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 5831247518009220662, guid: ac7d88c09ac3d1f47ac0652a91cf4d6b, type: 3}
+      propertyPath: jumpingGravity
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7143197731856183381, guid: ac7d88c09ac3d1f47ac0652a91cf4d6b, type: 3}
       propertyPath: hearts.Array.size
       value: 10

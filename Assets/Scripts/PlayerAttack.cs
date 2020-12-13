@@ -47,7 +47,8 @@ public class PlayerAttack : Attack
     public HurtBox hutbox;
 
     private GameMaster gm;
-    
+
+    public GameObject dark;
 
     // Start is called before the first frame update
     void Start()
@@ -135,7 +136,7 @@ public class PlayerAttack : Attack
                     //if pressed regenerate button and onground
                     if (Input.GetKey(KeyCode.O) && feet.isGrounded && (energy >= 3 || eUsed > 0))
                     {
-
+                        dark.SetActive(false);
                         if (eSpeed == 0)
                         {
                             print("charge");

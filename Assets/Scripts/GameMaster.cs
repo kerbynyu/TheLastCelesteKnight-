@@ -43,9 +43,9 @@ public class GameMaster : MonoBehaviour
 
     public int shakeFrames=30;
     public int shakeCounter=0;
-    public float shakeOffset=0.5f;
+    public float shakeOffset=1f;
     public float cameraSizeOffset=0.003f;
-    public float maxZoom=17.5f;
+    public float maxZoom=19.5f;
     public bool zooming=false;
     private float originalCamSize;
 
@@ -154,9 +154,12 @@ public class GameMaster : MonoBehaviour
         if(zooming && Camera.main.orthographicSize>maxZoom){
             Camera.main.orthographicSize-=cameraSizeOffset;
         }else if(!zooming && Camera.main.orthographicSize<originalCamSize){
-            Camera.main.orthographicSize=Mathf.Lerp(Camera.main.orthographicSize,originalCamSize,Time.deltaTime*100f);
+            Camera.main.orthographicSize += cameraSizeOffset;
         }
-
+        if (Camera.main.orthographicSize < 19f && zooming)
+        {
+            Camera.main.orthographicSize = 19f;
+        }
     }
 
     private void Awake() {
