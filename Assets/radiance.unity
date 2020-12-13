@@ -30869,6 +30869,10 @@ PrefabInstance:
       propertyPath: damage
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 8933767975881284816, guid: ac7d88c09ac3d1f47ac0652a91cf4d6b, type: 3}
+      propertyPath: dark
+      value: 
+      objectReference: {fileID: 1473107270}
     - target: {fileID: 9128267651064807776, guid: ac7d88c09ac3d1f47ac0652a91cf4d6b, type: 3}
       propertyPath: damage
       value: 5
@@ -41742,6 +41746,11 @@ MonoBehaviour:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8268380486559849433, guid: 0440724a051604a9782a4eb7386f0c61, type: 3}
   m_PrefabInstance: {fileID: 1271444666}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1473107270 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 383313788890656286, guid: ac7d88c09ac3d1f47ac0652a91cf4d6b, type: 3}
+  m_PrefabInstance: {fileID: 1229416228}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1473655052
 GameObject:
