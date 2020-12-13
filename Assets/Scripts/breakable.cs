@@ -11,6 +11,7 @@ public class breakable : MonoBehaviour
 	private ParticleSystem par;
 	private ParticleSystem par2;
 	private bool destroyed=false;
+	private bool isGrass=false;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +20,7 @@ public class breakable : MonoBehaviour
         spr=gameObject.GetComponent<SpriteRenderer>();
         par=gameObject.GetComponent<ParticleSystem>();
         par2=transform.GetChild(1).gameObject.GetComponent<ParticleSystem>();
+        if(gameObject.GetComponent<grassSway>()!=null) isGrass=true;
     }
 
     // Update is called once per frame
@@ -29,7 +31,7 @@ public class breakable : MonoBehaviour
         	ParticleSystem.VelocityOverLifetimeModule v=par2.velocityOverLifetime;
         	if(player.cHitbox==player.hitbox2){
         		shape.position=new Vector3(0f,1.48f,0f);
-        		shape.rotation=new Vector3(0f,0f,200f);
+        		if(!isGrass) shape.rotation=new Vector3(0f,0f,200f);
         		shape.arc=140;
         		par2.gameObject.transform.rotation=Quaternion.Euler(0,0,-90);
         		AnimationCurve curveY = new AnimationCurve();
@@ -41,10 +43,10 @@ public class breakable : MonoBehaviour
         		curveX.AddKey(1.0f, 0.0f);
         		v.x = new ParticleSystem.MinMaxCurve(10.0f, curveX);
         	}else if(player.cHitbox==player.hitbox3){
-        		shape.rotation=new Vector3(0f,0f,90f);
+        		if(!isGrass) shape.rotation=new Vector3(0f,0f,90f);
         		par2.gameObject.transform.localScale=new Vector3(-par2.gameObject.transform.localScale.x,par2.gameObject.transform.localScale.y,par2.gameObject.transform.localScale.z);
         	}else if(player.cHitbox==player.hitbox4){
-        		shape.rotation=new Vector3(0f,0f,50f);
+        		if(!isGrass) shape.rotation=new Vector3(0f,0f,50f);
         		par2.gameObject.transform.rotation=Quaternion.Euler(0,0,90);
         		AnimationCurve curveY = new AnimationCurve();
         		curveY.AddKey(0.0f, 0.0f);

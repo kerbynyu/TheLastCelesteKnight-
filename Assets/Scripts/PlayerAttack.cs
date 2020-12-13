@@ -55,6 +55,7 @@ public class PlayerAttack : Attack
         hitbox2.gameObject.SetActive(false);
         hitbox3.gameObject.SetActive(false);
         hitbox4.gameObject.SetActive(false);
+        gm = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameMaster>();
     }
 
     private void LateUpdate()
@@ -66,7 +67,7 @@ public class PlayerAttack : Attack
     {
         if (!alive)
         {
-            gm = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameMaster>();
+            
             gm.deathScreen();
             Destroy(gameObject);
         }
@@ -77,6 +78,7 @@ public class PlayerAttack : Attack
 
             if (hitted)
             {
+                gm.shakeCounter=gm.shakeFrames;
                 soundManager.playHitted();
                 hitted = false;
                 counter2 = invicibleTime;
