@@ -41,9 +41,13 @@ public class GameMaster : MonoBehaviour
     public Image dashBlank;
     public Image chargeBlank;
 
-    public int shakeFrames=10;
+    public int shakeFrames=30;
     public int shakeCounter=0;
-    public float shakeOffset=5f;
+    public float shakeOffset=0.5f;
+    public float cameraSizeOffset=0.003f;
+    public float maxZoom=17.5f;
+    public bool zooming=false;
+    private float originalCamSize;
 
 
 
@@ -52,6 +56,7 @@ public class GameMaster : MonoBehaviour
         sc = GameObject.FindGameObjectWithTag("Player").GetComponent<SimplePhysicsController>();
         pa = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
         hl = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
+        originalCamSize=Camera.main.orthographicSize;
         
     }
 
@@ -145,6 +150,13 @@ public class GameMaster : MonoBehaviour
             shakeCounter--;            
             Camera.main.transform.position=Camera.main.transform.position + new Vector3(Random.Range(-shakeOffset,shakeOffset),Random.Range(-shakeOffset,shakeOffset),0);
         }
+    
+        if(zooming && Camera.main.orthographicSize>maxZoom){
+            Camera.main.orthographicSize-=cameraSizeOffset;
+        }else if(!zooming && Camera.main.orthographicSize<originalCamSize){
+            Camera.main.orthographicSize=Mathf.Lerp(Camera.main.orthographicSize,originalCamSize,Time.deltaTime*100f);
+        }
+
     }
 
     private void Awake() {

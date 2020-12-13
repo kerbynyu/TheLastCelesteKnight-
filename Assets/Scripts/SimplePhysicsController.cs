@@ -95,6 +95,8 @@ public class SimplePhysicsController : MonoBehaviour {
             {
                 anim.SetBool("grounded", true);
                 anim.SetBool("dJump", false);
+            }else{
+                anim.SetBool("grounded", false);
             }
 
             if (transform.rotation.eulerAngles.z != 0)

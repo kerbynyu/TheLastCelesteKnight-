@@ -2761,6 +2761,9 @@ MonoBehaviour:
   jumpBlank: {fileID: 153264717}
   dashBlank: {fileID: 153264716}
   chargeBlank: {fileID: 153264715}
+  shakeFrames: 30
+  shakeCounter: 0
+  shakeOffset: 0.5
 --- !u!4 &178038627
 Transform:
   m_ObjectHideFlags: 0

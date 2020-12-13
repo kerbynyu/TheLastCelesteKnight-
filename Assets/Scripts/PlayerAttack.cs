@@ -47,6 +47,7 @@ public class PlayerAttack : Attack
     public HurtBox hutbox;
 
     private GameMaster gm;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -78,6 +79,7 @@ public class PlayerAttack : Attack
 
             if (hitted)
             {
+                thisAnimator.SetBool("hurting",true);
                 gm.shakeCounter=gm.shakeFrames;
                 soundManager.playHitted();
                 hitted = false;
@@ -86,9 +88,12 @@ public class PlayerAttack : Attack
                 counter4 = launchTime;
                 shift = transform.position - lPosition;
             }
+
+            if(counter3<=stunTime/2f) thisAnimator.SetBool("hurting",false);
             //if player is not hitted
             if (counter3 <= 0)
             {
+
                 //if player is pushed back by the attack
                 if (counter5 >= 0)
                 {
@@ -130,10 +135,12 @@ public class PlayerAttack : Attack
                     //if pressed regenerate button and onground
                     if (Input.GetKey(KeyCode.O) && feet.isGrounded && (energy >= 3 || eUsed > 0))
                     {
+
                         if (eSpeed == 0)
                         {
                             print("charge");
                             thisAnimator.SetTrigger("charge");
+                            gm.zooming=true;
                         }
                         thisAnimator.SetBool("charging", true);
                         if (eUsed % 1 <0.01&&eUsed>0.1 ) { soundManager.playCharging(); }
@@ -151,6 +158,7 @@ public class PlayerAttack : Attack
                             health.Hp += 1;
                             print("Hp plus 1");
                             soundManager.playCharge();
+                            gm.shakeCounter=gm.shakeFrames;
                         }
                     }
                     else if (eUsed > 0)
@@ -164,6 +172,7 @@ public class PlayerAttack : Attack
                         eSpeed = 0;
                         eUsed = 0;
                         thisAnimator.SetBool("charging", false);
+                        gm.zooming=false;
                     }
                 }
                 else
@@ -202,6 +211,7 @@ public class PlayerAttack : Attack
                 tmp.a = 1f;
                 pSprite.color = tmp;
                 hutbox.gameObject.SetActive(true);
+
             }
             if (counter4 > 0)
             {

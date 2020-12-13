@@ -59,10 +59,11 @@ public class HitBox : MonoBehaviour
                 
                 if (hurtbox.solid) {
                     soundManager.playHit();
-                    gm.shakeCounter=gm.shakeFrames;
+                    
                     //death fly
                     if (hurtbox.owner.GetComponent<Health>().Hp <= 0)
                     {
+                        gm.shakeCounter=gm.shakeFrames/4;
                         hurtbox.owner.GetComponent<Rigidbody2D>().gravityScale = 10;
                         hurtbox.owner.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
                         hurtbox.owner.GetComponent<Rigidbody2D>().AddForce(new Vector2(dir.x+Random.Range(-1f,1f), dir.y+Random.Range(1, 2)) * force * 2, ForceMode2D.Impulse);
